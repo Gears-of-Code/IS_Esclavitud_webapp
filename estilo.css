@@ -1,0 +1,259 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	background-color: #FFF;
+	margin: 0px 0px 0px 0px;
+	font-family: Tahoma;
+	color: #264b71;
+	font-size: 14px;
+}
+
+#wrapper{
+	width: auto;
+	height: auto;
+	margin-top: 10px;
+}
+
+#container{
+	width: 1000px;
+	height: 700px;
+	display: block;
+	position: relative;
+}
+
+#menu{
+	width: 250px;
+	height: 680px;
+	background-color: #FFF;
+	border: #FFF;
+	border-right: #264b71;
+	border-style: solid;
+	border-width: 2px;
+	float: left;
+	
+}
+
+#right{
+	width: 740px;
+	height: 680px;
+	margin-left: 10px;
+	display: inline-block;
+	float: left;
+}
+
+#topbar{
+	height: 20px;
+	width: 740px;
+	float: left;
+        cursor:pointer;
+	background-color:#E0E9E9;
+	background: -webkit-gradient(linear,left top,left bottom,
+	                            from(#E0E9E9),to(white),
+								color-stop(1.0,white));
+	background: -moz-gradient(linear,left top,left bottom,
+                                from(#E0E9E9),to(white),
+								color-stop(1.0,white));	
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+	border-radius: 5px;		
+}
+
+#contenido{
+	width: 740px;
+	height: auto;
+}
+
+
+
+
+.container-logo{
+	margin:auto;
+	width:30%;
+	padding-top:10%;
+	background-color: #FFF;
+}
+
+#notificacion{
+	width: 740px;
+	height: 680px;
+	background-color:#FFF;
+	position: absolute;
+	opacity: .9;
+	
+	display: none;
+	top: 30px;
+	left: 270px;
+	z-index: 10;
+}
+
+
+#login_site{	
+   width: 350px;
+   padding:20px;
+   margin-top:8px;
+   margin-bottom: 10px;
+}
+
+
+
+#logo{
+	width: 250px;
+	height: 53px;
+	background-image:url(imagenes/logo.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-top: 5px;
+	margin-bottom: 20px;
+}
+
+#login{
+	margin-right:20px;	
+}
+
+#autorizar{
+	padding-right:175px;
+}
+
+.titulo-menu{
+	width: 200px;;
+	height: 30px;
+    border-color: #2B3E42;
+	margin-bottom: 5px;
+	display: block;
+	padding-left:5px;
+	padding-top:2px;
+	background-color: #E0E9E9;
+	background: -webkit-gradient(linear,left top,left bottom,
+	                            from(#E0E9E9),to(white),
+								color-stop(1.0,white));
+	background: -moz-gradient(linear,left top,left bottom,
+                                from(#E0E9E9),to(white),
+								color-stop(1.0,white));	
+
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+	border-radius: 5px;	
+}
+
+.entrada-menu{
+	width: 250px;
+	height: 20px;
+	margin-bottom: 5px;
+	display: block;
+	cursor: pointer;
+}
+
+.entrada{
+	width: auto;
+	height: 30px;
+	margin-top: 15px;
+	cursor: pointer;
+	background-color: #E0E9E9;
+							
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+	border-radius: 5px;				
+}
+
+.hover{
+	background-color: #747E80;
+}
+
+.boton{
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	float: left;
+	margin-left: 4px;
+	margin-top: 3px;
+	cursor: pointer;
+}
+
+.button{
+	height: 18px;
+	padding-top:3px;
+	display:inline-block;
+	border-style:outset;
+	background:#FFFFFF;
+	color:#264b71;
+	float:right;
+	cursor: pointer;	
+	
+	padding-left:5px;
+	padding-right: 5px;
+	
+	-webkit-border-radius:2px;	
+	 display: inline-block;
+
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;	
+}
+
+.button-aceptar{}
+.button-rechazar {}
+.button-consultar{}
+.button-forma{}
+.button-reg{}
+
+.info{
+	width: 400px;
+	height: auto;
+	display: inline-block;
+	float: left;
+	margin-left: 5px;
+	margin-top: 3px;
+}
+
+.titulo{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.descripcion{
+	width: auto;
+	height: auto;
+	font-size: 14px;
+	
+	float: left;
+	margin: 10px 10px 10px 10px;
+}
+
+.perfilresp{
+	width: 400px;
+	height: 300px;
+	color: #000;
+	text-align: justify;
+	font-size: 14px;
+	
+	float: left;
+	margin: 10px 10px 10px 10px;
+}
+
+.especificaciones{
+	width: auto;
+	height: 600px;
+	border-style: solid;
+	display:block;
+	padding:10px;
+}
+
+.form-text{
+	width: 200px;
+	height: 20px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #264b71;
+}
+
+.form-multiline{
+	width: 200px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #264b71;
+}
+
+.bloqueinfo{
+    width: auto;
+    margin-bottom: 20px;
+}
