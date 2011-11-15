@@ -1,0 +1,122 @@
+Proyecto Servicio Social
+Ingenieria de Software
+--------------------------
+
+Requisitos:
+
+Programación en Java
+Base de Datos MySQL
+Servidores Tomcat y Apache
+--------------------------------------------------------------
+
+Estructura de Directorios:
+.
+|-- build.xml
+|-- estilo.css
+|-- funciones.js
+|-- index.jsp
+|-- jquery-1.6.3.min.js
+|-- lib
+|   |-- nblibraries.properties
+|-- nbproject
+|   |-- ant-deploy.xml
+|   |-- build-impl.xml
+|   |-- genfiles.properties
+|   |-- project.properties
+|   `-- project.xml
+|-- notificacion.js
+|-- README
+|-- src
+|   |-- conf
+|   |   `-- MANIFEST.MF
+|   `-- java
+|       |-- META-INF
+|       |   `-- services
+|       |       `-- java.sql.Driver
+|       `-- mx
+|           `-- gearsofcode
+|               `-- proyservsocial
+|                   `-- logico
+|                       |-- ConectaDb.java
+|                       |-- impl
+|                       |   |-- ConectaDbImpl.java
+|                       |   `-- LogicoFactoryImpl.java
+|                       |-- inicioDeSesion
+|                       |   |-- impl
+|                       |   |   |-- InicioDeSesionFactoryImpl.java
+|                       |   |   `-- SesionImpl.java
+|                       |   |-- InicioDeSesionFactory.java
+|                       |   |-- Sesion.java
+|                       |   `-- TipoUsuario.java
+|                       |-- LogicoFactory.java
+|                       |-- proyectos
+|                       |   |-- CarreraProyecto.java
+|                       |   |-- impl
+|                       |   |   |-- ProyectoImpl.java
+|                       |   |   `-- ProyectosFactoryImpl.java
+|                       |   |-- Proyecto.java
+|                       |   `-- ProyectosFactory.java
+|                       |-- usuarios
+|                       |   |-- Admin.java
+|                       |   |-- Alumno.java
+|                       |   |-- CarreraAlumno.java
+|                       |   |-- impl
+|                       |   |   |-- AdminImpl.java
+|                       |   |   |-- AlumnoImpl.java
+|                       |   |   |-- ResponsableImpl.java
+|                       |   |   |-- UsuarioRegistradoImpl.java
+|                       |   |   `-- UsuariosFactoryImpl.java
+|                       |   |-- Responsable.java
+|                       |   |-- UsuarioRegistrado.java
+|                       |   `-- UsuariosFactory.java
+|                       `-- util
+|                           |-- DBConsultException.java
+|                           |-- DBCreationException.java
+|                           |-- DBModificationException.java
+|                           `-- Mapper.java
+`-- web
+    |-- acep-alum.jsp
+    |-- acep-proy.jsp
+    |-- acep-resp.jsp
+    |-- aut-alum-adm.jsp
+    |-- aut-proy-adm.jsp
+    |-- aut-resp-adm.jsp
+    |-- cons-proy.jsp
+    |-- estilo.css
+    |-- funciones.js
+    |-- imagenes
+    |   |-- bg1.jpg
+    |   |-- home_logo_top.gif
+    |   |-- iconos
+    |   |   |-- add.png
+    |   |   |-- close.png
+    |   |   |-- connect.png
+    |   |   |-- delete.png
+    |   |   |-- edit.png
+    |   |   |-- home.png
+    |   |   |-- left.png
+    |   |   |-- logoff.png
+    |   |   |-- ok.png
+    |   |   `-- usr-add.png
+    |   |-- logo.png
+    |   |-- overbg.png
+    |   `-- Untitled-1.png
+    |-- index.jsp
+    |-- iniciosesion.jsp
+    |-- jquery-1.6.3.min.js
+    |-- logicoDebugger.jsp
+    |-- menu.jsp
+    |-- META-INF
+    |   `-- context.xml
+    |-- mis-proy.jsp
+    |-- notificacion.js
+    |-- perf-alum.jsp
+    |-- perf-res.jsp
+    |-- postularse.jsp
+    |-- reg-proy-resp-db.jsp
+    |-- reg-proy-resp.jsp
+    |-- reg-resp-db.jsp
+    |-- reg-resp.jsp
+    |-- salir.jsp
+    |-- verificador.jsp
+    `-- ver-proy.jsp
