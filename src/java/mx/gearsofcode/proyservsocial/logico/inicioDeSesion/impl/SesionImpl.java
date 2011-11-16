@@ -23,17 +23,6 @@ import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
 /**
  * La clase '<em><b>Sesion</b></em>' se encarga de manejar parte del inicio de
  * sesion del usuario en el sistema. Acepta o rechaza usuarios y les genera su
@@ -48,7 +37,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * </p>
  * 
  */
-public class SesionImpl extends EObjectImpl implements Sesion {
+public class SesionImpl implements Sesion {
 
     /**
      * The cached value of the '{@link #getUsuario() <em>Usuario</em>}'
@@ -59,30 +48,14 @@ public class SesionImpl extends EObjectImpl implements Sesion {
      * @ordered
      */
     protected UsuarioRegistrado usuario;
+
     /**
      * Se declara un elemento tipo ConectaDb. Clase ConectaDb contiene los
      * metodos de conexion a la base de datos. Aqui se realizan los queries
      * directamente a la base de datos.
      **/
     private ConectaDb conexion = null;
-    /**
-     * The default value of the '{@link #getTipo() <em>Tipo</em>}' attribute.
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getTipo()
-     * @generated
-     * @ordered
-     */
-    protected static final TipoUsuario TIPO_EDEFAULT = TipoUsuario.ALUMNO;
-    /**
-     * The cached value of the '{@link #getTipo() <em>Tipo</em>}' attribute.
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getTipo()
-     * @generated
-     * @ordered
-     */
-    protected TipoUsuario tipo = TIPO_EDEFAULT;
+
 
     /**
      * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -287,99 +260,4 @@ public class SesionImpl extends EObjectImpl implements Sesion {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    public TipoUsuario getTipo() {
-        return tipo;
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    public void setTipo(TipoUsuario newTipo) {
-        TipoUsuario oldTipo = tipo;
-        tipo = newTipo == null ? TIPO_EDEFAULT : newTipo;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.USUARIO_REGISTRADO__TIPO, oldTipo, tipo));
-        }
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case InicioDeSesionPackage.SESION__USUARIO:
-                if (resolve) {
-                    return getUsuario();
-                }
-                return basicGetUsuario();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case InicioDeSesionPackage.SESION__USUARIO:
-                setUsuario((UsuarioRegistrado) newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public void eUnset(int featureID) {
-        switch (featureID) {
-            case InicioDeSesionPackage.SESION__USUARIO:
-                setUsuario((UsuarioRegistrado) null);
-                return;
-        }
-        super.eUnset(featureID);
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    @Override
-    public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case InicioDeSesionPackage.SESION__USUARIO:
-                return usuario != null;
-        }
-        return super.eIsSet(featureID);
-    }
-
-    /**
-     * Creates a new instance of the specified Ecore class. <!-- begin-user-doc
-     * --> <!-- end-user-doc -->
-     * 
-     * @param eClass The Ecore class of the instance to create.
-     * @return The new instance.
-     * @generated
-     */
-    protected EObject create(EClass eClass) {
-        return EcoreUtil.create(eClass);
-    }
 } // SesionImpl

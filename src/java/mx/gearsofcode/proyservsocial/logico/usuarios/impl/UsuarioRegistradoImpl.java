@@ -30,16 +30,6 @@ import java.util.LinkedHashSet;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
 import mx.gearsofcode.proyservsocial.logico.usuarios.CarreraAlumno;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -61,7 +51,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *
  * @generated
  */
-public class UsuarioRegistradoImpl extends EObjectImpl implements
+public class UsuarioRegistradoImpl implements
         UsuarioRegistrado {
 
     /**
@@ -213,16 +203,6 @@ public class UsuarioRegistradoImpl extends EObjectImpl implements
      */
     protected UsuarioRegistradoImpl() {
         super();
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    protected EClass eStaticClass() {
-        return UsuariosPackage.Literals.USUARIO_REGISTRADO;
     }
 
     /**
@@ -459,140 +439,6 @@ public class UsuarioRegistradoImpl extends EObjectImpl implements
      * @generated
      */
     @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case UsuariosPackage.USUARIO_REGISTRADO__ID:
-                return getId();
-            case UsuariosPackage.USUARIO_REGISTRADO__USERNAME:
-                return getUsername();
-            case UsuariosPackage.USUARIO_REGISTRADO__CONTRASEÑA:
-                return getContraseña();
-            case UsuariosPackage.USUARIO_REGISTRADO__TIPO:
-                return getTipo();
-            case UsuariosPackage.USUARIO_REGISTRADO__NOMBRE:
-                return getNombre();
-            case UsuariosPackage.USUARIO_REGISTRADO__TELEFONO:
-                return getTelefono();
-            case UsuariosPackage.USUARIO_REGISTRADO__EMAIL:
-                return getEmail();
-            case UsuariosPackage.USUARIO_REGISTRADO__SESION:
-                if (resolve) {
-                    return getSesion();
-                }
-                return basicGetSesion();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case UsuariosPackage.USUARIO_REGISTRADO__ID:
-                setId((Integer) newValue);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__USERNAME:
-                setUsername((String) newValue);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__CONTRASEÑA:
-                setContraseña((String) newValue);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__TIPO:
-                setTipo((Integer) newValue);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__NOMBRE:
-                setNombre((String) newValue);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__TELEFONO:
-                setTelefono((String) newValue);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__EMAIL:
-                setEmail((String) newValue);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__SESION:
-                setSesion((Sesion) newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public void eUnset(int featureID) {
-        switch (featureID) {
-            case UsuariosPackage.USUARIO_REGISTRADO__ID:
-                setId(ID_EDEFAULT);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__USERNAME:
-                setUsername(USERNAME_EDEFAULT);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__CONTRASEÑA:
-                setContraseña(CONTRASEÑA_EDEFAULT);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__TIPO:
-                setTipo(TIPO_EDEFAULT);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__NOMBRE:
-                setNombre(NOMBRE_EDEFAULT);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__TELEFONO:
-                setTelefono(TELEFONO_EDEFAULT);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__EMAIL:
-                setEmail(EMAIL_EDEFAULT);
-                return;
-            case UsuariosPackage.USUARIO_REGISTRADO__SESION:
-                setSesion((Sesion) null);
-                return;
-        }
-        super.eUnset(featureID);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case UsuariosPackage.USUARIO_REGISTRADO__ID:
-                return id != ID_EDEFAULT;
-            case UsuariosPackage.USUARIO_REGISTRADO__USERNAME:
-                return USERNAME_EDEFAULT == null ? username != null
-                        : !USERNAME_EDEFAULT.equals(username);
-            case UsuariosPackage.USUARIO_REGISTRADO__CONTRASEÑA:
-                return CONTRASEÑA_EDEFAULT == null ? contraseña != null
-                        : !CONTRASEÑA_EDEFAULT.equals(contraseña);
-            case UsuariosPackage.USUARIO_REGISTRADO__TIPO:
-                return tipo != TIPO_EDEFAULT;
-            case UsuariosPackage.USUARIO_REGISTRADO__NOMBRE:
-                return NOMBRE_EDEFAULT == null ? nombre != null : !NOMBRE_EDEFAULT.equals(nombre);
-            case UsuariosPackage.USUARIO_REGISTRADO__TELEFONO:
-                return TELEFONO_EDEFAULT == null ? telefono != null
-                        : !TELEFONO_EDEFAULT.equals(telefono);
-            case UsuariosPackage.USUARIO_REGISTRADO__EMAIL:
-                return EMAIL_EDEFAULT == null ? email != null : !EMAIL_EDEFAULT.equals(email);
-            case UsuariosPackage.USUARIO_REGISTRADO__SESION:
-                return sesion != null;
-        }
-        return super.eIsSet(featureID);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public String toString() {
         if (eIsProxy()) {
             return super.toString();
@@ -618,23 +464,11 @@ public class UsuarioRegistradoImpl extends EObjectImpl implements
     }
 
     /**
-     * Creates a new instance of the specified Ecore class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param eClass The Ecore class of the instance to create.
-     * @return The new instance.
-     * @generated
-     */
-    protected EObject create(EClass eClass) {
-        return EcoreUtil.create(eClass);
-    }
-
-    /**
      * Llama a la base de datos para obtener y listar todos los proyectos
      * que se encuentran disponibles para el usuario.
      *
      * @throws DBConsultException
-     * @throws DBCreationException 
+     * @throws DBCreationException
      */
     public String[][] verProyectos() throws DBConsultException, DBCreationException {
 
@@ -655,7 +489,7 @@ public class UsuarioRegistradoImpl extends EObjectImpl implements
      * la consulta.
      *
      * @throws DBConsultException
-     * @throws DBCreationException 
+     * @throws DBCreationException
      */
     public String[][] verMisProyectos() throws DBConsultException, DBCreationException {
 
@@ -696,7 +530,7 @@ public class UsuarioRegistradoImpl extends EObjectImpl implements
      * proyecto y se los despliega al usuario.
      *
      * @param idProyecto Un identificador de algun proyecto.
-     * @throws DBCreationException 
+     * @throws DBCreationException
      */
     public Proyecto verDetallesProyecto(final int idProyect) throws DBConsultException, DBCreationException {
 
@@ -787,22 +621,19 @@ public class UsuarioRegistradoImpl extends EObjectImpl implements
         UsuarioRegistrado user = null;
         ResultSet queryResult = null;
         int userType = -1;
-        
+
         try {
             conexion = new LogicoFactoryImpl().createConectaDb();
             userType = conexion.getUserType(userId);
             queryResult = conexion.fetchUserInfo(userId, userType);
-            
+
         } catch (DBCreationException ex) {
             Logger.getLogger(UsuarioRegistradoImpl.class.getName()).log(Level.SEVERE, null, ex);
             DBConsultException exx = new DBConsultException(ex.getCause() + "  " + ex.getMessage());
             exx.setErrorCode(0);
             throw exx;
         }
-        
-        
-         
-        
+
         boolean status;
         String usuarioTipo = "";
         String usuarioNombre = "";
@@ -837,7 +668,7 @@ public class UsuarioRegistradoImpl extends EObjectImpl implements
                     cons.setErrorCode(8);
                     throw cons;
             }
-            
+
             usuarioTipo = queryResult.getString("tipo"); // Obtengo el tipo de usuario
             // del query.
             usuarioNombre = queryResult.getString("nombreUsuario");

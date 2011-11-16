@@ -12,8 +12,6 @@ import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Usuario Registrado</b></em>'.
@@ -37,7 +35,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface UsuarioRegistrado extends EObject {
+public interface UsuarioRegistrado {
     
     /**
      * Constantes para los tipos de usuarios segun lo especificado en la base de datos.

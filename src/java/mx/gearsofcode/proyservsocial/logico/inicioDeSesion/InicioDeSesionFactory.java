@@ -6,10 +6,6 @@
  */
 package mx.gearsofcode.proyservsocial.logico.inicioDeSesion;
 
-
-import org.eclipse.emf.ecore.EFactory;
-
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Factory</b> for the model.
@@ -18,7 +14,7 @@ import org.eclipse.emf.ecore.EFactory;
  * @see mx.gearsofcode.proyservsocial.logico.inicioDeSesion.InicioDeSesionPackage
  * @generated
  */
-public interface InicioDeSesionFactory extends EFactory {
+public interface InicioDeSesionFactory {
     /**
      * The singleton instance of the factory.
      * <!-- begin-user-doc -->
@@ -36,14 +32,5 @@ public interface InicioDeSesionFactory extends EFactory {
      * @generated
      */
     Sesion createSesion();
-
-    /**
-     * Returns the package supported by this factory.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the package supported by this factory.
-     * @generated
-     */
-    InicioDeSesionPackage getInicioDeSesionPackage();
 
 } //InicioDeSesionFactory

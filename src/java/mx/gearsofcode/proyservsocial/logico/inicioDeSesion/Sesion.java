@@ -10,8 +10,6 @@ import mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado;
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * Representacion de los elementos que la clase '<em><b>Sesion</b></em>'
  * debe cumplir.
@@ -19,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * @see mx.gearsofcode.proyservsocial.logico.inicioDeSesion.InicioDeSesionPackage#getSesion()
  * @model
  */
-public interface Sesion extends EObject {
+public interface Sesion extends Object {
     /**
      * Returns the value of the '<em><b>Usuario</b></em>' reference.
      * <!-- begin-user-doc -->

@@ -9,8 +9,6 @@ package mx.gearsofcode.proyservsocial.logico.proyectos;
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Proyecto</b></em>'. <!-- end-user-doc -->
@@ -54,7 +52,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Proyecto extends EObject {
+public interface Proyecto {
     /**
      * Regresa el valor del '<em><b>Id</b></em>' del proyecto.
      * 
@@ -347,8 +345,6 @@ public interface Proyecto extends EObject {
      * @see mx.gearsofcode.proyservsocial.logico.proyectos.ProyectosPackage#getProyecto_Estado()
      */
     boolean getEstado();
-
-   
 
     /**
      * Muestra el bloque de usuarios que se han postulado a un proyecto.
