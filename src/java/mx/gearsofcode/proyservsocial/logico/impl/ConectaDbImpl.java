@@ -11,13 +11,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.LinkedList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 
-import mx.gearsofcode.proyservsocial.logico.LogicoPackage;
+//import mx.gearsofcode.proyservsocial.logico.LogicoPackage;
 
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
 
@@ -30,12 +31,12 @@ import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
+//import org.eclipse.emf.ecore.EClass;
+//import org.eclipse.emf.ecore.EObject;
+//
+//import org.eclipse.emf.ecore.impl.EObjectImpl;
+//
+//import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * Clase que se encarga de manejar las conexiones a la base de
@@ -43,14 +44,15 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * y se pasan al servidor de la base de datos para procesarlas.
  *
  */
-public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
+//public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
+public class ConectaDbImpl implements ConectaDb {
 
     // Variables para conexion.
     private final static String driver = "com.mysql.jdbc.Driver";
     private final static String url = "jdbc:mysql://localhost:3306/gearsofcode";
 //    private static String dbName = "gearsofcode";
     private final static String user = "root";
-    private final static String password = "goldsun627";
+    private final static String password = "ciortv";
     // Variables para estados de los proyectos y usuarios.
     final private int NO_AUTORIZADO = 0;
     final private int AUTORIZADO = 1;
@@ -370,7 +372,7 @@ public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
     }
 
     /**
-     * El responsable rechaza (elimina) un alumno de su proycto.
+     * El responsable rechaza (cambia su estado a rechazado) un alumno de su proycto.
      *
      * @param idProyecto id del proyecto del cual se quiere rechazar un alumno.
      * @param idAlumno id del alumno que se va a rechazar.
@@ -379,9 +381,11 @@ public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
     public void rechazaAlumnoProyectoDb(final int idProyecto, final int idAlumno)
             throws DBModificationException, DBCreationException {
 
-        String query = "DELETE FROM postulados WHERE id_p = " + idProyecto
-                + " AND id_u = " + idAlumno;
-
+        String query = "UPDATE postulados SET estador = 'rechazado' " +
+        		" WHERE id_p = " + idProyecto + 
+        		" AND id_u = " + idAlumno + ";";     
+        
+        
         Connection connect = null;
         Statement statement = null;
 
@@ -475,9 +479,8 @@ public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
     public void postularAProyectoDb(final int idProyecto, final int idAlumno)
             throws DBCreationException, DBModificationException {
 
-        String query = "INSERT INTO postulados (id_p, id_u, estadoa, estador)"
-                + "VALUES (" + idProyecto + "," + idAlumno + ","
-                + NO_AUTORIZADO + "," + NO_AUTORIZADO + ")";
+        String query = "INSERT INTO postulados (id_p, id_u, estadoa, estador) " +
+        		" VALUES ( " + idProyecto + "," + idAlumno + ",'pendiente','pendiente');";
 
         Connection connect = null;
         Statement statement = null;
@@ -537,7 +540,7 @@ public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
 
     /**
      * El reaponsable de un proyecto acepta un alumno en su proyecto. Por lo cual
-     * se cambia el contenido de la columna "estador" a 1 donde el id del usuario
+     * se cambia el contenido de la columna "estador" a "aceptado" donde el id del usuario
      * y el id de proyecto coicidan con los pasados como parametros.
      *
      * @param idProyecto id del proyecto en el cual se aceptara al alumno.
@@ -548,9 +551,9 @@ public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
     public void aceptarAlumnoProyectoDb(final int idProyecto, final int idAlumno)
             throws DBCreationException, DBModificationException {
 
-        String query = "UPDATE postulados " + "SET estador = " + AUTORIZADO
+        String query = "UPDATE postulados " + "SET estador = 'aceptado' "
                 + "WHERE id_u = " + idAlumno
-                + "AND id_p = " + idProyecto;
+                + " AND id_p = " + idProyecto;
 
         Connection connect = null;
         Statement statement = null;
@@ -574,7 +577,7 @@ public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
 
     /**
      * El administrador autoriza a un alumno en un proyecto. Por lo cual
-     * se cambia el contenido de la columna "estadoa" a 1 donde el id del usuario
+     * se cambia el contenido de la columna "estadoa" a aceptado donde el id del usuario
      * y el id de proyecto coicidan con los pasados como parametros.
      *
      * @param idProyecto id del proyecto en el cual se autorizara al alumno.
@@ -585,7 +588,7 @@ public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
     public void autorizarAlumnoProyecto(final int idAlumno, final int idProyecto)
             throws DBCreationException, DBModificationException {
 
-        String query = "UPDATE postulados  SET estadoa = " + AUTORIZADO
+        String query = "UPDATE postulados  SET estadoa = 'aceptado' " 
                 + "WHERE id_u = " + idAlumno
                 + " AND id_p = " + idProyecto;
 
@@ -1016,9 +1019,9 @@ public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
      * @return The new instance.
      * @generated
      */
-    protected EObject create(EClass eClass) {
-        return EcoreUtil.create(eClass);
-    }
+//    protected EObject create(EClass eClass) {
+//        return EcoreUtil.create(eClass);
+//    }
 
     public String[][] fetchAC() throws DBConsultException, DBCreationException {
         String[][] res = null;
@@ -1123,4 +1126,224 @@ public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
         }
         return resultArray;
     }
+    
+ 
+    /**
+     * Nuevos metodos 
+     */
+    
+    /**
+     * Este metodo se utiliza para conseguir una lista de arreglos,
+     * cada uno con dos entradas. Cada uno de estos arreglos,
+     * tienen como primer elemento una cadena  que representa el
+     *  nombre (area de conocimiento,carrera o proyecto ) y entero
+     * que representa el numero de elementos.
+     * @param rs
+     * @return Lista ligada de arreglos de cadenas de tamaño 2.
+     * @throws SQLException
+     */
+    private LinkedList<String[]> getNombrexNum(final ResultSet rs) throws SQLException {
+
+        LinkedList<String[]> lista = new LinkedList<String[]>();
+        String[] nombrexnum = null;
+
+        while (rs.next()) {
+            nombrexnum = new String[4];
+            nombrexnum[0] = rs.getString(1);
+            nombrexnum[1] = rs.getString(2);
+            lista.add(nombrexnum);
+        }
+
+        return lista;
+}
+    
+    /**
+     * El Alumno se despostula de un proycto (se elimina de db) .
+     * @param idProyecto id del proyecto del cual se quiere despostular un alumno.
+     * @param idAlumno id del alumno que se va a despostular.
+     * @throws Se lanza una excepcion si no se puede eliminar al alumno del proyecto.
+     */
+    public void despostularAlumnoProyectoDb(final int idProyecto, final int idAlumno)
+            throws DBModificationException, DBCreationException {
+
+        String query = "DELETE FROM postulados WHERE id_p = " + idProyecto
+                + " AND id_u = " + idAlumno;
+
+        Connection connect = null;
+        Statement statement = null;
+
+        try {
+
+            connect = cargarBase();
+            statement = connect.createStatement();
+
+            if (statement.executeUpdate(query) == 0) {
+                throw new DBModificationException("Cannot turn back. " + 
+                        idProyecto + " alum:" + idAlumno);
+            }
+        } catch (SQLException e) {
+            throw new DBModificationException(e.getMessage() + "   " + e.getSQLState());
+        }
+    }
+      
+    /**
+     * Regresa una lista con  el numero de proyectos por areas  de conocimiento.
+     *
+     * @return Regresa una lista ligada cuyos elemenos son el par ordenado
+     * del nombre del Area C. y  el numero de proyectos en esta.
+     * @throws Lanza una excepcion
+     */
+    public LinkedList<String[]> areaNumProyDb () throws DBCreationException, DBConsultException {
+
+        String query = "SELECT DISTINCT areasconocimiento.nombre , " +
+        		" COUNT(areasconocimiento.nombre) AS NumProyectos " +
+        		" FROM proyectos, proyac NATURAL JOIN areasconocimiento "+
+        		" WHERE proyectos.id_p = proyac.id_p " +
+        		" GROUP BY areasconocimiento.nombre;";
+        
+
+        LinkedList<String[]> listaAreas = new LinkedList<String[]>();
+
+        Connection connect = null;
+        Statement statement = null;
+        ResultSet resultset = null;
+
+        try {
+
+            connect = cargarBase();
+            statement = connect.createStatement();
+
+            resultset = statement.executeQuery(query);
+            listaAreas = getNombrexNum(resultset);
+
+        } catch (SQLException e) {
+            throw new DBConsultException(e.getMessage() + "    " + e.getSQLState());
+        } finally {
+            cerrarBase(connect, statement);
+        }
+        return listaAreas ;
+    }
+    
+    /**
+     * Regresa una lista con  el numero de proyectos por carreras.
+     *
+     * @return Regresa una lista ligada cuyos elemenos son el par ordenado
+     * de nombre del carrera y  el numero de proyectos en esta.
+     * @throws Lanza una excepcion
+     */  
+    public LinkedList<String[]> carrerasNumProyDb () throws DBCreationException, DBConsultException {
+
+        String query = "SELECT DISTINCT carreras.nombre ,COUNT(carreras.nombre) AS NumProyectos " + 
+        		" FROM proyectos, proycarr NATURAL JOIN carreras " +
+        		" WHERE proyectos.id_p = proycarr.id_p " +
+        		" GROUP BY carreras.nombre;";
+
+        LinkedList<String[]> listaCarreras = new LinkedList<String[]>();
+
+        Connection connect = null;
+        Statement statement = null;
+        ResultSet resultset = null;
+
+        try {
+
+            connect = cargarBase();
+            statement = connect.createStatement();
+
+            resultset = statement.executeQuery(query);
+            listaCarreras = getNombrexNum(resultset);
+
+        } catch (SQLException e) {
+            throw new DBConsultException(e.getMessage() + "    " + e.getSQLState());
+        } finally {
+            cerrarBase(connect, statement);
+        }
+        return listaCarreras ;
+    }
+    
+    /**
+     * Regresa una lista con  el numero de alumnos por carreras.
+     *
+     * @param null
+     * @return Regresa una lista ligada cuyos elemenos son el par ordenado
+     * del nombre del carrera y  el numero de alumnos en esta.
+     * @throws Lanza una excepcion
+     */  
+    public LinkedList<String[]> carrerasNumAlumnosDb () throws DBCreationException, DBConsultException {
+
+        String query = "SELECT DISTINCT carreras.nombre , COUNT(carreras.nombre) AS NumAlumnos " +
+        		" FROM alumnos NATURAL JOIN carreras " +
+        		" WHERE alumnos.carrera = carreras.id_c "+
+        		" GROUP BY carreras.nombre;";
+
+        LinkedList<String[]> listaAlumnos = new LinkedList<String[]>();
+
+        Connection connect = null;
+        Statement statement = null;
+        ResultSet resultset = null;
+
+        try {
+
+            connect = cargarBase();
+            statement = connect.createStatement();
+
+            resultset = statement.executeQuery(query);
+            listaAlumnos = getNombrexNum(resultset);
+
+        } catch (SQLException e) {
+            throw new DBConsultException(e.getMessage() + "    " + e.getSQLState());
+        } finally {
+            cerrarBase(connect, statement);
+        }
+        return listaAlumnos ;
+    }
+    
+    /**
+     * Regresa una lista con  el numero de alumnos aceptados,rechazados o pendientes por proyecto .
+     *
+     * @param un entero con los siguientes significados: 1 aceptado; 2 rechazado; 3 pendiente.
+     * Cualquier otro valor lanzara un DBSocultException
+     * @return Regresa una lista ligada cuyos elemenos son el par ordenado
+     * del nombre del proyecto y el numero de alumnos en determinado estado.
+     * @throws Lanza una excepcion
+    */
+    public LinkedList<String[]> estadosAlumnosProyDb () 
+            throws DBCreationException, DBConsultException {		
+			
+        String query = "SELECT proyectos.nombre ,COUNT(postulados.estador) AS ?" +
+                        " FROM proyectos ,postulados" +
+                        " WHERE proyectos.id_u = postulados.id_u AND" +
+                        " postulados.estador = ?" + 
+                        " GROUP BY postulados.estador;";
+    	
+
+        LinkedList<String[]> listaA = new LinkedList<String[]>();
+        LinkedList<String[]> listaB = new LinkedList<String[]>();
+        LinkedList<String[]> listaC = new LinkedList<String[]>();
+
+        Connection connect = null;
+        PreparedStatement statement = null;
+        ResultSet resultset = null;
+
+        try {
+
+            connect = cargarBase();
+            statement = connect.prepareStatement(query);
+            statement.setString(1, "Aceptados");
+            statement.setString(2, "aceptado");
+            resultset = statement.executeQuery();
+            listaA = getNombrexNum(resultset);
+            
+            statement =
+            
+            
+
+        } catch (SQLException e) {
+            throw new DBConsultException(e.getMessage() + "    " + e.getSQLState());
+        } finally {
+            cerrarBase(connect, statement);
+        }
+        return listaProy ;
+    }
+    
+    
 } // ConectaDbImpl
