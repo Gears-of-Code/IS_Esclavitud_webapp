@@ -1233,7 +1233,7 @@ public class ConectaDbImpl implements ConectaDb {
     public LinkedList<String[]> proyectosPorCarrerasDb () 
             throws DBCreationException, DBConsultException {
 
-        String query = "select carreras.nombre, count(proycarr.id_p) as NumProyectos" +
+        String query = "select carreras.nombre, count(proycarr.id_p) as NumProyectos " +
                 "from carreras left join proycarr " +
                 "on carreras.id_c = proycarr.id_c " +
                 "group by carreras.nombre";
@@ -1270,7 +1270,7 @@ public class ConectaDbImpl implements ConectaDb {
      */  
     public LinkedList<String[]> alumnosPorCarreraDb () throws DBCreationException, DBConsultException {
 
-        String query = "select carreras.nombre, count(alumnos.id_u) as NumAlumnos" +
+        String query = "select carreras.nombre, count(alumnos.id_u) as NumAlumnos " +
                 "from carreras left join alumnos " +
                 "on carreras.id_c = alumnos.carrera " +
                 "group by carreras.nombre;";
@@ -1369,29 +1369,5 @@ public class ConectaDbImpl implements ConectaDb {
             cerrarBase(connect, statement);
         }
         return listaProy ;
-    }
-    
-    public static void main(String[] args){
-        try{
-        ConectaDbImpl d = new ConectaDbImpl();
-        System.out.println(toStringLinkedList(d.estadosAlumnosProyDb()));
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        
-    }
-    
-    private static String toStringLinkedList(LinkedList<String[]> lista){
-        String result = "";
-        String[] elem = null;
-        for (int i = 0; i< lista.size(); i++){
-            elem = lista.get(i);
-            for (int j = 0; j<elem.length; j++){
-                result += elem[j] + " ";
-            }
-            result += "\n";
-        }
-        return  result;
     }  
-    
 } // ConectaDbImpl
