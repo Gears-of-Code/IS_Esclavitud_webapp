@@ -9,7 +9,6 @@ package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 import mx.gearsofcode.proyservsocial.logico.impl.LogicoFactoryImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Admin;
-import mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage;
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
@@ -47,6 +46,8 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
     public void aceptaResponsable(final int respID) throws DBModificationException, DBCreationException {
         ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
         conexion.aceptarResponsableDb(respID);
+        
+        //TODO:sendmail
     }
 
     /**
