@@ -1148,7 +1148,7 @@ public class ConectaDbImpl implements ConectaDb {
         String[] nombrexnum = null;
 
         while (rs.next()) {
-            nombrexnum = new String[4];
+            nombrexnum = new String[2];
             nombrexnum[0] = rs.getString(1);
             nombrexnum[1] = rs.getString(2);
             lista.add(nombrexnum);
@@ -1298,45 +1298,42 @@ public class ConectaDbImpl implements ConectaDb {
     }
     
     /**
-     * Regresa una lista con  el numero de alumnos aceptados,rechazados o pendientes por proyecto .
-     *
-     * @param un entero con los siguientes significados: 1 aceptado; 2 rechazado; 3 pendiente.
-     * Cualquier otro valor lanzara un DBSocultException
+     * Regresa una lista de tamaño 3 de Objectos ResultSet.
+     * Cada objeto ResultSet, tiene dos columnas: nombre  y estado.
+     * La columna nombre tiene el nombre del proyecto y la columna estado
+     * tiene el numero de alumnos en el estado dado. Estos estados pueden ser:
+     * aceptado, rechazado y pendiente.
+     * El primer elemento de la lista es el de los acpetados.
+     * El segundo es el de los rechazados y la Tercera es la de los pendientes.
      * @return Regresa una lista ligada cuyos elemenos son el par ordenado
      * del nombre del proyecto y el numero de alumnos en determinado estado.
      * @throws Lanza una excepcion
     */
-    public LinkedList<String[]> estadosAlumnosProyDb () 
+    public LinkedList<ResultSet> estadosAlumnosProyDb () 
             throws DBCreationException, DBConsultException {		
 			
-        String query = "SELECT proyectos.nombre ,COUNT(postulados.estador) AS ?" +
-                        " FROM proyectos ,postulados" +
-                        " WHERE proyectos.id_u = postulados.id_u AND" +
-                        " postulados.estador = ?" + 
-                        " GROUP BY postulados.estador;";
+        String query = "select nombre, count(estador) AS estado "+
+                        "from proyectos,postulados "+
+                        "where estador = ? and proyectos.id_p = postulados.id_p "+ 
+                        "group by postulados.id_p;";
     	
-
-        LinkedList<String[]> listaA = new LinkedList<String[]>();
-        LinkedList<String[]> listaB = new LinkedList<String[]>();
-        LinkedList<String[]> listaC = new LinkedList<String[]>();
+        LinkedList<ResultSet> listaProy = null;
 
         Connection connect = null;
         PreparedStatement statement = null;
-        ResultSet resultset = null;
-
+        
         try {
 
             connect = cargarBase();
             statement = connect.prepareStatement(query);
-            statement.setString(1, "Aceptados");
             statement.setString(2, "aceptado");
-            resultset = statement.executeQuery();
-            listaA = getNombrexNum(resultset);
+            listaProy.add(statement.executeQuery());
             
-            statement =
+            statement.setString(2,"rechazado");
+            listaProy.add(statement.executeQuery());
             
-            
-
+            statement.setString(2,"pendiente");
+            listaProy.add(statement.executeQuery());
         } catch (SQLException e) {
             throw new DBConsultException(e.getMessage() + "    " + e.getSQLState());
         } finally {
@@ -1344,6 +1341,5 @@ public class ConectaDbImpl implements ConectaDb {
         }
         return listaProy ;
     }
-    
     
 } // ConectaDbImpl

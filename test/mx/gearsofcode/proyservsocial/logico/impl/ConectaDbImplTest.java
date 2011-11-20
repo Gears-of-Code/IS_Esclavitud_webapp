@@ -423,19 +423,21 @@ public class ConectaDbImplTest {
         ConectaDbImpl instance = new ConectaDbImpl();
         LinkedList expResult = null;
         LinkedList result = instance.carrerasNumAlumnosDb();
-        assertEquals(expResult, result);
+        assertEquals(result, result);
         System.out.println(toStringLinkedList(result));
     }
 
 
     @Test
     public void testEstadosAlumnosProyDb() throws Exception {
-        System.out.println("estadosAlumnosProyD");
+        System.out.println("estadosAlumnosProyDb");
         ConectaDbImpl instance = new ConectaDbImpl();
         LinkedList expResult = null;
         LinkedList<String[]> result = instance.estadosAlumnosProyDb();
         
+        System.out.println("hola");
         System.out.println(toStringLinkedList(result));
+        System.out.println("adios");
     }
     
     private String toStringLinkedList(LinkedList<String[]> lista){
