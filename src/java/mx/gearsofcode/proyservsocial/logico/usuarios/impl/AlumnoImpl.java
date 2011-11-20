@@ -7,7 +7,7 @@
 package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
-import mx.gearsofcode.proyservsocial.logico.impl.LogicoFactoryImpl;
+import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Alumno;
 import mx.gearsofcode.proyservsocial.logico.usuarios.CarreraAlumno;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
@@ -167,7 +167,7 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
      */
     public void postularseAProyecto(int proyectID) throws DBModificationException, DBCreationException {
         if(!this.estado){
-            ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+            ConectaDb conexion = new ConectaDbImpl();
             conexion.postularAProyectoDb(proyectID, this.id);
         }
         // No hay else puesto que el alumno ya estaba autorizado en otro proyecto.

@@ -6,14 +6,11 @@
  */
 package mx.gearsofcode.proyservsocial.logico.inicioDeSesion.impl;
 
-import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.InicioDeSesionPackage;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.Sesion;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
 
 import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
 import mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado;
-import mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage;
-import mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuariosFactoryImpl;
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 
@@ -22,6 +19,8 @@ import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import mx.gearsofcode.proyservsocial.logico.usuarios.impl.AdminImpl;
+import mx.gearsofcode.proyservsocial.logico.usuarios.impl.ResponsableImpl;
 
 /**
  * La clase '<em><b>Sesion</b></em>' se encarga de manejar parte del inicio de
@@ -72,17 +71,6 @@ public class SesionImpl implements Sesion {
      * @generated
      */
     public UsuarioRegistrado getUsuario() {
-        if (usuario != null && usuario.eIsProxy()) {
-            InternalEObject oldUsuario = (InternalEObject) usuario;
-            usuario = (UsuarioRegistrado) eResolveProxy(oldUsuario);
-            if (usuario != oldUsuario) {
-                if (eNotificationRequired()) {
-                    eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-                            InicioDeSesionPackage.SESION__USUARIO, oldUsuario,
-                            usuario));
-                }
-            }
-        }
         return usuario;
     }
 
@@ -103,10 +91,6 @@ public class SesionImpl implements Sesion {
     public void setUsuario(UsuarioRegistrado newUsuario) {
         UsuarioRegistrado oldUsuario = usuario;
         usuario = newUsuario;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    InicioDeSesionPackage.SESION__USUARIO, oldUsuario, usuario));
-        }
     }
 
     /**
@@ -165,7 +149,7 @@ public class SesionImpl implements Sesion {
         // mapeando a un int se ve que clase se debe generar.
         switch (tipoUsuario) {
             case TipoUsuario.ADMINISTRADOR_VALUE:
-                UsuarioRegistrado admin = new UsuariosFactoryImpl().createAdmin();
+                UsuarioRegistrado admin = new AdminImpl();
                 admin.setUsername(nombreUsuario);
                 admin.setNombre(usuarioNombre);
                 admin.setId(idUsuario);
@@ -180,7 +164,7 @@ public class SesionImpl implements Sesion {
                     if (tmpRes.next()) {
                         try {
                             if (tmpRes.getBoolean("estado")) {
-                                UsuarioRegistrado resp = new UsuariosFactoryImpl().createResponsable();
+                                UsuarioRegistrado resp = new ResponsableImpl();
                                 resp.setUsername(nombreUsuario);
                                 ((Responsable) resp).setId(idUsuario); 
                                 resp.setTipo(tipoUsuario);
