@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
-import mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage;
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
@@ -126,11 +125,6 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     public void setDescripcion(String newDescripcion) {
         String oldDescripcion = descripcion;
         descripcion = newDescripcion;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.RESPONSABLE__DESCRIPCION, oldDescripcion,
-                    descripcion));
-        }
     }
 
 /*    public int getIdResp() {
@@ -158,11 +152,6 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     public void setSitioweb(String newSitioweb) {
         String oldSitioweb = sitioweb;
         sitioweb = newSitioweb;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.RESPONSABLE__SITIOWEB, oldSitioweb,
-                    sitioweb));
-        }
     }
 
     /**
@@ -182,10 +171,6 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     public void setEstado(boolean newEstado) {
         boolean oldEstado = estado;
         estado = newEstado;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.RESPONSABLE__ESTADO, oldEstado, estado));
-        }
     }
 
     /**
@@ -277,9 +262,6 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
      */
     @Override
     public String toString() {
-        if (eIsProxy()) {
-            return super.toString();
-        }
 
         StringBuffer result = new StringBuffer(super.toString());
         result.append(" (descripcion: ");

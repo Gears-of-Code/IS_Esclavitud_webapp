@@ -6,10 +6,16 @@
  */
 package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
-import mx.gearsofcode.proyservsocial.logico.impl.LogicoFactoryImpl;
+
+import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
+
 import mx.gearsofcode.proyservsocial.logico.usuarios.Admin;
+import mx.gearsofcode.proyservsocial.logico.usuarios.Alumno;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
+
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
@@ -52,7 +58,10 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
             Responsable res = (ResponsableImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(respID));
             String userMail = res.getEmail();
             Mailing dove = new Mailing();
-            dove.sendmail(userMail, "Has sido aceptado al sistema de servicio social de la facultad de ciencias.", "Este correo es para informarte que tu solicitud para ser un Responsable de Proyecto en nuestra facultad ha sido existosa. Te recordamos que las credenciales que proporcionaste en tu registro son:\nUsuario: "+res.getUsername()+"\nContraseña:"+res.getContraseña()+"\nSi tienes algun problema, favor de revisar el manual del usuaio o contactar al administrador del sistema.\n\n\nEste mensaje fue generado de forma automática y por tanto no hay necesidad de responderlo.");
+            String accepted = "Has sido aceptado al sistema de servicio social de la facultad de ciencias.";
+            String content = "Este correo es para informarte que tu solicitud para ser un Responsable de Proyecto en nuestra facultad ha sido existosa. Te recordamos que las credenciales que proporcionaste en tu registro son:\nUsuario: " + res.getUsername() + "\nContraseña:" + res.getContraseña() + "\nSi tienes algun problema, favor de revisar el manual del usuaio o contactar al administrador del sistema.\n\n\nEste mensaje fue generado de forma automática y por tanto no hay necesidad de responderlo.";
+
+            dove.sendmail(userMail, accepted, content);
         } catch (DBConsultException cons) {
             throw new DBCreationException(cons.getMessage());
         }
@@ -69,8 +78,6 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      */
     public void actualizaEstadoAlumno(final int studentID, boolean studentState) throws DBModificationException, DBCreationException {
         ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
-        //falta metodo de ConectaDb modificarEstadoAlumno(final int studentID, boolean studentState)
-        //se agrega temporalmente.
         conexion.modificarEstadoAlumno(studentID, studentState);
     }
 
@@ -84,11 +91,22 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      */
     public void autorizarAlumnoProyecto(final int studentID, final int proyectID) throws DBModificationException, DBCreationException {
         ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
-        //falta metodo de ConectaDb autorizarAlumnoProyecto(final int studentID, final int proyectID)
-        //se agrega temporalmente.
         conexion.autorizarAlumnoProyecto(studentID, proyectID);
         this.actualizaEstadoAlumno(studentID, true);
-        //TODO:sendmail
+
+        try {
+
+            Alumno res = (AlumnoImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(studentID));
+            Proyecto proy = this.verDetallesProyecto(proyectID);
+            String proyectName = proy.getNombre();
+            String userMail = res.getEmail();
+            Mailing dove = new Mailing();
+            String accepted = "Has sido aceptado en un proyecto.";
+            String content = "Este correo es para informarte que tu solicitud para participar en el proyecto: " + proyectName + " de nuestra facultad ha sido existosa. \n\n\nEste mensaje fue generado de forma automática y por tanto no hay necesidad de responderlo.";
+            dove.sendmail(userMail, accepted, content);
+        } catch (DBConsultException cons) {
+            throw new DBCreationException(cons.getMessage());
+        }
     }
 
     /**
@@ -103,7 +121,21 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
     public void autorizarProyecto(final int proyectID) throws DBModificationException, DBCreationException {
         boolean aceptado = true;
         modificaProyecto(proyectID, aceptado);
-        //TODO:sendmail
+
+        try {
+
+            Proyecto proy = this.verDetallesProyecto(proyectID);
+
+            Responsable res = (ResponsableImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(proy.getResponsable()));
+            String proyectName = proy.getNombre();
+            String userMail = res.getEmail();
+            Mailing dove = new Mailing();
+            String accepted = "Proyecto aceptado.";
+            String content = "Este correo es para informarte que tu solicitud para postular el proyecto: " + proyectName + " en el sistema de servicio social de nuestra facultad ha sido existosa.\nLos alumnos podrán, a partir de ahora, postularse para participar en tu proyecto. Debes mantenerte al tanto de dichas solicitudes y revisar a los participantes, a fin de tener los mejores resultados. \n\n\nEste mensaje fue generado de forma automática y por tanto no hay necesidad de responderlo.";
+            dove.sendmail(userMail, accepted, content);
+        } catch (DBConsultException cons) {
+            throw new DBCreationException(cons.getMessage());
+        }
     }
 
     /**
@@ -117,7 +149,21 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
     public void rechazarProyecto(final int proyectID) throws DBCreationException, DBModificationException {
         boolean rechazado = false;
         modificaProyecto(proyectID, rechazado);
-        //TODO:sendmail
+
+        try {
+
+            Proyecto proy = this.verDetallesProyecto(proyectID);
+
+            Responsable res = (ResponsableImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(proy.getResponsable()));
+            String proyectName = proy.getNombre();
+            String userMail = res.getEmail();
+            Mailing dove = new Mailing();
+            String accepted = "Proyecto rechazado.";
+            String content = "Este correo es para informarte que tu solicitud para postular el proyecto: " + proyectName + " en el sistema de servicio social de nuestra facultad ha fracasado.\nCualquier duda sobre esta decisión deberás llevarla con el administrador del sistema, contactándolo en el correo pre-determinado para esta función.. \n\n\nEste mensaje fue generado de forma automática y por tanto no hay necesidad de responderlo.";
+            dove.sendmail(userMail, accepted, content);
+        } catch (DBConsultException cons) {
+            throw new DBCreationException(cons.getMessage());
+        }
     }
 
     /**
@@ -142,12 +188,34 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
     public void rechazarResponsable(final int respID) throws DBCreationException, DBModificationException {
         ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
         conexion.rechazaResponsableDb(respID);
-        //TODO:sendmail
+
+        try {
+            Responsable res = (ResponsableImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(respID));
+            String userMail = res.getEmail();
+            Mailing dove = new Mailing();
+            String accepted = "Has sido rechazado en el sistema de servicio social de la facultad de ciencias.";
+            String content = "Este correo es para informarte que tu solicitud para ser un Responsable de Proyecto en nuestra facultad ha fracasado. \nCualquier duda sobre esta decisión deberás llevarla con el administrador del sistema, contactándolo en el correo pre-determinado para esta función.. \n\n\nEste mensaje fue generado de forma automática y por tanto no hay necesidad de responderlo.";
+            dove.sendmail(userMail, accepted, content);
+        } catch (DBConsultException cons) {
+            throw new DBCreationException(cons.getMessage());
+        }
     }
 
     public void rechazarAlumnoProyecto(final int studentID, final int proyectID) throws DBCreationException, DBModificationException {
         ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
         conexion.rechazaAlumnoProyectoDb(proyectID, studentID);
-        //TODO:sendmail
+        try {
+
+            Alumno res = (AlumnoImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(studentID));
+            Proyecto proy = this.verDetallesProyecto(proyectID);
+            String proyectName = proy.getNombre();
+            String userMail = res.getEmail();
+            Mailing dove = new Mailing();
+            String accepted = "Has sido rechazado en un proyecto.";
+            String content = "Este correo es para informarte que tu solicitud para participar en el proyecto: " + proyectName + " de nuestra facultad ha fracasado.Cualquier duda sobre esta decisión deberás llevarla con el administrador del sistema, contactándolo en el correo pre-determinado para esta función.. \n\n\nEste mensaje fue generado de forma automática y por tanto no hay necesidad de responderlo.";
+            dove.sendmail(userMail, accepted, content);
+        } catch (DBConsultException cons) {
+            throw new DBCreationException(cons.getMessage());
+        }
     }
 } //AdminImpl

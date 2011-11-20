@@ -10,7 +10,6 @@ import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 import mx.gearsofcode.proyservsocial.logico.impl.LogicoFactoryImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Alumno;
 import mx.gearsofcode.proyservsocial.logico.usuarios.CarreraAlumno;
-import mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
@@ -135,10 +134,6 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
     public void setPorcentaje(int newPorcentaje) {
         int oldPorcentaje = porcentaje;
         porcentaje = newPorcentaje;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.ALUMNO__PORCENTAJE, oldPorcentaje,
-                    porcentaje));
     }
 
     /**
@@ -158,9 +153,6 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
     public void setEstado(boolean newEstado) {
         boolean oldEstado = estado;
         estado = newEstado;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.ALUMNO__ESTADO, oldEstado, estado));
     }
 
     /**
@@ -188,9 +180,6 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
      */
     @Override
     public String toString() {
-        if (eIsProxy())
-            return super.toString();
-
         StringBuffer result = new StringBuffer(super.toString());
         result.append(" (carrera: ");
         result.append(carrera);
