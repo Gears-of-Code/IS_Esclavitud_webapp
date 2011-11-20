@@ -71,16 +71,6 @@ public class SesionImpl implements Sesion {
      * 
      * @generated
      */
-    @Override
-    protected EClass eStaticClass() {
-        return InicioDeSesionPackage.Literals.SESION;
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
     public UsuarioRegistrado getUsuario() {
         if (usuario != null && usuario.eIsProxy()) {
             InternalEObject oldUsuario = (InternalEObject) usuario;
@@ -125,7 +115,7 @@ public class SesionImpl implements Sesion {
      * datos, se accede al sistema sino se manda un mensaje de error.
      * 
      * @param nombreUsuario Nombre del usuario.
-     * @param passwd Contrasena del usuario, en texto plano.
+     * @param passwd Contrasena del usuario, llega en texto plano.
      * @throws DBConsultException
      */
     public UsuarioRegistrado autenticar(final String nombreUsuario,
@@ -140,14 +130,15 @@ public class SesionImpl implements Sesion {
         int idUsuario = -1;
         try {
             conexion = new LogicoFactoryImpl().createConectaDb();
-            data = conexion.validaUsuarioDb(nombreUsuario, md5passwd); // Resultados
-            // del
-            // query.
+            data = conexion.validaUsuarioDb(nombreUsuario, md5passwd); 
+	    // Data recibe los esultados del query.
+
             data.next();
 
             idUsuario = data.getInt("id_u");
             usuarioTipo = data.getString("tipo"); // Obtengo el tipo de usuario
             // del query.
+
             usuarioNombre = data.getString("nombre");
             usuarioMail = data.getString("email");
             usuarioPhone = data.getInt("telefono");
@@ -166,13 +157,9 @@ public class SesionImpl implements Sesion {
 //        if (1 < 2) {
 //            throw new DBConsultException("uID" + idUsuario + " uTY[" + usuarioTipo + "]" + data.toString());
 //        }
-        usuarioTipo = usuarioTipo.toUpperCase();//los tipos estan en mayus, entonces hay que darle gusto.
-        int tipoUsuario = TipoUsuario.valueOf(usuarioTipo).getValue(); // Mapea
-        // el
-        // tipo
-        // de
-        // usuario
-        // a int.
+        usuarioTipo = usuarioTipo.toUpperCase(); // Los tipos estan en mayus, entonces hay que darle gusto.
+        int tipoUsuario = TipoUsuario.valueOf(usuarioTipo).getValue(); 
+	// TipoUsuario realiza un mapeo del tipo de usuario a int.
 
         // Dependiendo del tipo almacenado en la base de datos
         // mapeando a un int se ve que clase se debe generar.
@@ -185,6 +172,7 @@ public class SesionImpl implements Sesion {
                 admin.setTipo(tipoUsuario);
                 inicioUsuario = admin;
                 break;
+
             case TipoUsuario.RESPONSABLE_VALUE:
                 conexion = new LogicoFactoryImpl().createConectaDb();
                 ResultSet tmpRes = conexion.fetchUserInfo(idUsuario, tipoUsuario);
@@ -199,7 +187,7 @@ public class SesionImpl implements Sesion {
                                 resp.setNombre(usuarioNombre);
                                 inicioUsuario = resp;
                             } else {
-                                DBConsultException cons = new DBConsultException("User has not been authorized yet.");
+                                DBConsultException cons = new DBConsultException("El usuario aun no ha sido autorizado.");
                                 cons.setErrorCode(7);
                                 throw cons;
                             }
@@ -218,32 +206,22 @@ public class SesionImpl implements Sesion {
 
             case TipoUsuario.ALUMNO_VALUE:
                 UsuarioRegistrado alum = new UsuariosFactoryImpl().createAlumno();
-
                 alum.setUsername(nombreUsuario);
-
                 alum.setId(idUsuario);
-
                 alum.setTipo(tipoUsuario);
-
                 alum.setNombre(usuarioNombre);
                 inicioUsuario = alum;
-
                 break;
 
             default:
-                DBConsultException cons = new DBConsultException("User has an invalid user type.");
-
-                cons.setErrorCode(
-                        8);
-
+                DBConsultException cons = new DBConsultException("Tipo de usuario invalido.");
+                cons.setErrorCode(8);
                 throw cons;
-            // El usuario tiene un tipo no valido.
+		// El usuario tiene un tipo no valido.
         }
-        
-        inicioUsuario.setEmail(usuarioMail);
-        inicioUsuario.setTelefono(
-                "" + usuarioPhone);
 
+        inicioUsuario.setEmail(usuarioMail);
+        inicioUsuario.setTelefono("" + usuarioPhone);
         return inicioUsuario;
     }
 
