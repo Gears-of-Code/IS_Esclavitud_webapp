@@ -1230,7 +1230,8 @@ public class ConectaDbImpl implements ConectaDb {
      * de nombre del carrera y  el numero de proyectos en esta.
      * @throws Lanza una excepcion
      */  
-    public LinkedList<String[]> proyectosPorCarreras () throws DBCreationException, DBConsultException {
+    public LinkedList<String[]> proyectosPorCarrerasDb () 
+            throws DBCreationException, DBConsultException {
 
         String query = "select carreras.nombre, count(proycarr.id_p) " +
                 "from carreras left join proycarr " +
@@ -1267,9 +1268,9 @@ public class ConectaDbImpl implements ConectaDb {
      * del nombre del carrera y  el numero de alumnos en esta.
      * @throws Lanza una excepcion
      */  
-    public LinkedList<String[]> alumnosPorCarrera () throws DBCreationException, DBConsultException {
+    public LinkedList<String[]> alumnosPorCarreraDb () throws DBCreationException, DBConsultException {
 
-        String query = "select carreras.nombre, count(alumnos.id_u)" 
+        String query = "select carreras.nombre, count(alumnos.id_u)" +
                 "from carreras left join alumnos " +
                 "on carreras.id_c = alumnos.carrera " +
                 "group by carreras.nombre;";
