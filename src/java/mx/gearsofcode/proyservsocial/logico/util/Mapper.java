@@ -5,7 +5,7 @@
 package mx.gearsofcode.proyservsocial.logico.util;
 
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
-import mx.gearsofcode.proyservsocial.logico.impl.LogicoFactoryImpl;
+import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
 
 /**
  *
@@ -65,11 +65,11 @@ public class Mapper {
         ConectaDb conexion = null;
         switch (this.type) {
             case 0:
-                conexion = new LogicoFactoryImpl().createConectaDb();
+                conexion = new ConectaDbImpl();
                 this.translated = conexion.translateAC(this.values);
                 break;
             case 1:
-                conexion = new LogicoFactoryImpl().createConectaDb();
+                conexion = new ConectaDbImpl();
                 this.translated = conexion.translateCAR(this.values);
                 break;
             default:
