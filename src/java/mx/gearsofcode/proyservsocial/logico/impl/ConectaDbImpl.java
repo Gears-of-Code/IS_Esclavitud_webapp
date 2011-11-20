@@ -1187,18 +1187,18 @@ public class ConectaDbImpl implements ConectaDb {
       
     /**
      * Regresa una lista con  el numero de proyectos por areas  de conocimiento.
-     *
+     *areaNumProy
      * @return Regresa una lista ligada cuyos elemenos son el par ordenado
      * del nombre del Area C. y  el numero de proyectos en esta.
      * @throws Lanza una excepcion
      */
-    public LinkedList<String[]> areaNumProyDb () throws DBCreationException, DBConsultException {
+    public LinkedList<String[]> proyectosPorAreaDb () throws DBCreationException, DBConsultException {
 
-        String query = "SELECT DISTINCT areasconocimiento.nombre , " +
-        		" COUNT(areasconocimiento.nombre) AS NumProyectos " +
-        		" FROM proyectos, proyac NATURAL JOIN areasconocimiento "+
-        		" WHERE proyectos.id_p = proyac.id_p " +
-        		" GROUP BY areasconocimiento.nombre;";
+        String query = "select areasconocimiento.nombre, count(proyac.id_p) "+
+                "as NumProyectos from areasconocimiento left join proyac "+
+                "on areasconocimiento.id_ac = proyac.id_ac "+
+                "group by areasconocimiento.nombre";
+
         
 
         LinkedList<String[]> listaAreas = new LinkedList<String[]>();
@@ -1233,7 +1233,7 @@ public class ConectaDbImpl implements ConectaDb {
     public LinkedList<String[]> proyectosPorCarrerasDb () 
             throws DBCreationException, DBConsultException {
 
-        String query = "select carreras.nombre, count(proycarr.id_p) " +
+        String query = "select carreras.nombre, count(proycarr.id_p) as NumProyectos" +
                 "from carreras left join proycarr " +
                 "on carreras.id_c = proycarr.id_c " +
                 "group by carreras.nombre";
@@ -1270,7 +1270,7 @@ public class ConectaDbImpl implements ConectaDb {
      */  
     public LinkedList<String[]> alumnosPorCarreraDb () throws DBCreationException, DBConsultException {
 
-        String query = "select carreras.nombre, count(alumnos.id_u)" +
+        String query = "select carreras.nombre, count(alumnos.id_u) as NumAlumnos" +
                 "from carreras left join alumnos " +
                 "on carreras.id_c = alumnos.carrera " +
                 "group by carreras.nombre;";
