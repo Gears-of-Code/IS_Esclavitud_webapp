@@ -19,12 +19,6 @@ import mx.gearsofcode.proyservsocial.logico.impl.LogicoFactoryImpl;
 import mx.gearsofcode.proyservsocial.logico.proyectos.impl.ProyectosFactoryImpl;
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
 
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Responsable</b></em>'.
@@ -113,16 +107,6 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
      */
     protected ResponsableImpl() {
         super();
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    protected EClass eStaticClass() {
-        return UsuariosPackage.Literals.RESPONSABLE;
     }
 
     /**
@@ -256,16 +240,6 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public void seleccionarAlumnos() {
-        // TODO: delete this method
-        throw new UnsupportedOperationException();
-    }
-
-    /**
      * Metodo que dara de alta un nuevo proyecto en la base
      * de datos. Este proyecto siempre esta en estado false 
      * que implica que esta en "proceso de autorizacion".
@@ -294,86 +268,6 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
         nuevoProyecto.setCarreras(carreraProy);
         conexion = new LogicoFactoryImpl().createConectaDb();
         conexion.proponerProyectoDb(nuevoProyecto);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case UsuariosPackage.RESPONSABLE__DESCRIPCION:
-                return getDescripcion();
-            case UsuariosPackage.RESPONSABLE__SITIOWEB:
-                return getSitioweb();
-            case UsuariosPackage.RESPONSABLE__ESTADO:
-                return isEstado();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case UsuariosPackage.RESPONSABLE__DESCRIPCION:
-                setDescripcion((String) newValue);
-                return;
-            case UsuariosPackage.RESPONSABLE__SITIOWEB:
-                setSitioweb((String) newValue);
-                return;
-            case UsuariosPackage.RESPONSABLE__ESTADO:
-                setEstado((Boolean) newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public void eUnset(int featureID) {
-        switch (featureID) {
-            case UsuariosPackage.RESPONSABLE__DESCRIPCION:
-                setDescripcion(DESCRIPCION_EDEFAULT);
-                return;
-            case UsuariosPackage.RESPONSABLE__SITIOWEB:
-                setSitioweb(SITIOWEB_EDEFAULT);
-                return;
-            case UsuariosPackage.RESPONSABLE__ESTADO:
-                setEstado(ESTADO_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case UsuariosPackage.RESPONSABLE__DESCRIPCION:
-                return DESCRIPCION_EDEFAULT == null ? descripcion != null
-                        : !DESCRIPCION_EDEFAULT.equals(descripcion);
-            case UsuariosPackage.RESPONSABLE__SITIOWEB:
-                return SITIOWEB_EDEFAULT == null ? sitioweb != null
-                        : !SITIOWEB_EDEFAULT.equals(sitioweb);
-            case UsuariosPackage.RESPONSABLE__ESTADO:
-                return estado != ESTADO_EDEFAULT;
-        }
-        return super.eIsSet(featureID);
     }
 
     /**

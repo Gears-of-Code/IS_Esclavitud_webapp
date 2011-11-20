@@ -108,9 +108,6 @@ public interface Responsable extends UsuarioRegistrado {
      */
     void setEstado(boolean value);
 
-  //  void setIdResp(final int idresponsable);
-    
-//int getIdResp();
     
     /**
      * <!-- begin-user-doc -->
@@ -143,6 +140,7 @@ public interface Responsable extends UsuarioRegistrado {
             final int capMax, final int[] carreraProy, final int[] areaDeConocimiento) throws DBCreationException;
 
     String [][] dameAC() throws DBConsultException, DBCreationException;
+
     String [][] dameCAR() throws DBConsultException, DBCreationException;
     
 } // Responsable

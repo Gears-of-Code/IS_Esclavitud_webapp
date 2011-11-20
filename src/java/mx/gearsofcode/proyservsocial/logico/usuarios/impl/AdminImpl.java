@@ -14,8 +14,6 @@ import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
-import org.eclipse.emf.ecore.EClass;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Admin</b></em>'.
@@ -34,16 +32,6 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      */
     protected AdminImpl() {
         super();
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    protected EClass eStaticClass() {
-        return UsuariosPackage.Literals.ADMIN;
     }
 
     /**
@@ -128,13 +116,11 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         conexion.autorizarProyectoDb(proyectID);   
     }
     
-    @Override
     public String[][] dameRespPendientes() throws DBConsultException, DBCreationException {
             ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
         return conexion.pendingResp();
     }
     
-    @Override
     public String[][] dameAlumPendientes() throws DBConsultException, DBCreationException {
             ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
         return conexion.pendingAlum();

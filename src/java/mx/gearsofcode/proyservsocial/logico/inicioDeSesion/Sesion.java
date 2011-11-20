@@ -18,6 +18,8 @@ import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
  * @model
  */
 public interface Sesion extends Object {
+
+    // TODO: Revisar si estos metodos sirven de algo (getUsuario y setUsario)
     /**
      * Returns the value of the '<em><b>Usuario</b></em>' reference.
      * <!-- begin-user-doc -->
