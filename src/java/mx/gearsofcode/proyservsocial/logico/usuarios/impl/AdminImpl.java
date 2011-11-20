@@ -31,7 +31,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      * <!-- end-user-doc -->
      * @generated
      */
-    protected AdminImpl() {
+    public  AdminImpl() {
         super();
     }
 

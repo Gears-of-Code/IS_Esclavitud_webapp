@@ -17,7 +17,7 @@ import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
  * @see mx.gearsofcode.proyservsocial.logico.inicioDeSesion.InicioDeSesionPackage#getSesion()
  * @model
  */
-public interface Sesion extends Object {
+public interface Sesion {
 
     // TODO: Revisar si estos metodos sirven de algo (getUsuario y setUsario)
     /**
@@ -55,11 +55,10 @@ public interface Sesion extends Object {
      * @throws DBCreationException 
      */
     UsuarioRegistrado autenticar(final String nombreUsuario,
-                                 final String password) throws DBConsultException, DBCreationException;
+            final String password) throws DBConsultException, DBCreationException;
 
     /**
      * Elimina el objeto del usuario que mando llamar al mentodo.
      */
     void cerrarSesion(final UsuarioRegistrado unUsuario);
-
 } // Sesion

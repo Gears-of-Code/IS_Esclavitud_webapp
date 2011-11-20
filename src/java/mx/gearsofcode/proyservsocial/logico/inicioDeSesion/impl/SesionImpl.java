@@ -17,11 +17,15 @@ import mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuariosFactoryImpl;
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 
-import mx.gearsofcode.proyservsocial.logico.impl.LogicoFactoryImpl;
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
+import mx.gearsofcode.proyservsocial.logico.usuarios.impl.AdminImpl;
+import mx.gearsofcode.proyservsocial.logico.usuarios.impl.AlumnoImpl;
+import mx.gearsofcode.proyservsocial.logico.usuarios.impl.ResponsableImpl;
+
 
 /**
  * La clase '<em><b>Sesion</b></em>' se encarga de manejar parte del inicio de
@@ -129,7 +133,7 @@ public class SesionImpl implements Sesion {
         int usuarioPhone = 0;
         int idUsuario = -1;
         try {
-            conexion = new LogicoFactoryImpl().createConectaDb();
+            conexion = new ConectaDbImpl();
             data = conexion.validaUsuarioDb(nombreUsuario, md5passwd); 
 	    // Data recibe los esultados del query.
 
@@ -174,7 +178,7 @@ public class SesionImpl implements Sesion {
                 break;
 
             case TipoUsuario.RESPONSABLE_VALUE:
-                conexion = new LogicoFactoryImpl().createConectaDb();
+                conexion = new ConectaDbImpl();
                 ResultSet tmpRes = conexion.fetchUserInfo(idUsuario, tipoUsuario);
                 try {
                     if (tmpRes.next()) {
@@ -205,7 +209,7 @@ public class SesionImpl implements Sesion {
                 break;
 
             case TipoUsuario.ALUMNO_VALUE:
-                UsuarioRegistrado alum = new UsuariosFactoryImpl().createAlumno();
+                UsuarioRegistrado alum = new AlumnoImpl();
                 alum.setUsername(nombreUsuario);
                 alum.setId(idUsuario);
                 alum.setTipo(tipoUsuario);

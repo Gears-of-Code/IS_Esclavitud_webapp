@@ -17,8 +17,8 @@ import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
-import mx.gearsofcode.proyservsocial.logico.impl.LogicoFactoryImpl;
 
+import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
 
 /**
@@ -543,7 +543,7 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
             LinkedList<String[]> queryResult = null;
             
             try {
-                conexion = new LogicoFactoryImpl().createConectaDb();
+                conexion = new ConectaDbImpl();
                 queryResult = conexion.verPostuladosDb(id);
             } catch (DBCreationException dbe) {
                 dbe.getCause();

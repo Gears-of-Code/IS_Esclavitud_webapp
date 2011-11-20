@@ -38,7 +38,7 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
         Responsable {
 
 //    protected static final int ID_RESP = -1;
-  //  protected int id_resp = ID_RESP;
+    //  protected int id_resp = ID_RESP;
     /**
      * The default value of the '{@link #getDescripcion() <em>Descripcion</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -105,7 +105,7 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
      * <!-- end-user-doc -->
      * @generated
      */
-    protected ResponsableImpl() {
+    public ResponsableImpl() {
         super();
     }
 
@@ -133,14 +133,14 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
         }
     }
 
-/*    public int getIdResp() {
-        return id_resp;
+    /*    public int getIdResp() {
+    return id_resp;
     }
-
+    
     public void setIdResp(final int idresponsable) {
-        id_resp = idresponsable;
+    id_resp = idresponsable;
     }
-*/
+     */
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

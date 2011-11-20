@@ -96,7 +96,7 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
      * <!-- end-user-doc -->
      * @generated
      */
-    protected AlumnoImpl() {
+    public AlumnoImpl() {
         super();
     }
 
