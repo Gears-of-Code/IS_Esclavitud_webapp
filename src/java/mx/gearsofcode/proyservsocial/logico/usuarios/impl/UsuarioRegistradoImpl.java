@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.Sesion;
 
 import mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado;
-import mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage;
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 
@@ -28,6 +27,7 @@ import java.util.Set;
 import java.util.LinkedHashSet;
 
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
+import mx.gearsofcode.proyservsocial.logico.usuarios.Alumno;
 import mx.gearsofcode.proyservsocial.logico.usuarios.CarreraAlumno;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
 
@@ -222,10 +222,6 @@ public class UsuarioRegistradoImpl implements
     public void setId(int newId) {
         int oldId = id;
         id = newId;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.USUARIO_REGISTRADO__ID, oldId, id));
-        }
     }
 
     /**
@@ -245,11 +241,6 @@ public class UsuarioRegistradoImpl implements
     public void setUsername(String newUsername) {
         String oldUsername = username;
         username = newUsername;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.USUARIO_REGISTRADO__USERNAME, oldUsername,
-                    username));
-        }
     }
 
     /**
@@ -269,11 +260,6 @@ public class UsuarioRegistradoImpl implements
     public void setContraseña(String newContraseña) {
         String oldContraseña = contraseña;
         contraseña = newContraseña;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.USUARIO_REGISTRADO__CONTRASEÑA,
-                    oldContraseña, contraseña));
-        }
     }
 
     /**
@@ -312,10 +298,6 @@ public class UsuarioRegistradoImpl implements
     public void setTipo(final int newTipo) {
         int oldTipo = tipo;
         tipo = (newTipo == -1) ? TIPO_EDEFAULT : newTipo;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.USUARIO_REGISTRADO__TIPO, oldTipo, tipo));
-        }
     }
 
     /**
@@ -335,11 +317,6 @@ public class UsuarioRegistradoImpl implements
     public void setNombre(String newNombre) {
         String oldNombre = nombre;
         nombre = newNombre;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.USUARIO_REGISTRADO__NOMBRE, oldNombre,
-                    nombre));
-        }
     }
 
     /**
@@ -359,11 +336,6 @@ public class UsuarioRegistradoImpl implements
     public void setTelefono(String newTelefono) {
         String oldTelefono = telefono;
         telefono = newTelefono;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.USUARIO_REGISTRADO__TELEFONO, oldTelefono,
-                    telefono));
-        }
     }
 
     /**
@@ -383,10 +355,6 @@ public class UsuarioRegistradoImpl implements
     public void setEmail(String newEmail) {
         String oldEmail = email;
         email = newEmail;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.USUARIO_REGISTRADO__EMAIL, oldEmail, email));
-        }
     }
 
     /**
@@ -395,18 +363,9 @@ public class UsuarioRegistradoImpl implements
      * @generated
      */
     public Sesion getSesion() {
-        if (sesion != null && sesion.eIsProxy()) {
-            InternalEObject oldSesion = (InternalEObject) sesion;
-            sesion = (Sesion) eResolveProxy(oldSesion);
-            if (sesion != oldSesion) {
-                if (eNotificationRequired()) {
-                    eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-                            UsuariosPackage.USUARIO_REGISTRADO__SESION,
-                            oldSesion, sesion));
-                }
-            }
-        }
-        return sesion;
+        if (sesion != null) 
+            return sesion;
+        return null;
     }
 
     /**
@@ -426,11 +385,6 @@ public class UsuarioRegistradoImpl implements
     public void setSesion(Sesion newSesion) {
         Sesion oldSesion = sesion;
         sesion = newSesion;
-        if (eNotificationRequired()) {
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    UsuariosPackage.USUARIO_REGISTRADO__SESION, oldSesion,
-                    sesion));
-        }
     }
 
     /**
@@ -440,9 +394,6 @@ public class UsuarioRegistradoImpl implements
      */
     @Override
     public String toString() {
-        if (eIsProxy()) {
-            return super.toString();
-        }
 
         StringBuffer result = new StringBuffer(super.toString());
         result.append(" (id: ");
@@ -646,10 +597,10 @@ public class UsuarioRegistradoImpl implements
             idUsuario = queryResult.getInt("id_u");
             switch (userType) {
                 case 0:
-                    user = new UsuariosFactoryImpl().createAdmin();
+                    user = new AdminImpl();
                     break;
                 case 1:
-                    user = new UsuariosFactoryImpl().createResponsable();
+                    user = new ResponsableImpl();
                     ((ResponsableImpl) user).setDescripcion(queryResult.getString("descripcion"));
                     ((ResponsableImpl) user).setSitioweb(queryResult.getString("sitioweb"));
                     status = (queryResult.getString("estado").compareToIgnoreCase("1") == 0) ? true : false;
@@ -657,7 +608,7 @@ public class UsuarioRegistradoImpl implements
                     ((ResponsableImpl) user).setId(idUsuario);
                     break;
                 case 2:
-                    user = new UsuariosFactoryImpl().createAlumno();
+                    user = new AlumnoImpl();
                     ((AlumnoImpl) user).setCarrera(queryResult.getString("nombreCarrera"));
                     status = (queryResult.getString("estado").compareToIgnoreCase("1") == 0) ? true : false;
                     ((AlumnoImpl) user).setEstado(status);
