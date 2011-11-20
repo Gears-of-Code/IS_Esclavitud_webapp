@@ -1225,17 +1225,17 @@ public class ConectaDbImpl implements ConectaDb {
     
     /**
      * Regresa una lista con  el numero de proyectos por carreras.
-     *
+     *carrerasNumAlumnosDb carrerasNumProyDb
      * @return Regresa una lista ligada cuyos elemenos son el par ordenado
      * de nombre del carrera y  el numero de proyectos en esta.
      * @throws Lanza una excepcion
      */  
-    public LinkedList<String[]> carrerasNumProyDb () throws DBCreationException, DBConsultException {
+    public LinkedList<String[]> proyectosPorCarreras () throws DBCreationException, DBConsultException {
 
-        String query = "SELECT DISTINCT carreras.nombre ,COUNT(carreras.nombre) AS NumProyectos " + 
-        		" FROM proyectos, proycarr NATURAL JOIN carreras " +
-        		" WHERE proyectos.id_p = proycarr.id_p " +
-        		" GROUP BY carreras.nombre;";
+        String query = "select carreras.nombre, count(proycarr.id_p) " +
+                "from carreras left join proycarr " +
+                "on carreras.id_c = proycarr.id_c " +
+                "group by carreras.nombre";
 
         LinkedList<String[]> listaCarreras = new LinkedList<String[]>();
 
@@ -1267,12 +1267,13 @@ public class ConectaDbImpl implements ConectaDb {
      * del nombre del carrera y  el numero de alumnos en esta.
      * @throws Lanza una excepcion
      */  
-    public LinkedList<String[]> carrerasNumAlumnosDb () throws DBCreationException, DBConsultException {
+    public LinkedList<String[]> alumnosPorCarrera () throws DBCreationException, DBConsultException {
 
-        String query = "SELECT DISTINCT carreras.nombre , COUNT(carreras.nombre) AS NumAlumnos " +
-        		" FROM alumnos NATURAL JOIN carreras " +
-        		" WHERE alumnos.carrera = carreras.id_c "+
-        		" GROUP BY carreras.nombre;";
+        String query = "select carreras.nombre, count(alumnos.id_u)" 
+                "from carreras left join alumnos " +
+                "on carreras.id_c = alumnos.carrera " +
+                "group by carreras.nombre;";
+;
 
         LinkedList<String[]> listaAlumnos = new LinkedList<String[]>();
 
