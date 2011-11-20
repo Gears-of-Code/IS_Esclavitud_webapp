@@ -14,12 +14,6 @@ import mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Alumno</b></em>'.
@@ -111,16 +105,6 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
      * <!-- end-user-doc -->
      * @generated
      */
-    @Override
-    protected EClass eStaticClass() {
-        return UsuariosPackage.Literals.ALUMNO;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
     public String getCarrera() {
         return carrera;
     }
@@ -193,89 +177,8 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
         if(!this.estado){
             ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
             conexion.postularAProyectoDb(proyectID, this.id);
-        }else{
-            // No se hace nada puesto que el alumno ya estaba autorizado en otro proyecto.
         }
-    }
-
-    /* Comienzan métodos auto-generados. */
-    
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-        case UsuariosPackage.ALUMNO__CARRERA:
-            return getCarrera();
-        case UsuariosPackage.ALUMNO__PORCENTAJE:
-            return getPorcentaje();
-        case UsuariosPackage.ALUMNO__ESTADO:
-            return isEstado();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-        case UsuariosPackage.ALUMNO__CARRERA:
-            setCarrera((String) newValue);
-            return;
-        case UsuariosPackage.ALUMNO__PORCENTAJE:
-            setPorcentaje((Integer) newValue);
-            return;
-        case UsuariosPackage.ALUMNO__ESTADO:
-            setEstado((Boolean) newValue);
-            return;
-        }
-        super.eSet(featureID, newValue);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public void eUnset(int featureID) {
-        switch (featureID) {
-        case UsuariosPackage.ALUMNO__CARRERA:
-            setCarrera(CARRERA_EDEFAULT);
-            return;
-        case UsuariosPackage.ALUMNO__PORCENTAJE:
-            setPorcentaje(PORCENTAJE_EDEFAULT);
-            return;
-        case UsuariosPackage.ALUMNO__ESTADO:
-            setEstado(ESTADO_EDEFAULT);
-            return;
-        }
-        super.eUnset(featureID);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public boolean eIsSet(int featureID) {
-        switch (featureID) {
-        case UsuariosPackage.ALUMNO__CARRERA:
-            return carrera != CARRERA_EDEFAULT;
-        case UsuariosPackage.ALUMNO__PORCENTAJE:
-            return porcentaje != PORCENTAJE_EDEFAULT;
-        case UsuariosPackage.ALUMNO__ESTADO:
-            return estado != ESTADO_EDEFAULT;
-        }
-        return super.eIsSet(featureID);
+        // No hay else puesto que el alumno ya estaba autorizado en otro proyecto.
     }
 
     /**

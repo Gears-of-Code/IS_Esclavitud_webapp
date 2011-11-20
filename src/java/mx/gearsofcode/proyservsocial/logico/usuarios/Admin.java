@@ -50,11 +50,16 @@ public interface Admin extends UsuarioRegistrado {
      * @generated
      */
     void autorizarAlumnoProyecto(final int studentID, final int proyectID) throws DBModificationException, DBCreationException;
-    public void autorizarProyecto(final int proyectID) throws DBModificationException, DBCreationException;
-    public void rechazarProyecto(final int proyectID) throws DBCreationException, DBModificationException;
+
+    void autorizarProyecto(final int proyectID) throws DBModificationException, DBCreationException;
+
+    void rechazarProyecto(final int proyectID) throws DBCreationException, DBModificationException;
 
     String [][] dameRespPendientes() throws DBConsultException, DBCreationException;
+
     String [][] dameAlumPendientes() throws DBConsultException, DBCreationException;
+
     void rechazarResponsable(final int respID)  throws DBCreationException, DBModificationException;
+
     void rechazarAlumnoProyecto(final int studentID, final int proyectID) throws DBCreationException, DBModificationException;
 } // Admin
