@@ -1178,8 +1178,7 @@ public class ConectaDbImpl implements ConectaDb {
             statement = connect.createStatement();
 
             if (statement.executeUpdate(query) == 0) {
-                throw new DBModificationException("Cannot turn back. " + 
-                        idProyecto + " alum:" + idAlumno);
+                throw new DBModificationException("No se puedo despostular al alumno");
             }
         } catch (SQLException e) {
             throw new DBModificationException(e.getMessage() + "   " + e.getSQLState());
@@ -1298,26 +1297,28 @@ public class ConectaDbImpl implements ConectaDb {
     }
     
     /**
-     * Regresa una lista de tamaño 3 de Objectos ResultSet.
-     * Cada objeto ResultSet, tiene dos columnas: nombre  y estado.
-     * La columna nombre tiene el nombre del proyecto y la columna estado
-     * tiene el numero de alumnos en el estado dado. Estos estados pueden ser:
-     * aceptado, rechazado y pendiente.
-     * El primer elemento de la lista es el de los acpetados.
-     * El segundo es el de los rechazados y la Tercera es la de los pendientes.
-     * @return Regresa una lista ligada cuyos elemenos son el par ordenado
-     * del nombre del proyecto y el numero de alumnos en determinado estado.
+     * Regresa una lista de arreglas de cadenas.
+     * Cada arreglo de cadenas contienes los siguientes datos en ese orden:
+     * nombre_del_proyecto, num_aceptados, num_rechazados, num_pendientes.
+     * @return Regresa una lista ligada cuyos elemenos son arraglos de cadenas
+     * que 
      * @throws Lanza una excepcion
     */
-    public LinkedList<ResultSet> estadosAlumnosProyDb () 
+    public LinkedList<String[]> estadosAlumnosProyDb () 
             throws DBCreationException, DBConsultException {		
 			
-        String query = "select nombre, count(estador) AS estado "+
-                        "from proyectos,postulados "+
-                        "where estador = ? and proyectos.id_p = postulados.id_p "+ 
-                        "group by postulados.id_p;";
-    	
-        LinkedList<ResultSet> listaProy = null;
+        String query = "select nombre, count(estador) as estado " +
+                "from proyectos left join postulados "+
+                "on proyectos.id_p = postulados.id_p and estador = ?" + 
+                "group by nombre";
+
+        LinkedList<String[]> listaProy = new LinkedList<String[]>();
+        LinkedList<String> nproy = new LinkedList<String>();
+        LinkedList<String> aceptados = new LinkedList<String>();
+        LinkedList<String> rechazados = new LinkedList<String>();
+        LinkedList<String> pendientes = new LinkedList<String>();
+        String[] proy = null;
+        ResultSet rs = null;
 
         Connection connect = null;
         PreparedStatement statement = null;
@@ -1326,14 +1327,40 @@ public class ConectaDbImpl implements ConectaDb {
 
             connect = cargarBase();
             statement = connect.prepareStatement(query);
-            statement.setString(2, "aceptado");
-            listaProy.add(statement.executeQuery());
             
-            statement.setString(2,"rechazado");
-            listaProy.add(statement.executeQuery());
+            statement.setString(1, "aceptado");
+            rs = statement.executeQuery();
             
-            statement.setString(2,"pendiente");
-            listaProy.add(statement.executeQuery());
+            while (rs.next()){
+                nproy.add(rs.getString("nombre"));
+                aceptados.add(rs.getString("estado"));
+            }
+            
+            statement.setString(1,"rechazado");
+            rs = statement.executeQuery();
+            
+            while (rs.next()){
+                rechazados.add(rs.getString("estado"));
+            }
+            
+            statement.setString(1,"pendiente");
+            rs = statement.executeQuery(); 
+            
+            while (rs.next()){
+                pendientes.add(rs.getString("estado"));
+            }
+            
+            
+            for (int i = 0; i< nproy.size(); i++){
+                proy = new String[4];
+                proy[0] = nproy.get(i);
+                proy[1] = aceptados.get(i);
+                proy[2] = rechazados.get(i);
+                proy[3] = pendientes.get(i);
+                listaProy.add(proy);
+            }
+            
+
         } catch (SQLException e) {
             throw new DBConsultException(e.getMessage() + "    " + e.getSQLState());
         } finally {
@@ -1341,5 +1368,28 @@ public class ConectaDbImpl implements ConectaDb {
         }
         return listaProy ;
     }
+    
+    public static void main(String[] args){
+        try{
+        ConectaDbImpl d = new ConectaDbImpl();
+        System.out.println(toStringLinkedList(d.estadosAlumnosProyDb()));
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+    }
+    
+    private static String toStringLinkedList(LinkedList<String[]> lista){
+        String result = "";
+        String[] elem = null;
+        for (int i = 0; i< lista.size(); i++){
+            elem = lista.get(i);
+            for (int j = 0; j<elem.length; j++){
+                result += elem[j] + " ";
+            }
+            result += "\n";
+        }
+        return  result;
+    }  
     
 } // ConectaDbImpl
