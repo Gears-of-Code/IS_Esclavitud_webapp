@@ -28,6 +28,8 @@ import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
  */
 public interface ConectaDb  {
 
+    //TODO: Los métodos que se agregaron de estadísticas deben aparecer en ésta interfaz.
+    
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
