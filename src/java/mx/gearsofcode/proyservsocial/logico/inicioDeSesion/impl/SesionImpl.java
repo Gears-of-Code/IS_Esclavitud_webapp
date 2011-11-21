@@ -19,6 +19,7 @@ import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.impl.AdminImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.impl.AlumnoImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.impl.ResponsableImpl;
@@ -62,7 +63,7 @@ public class SesionImpl implements Sesion {
      * 
      * @generated
      */
-    protected SesionImpl() {
+    public SesionImpl() {
         super();
     }
 

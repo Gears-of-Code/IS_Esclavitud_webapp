@@ -215,5 +215,10 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
         
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    public void despostularseAProyecto(int proyectID) throws DBModificationException, DBCreationException {
+        ConectaDbImpl con = new ConectaDbImpl();
+        con.despostularAlumnoProyectoDb(proyectID, this.id);
+    }
 
 } //AlumnoImpl
