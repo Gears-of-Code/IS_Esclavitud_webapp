@@ -8,8 +8,10 @@ package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
+
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
 
 import mx.gearsofcode.proyservsocial.logico.usuarios.Admin;
@@ -22,34 +24,40 @@ import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 import mx.gearsofcode.proyservsocial.logico.util.Mailing;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Admin</b></em>'.
- * <!-- end-user-doc -->
- * <p>
- * </p>
+ * Clase que implementa la interfaz '<em><b>Admin</b></em>'.
+ * contiene las funciones particulares de un administrador.
  *
- * @generated
+ * <p>
+ * Las siguientes funciones se encuentran disponibles:
+ * </p>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Admin#aceptaResponsable <em>Acepta Responsable</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Admin#rechazarResponsable <em>Rechaza Responsable</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Admin#actualizaEstadoAlumno <em>Actualiza Estado Alumno</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Admin#autorizarAlumnoProyecto <em>Autorizar Alumno Proyecto</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Admin#rechazarAlumnoProyecto <em>Rechazar Alumno Proyecto</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Admin#autorizarProyecto <em>Autorizar Proyecto</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Admin#rechazarProyecto <em>Rechazar Proyecto</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Admin#dameRespPendientes <em>Dame Responsables Pendientes</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Admin#dameAlumPendientes <em>Dame Alumnos Pendientes</em>}</li>
+ * </ul>
+ * </p>
  */
 public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * Constructor de un objeto tipo administrador.
      */
     public  AdminImpl() {
         super();
     }
 
     /**
-     * <!-- begin-user-doc -->
      * Método que se manda llamar cuando un Administrador de Sistema pulsa aceptar, luego 
      * de haber seleccionado dentro de una lista a los responsables de proyecto que desea
      * autorizar.
-     * <!-- end-user-doc -->
+     *
      * @throws DBModificationException 
-     * @throws DBCreationException 
-     * @generated NOT
+     * @throws DBCreationException
      */
     public void aceptaResponsable(final int respID) throws DBModificationException, DBCreationException {
         ConectaDb conexion = new ConectaDbImpl();
@@ -68,12 +76,11 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * Método que se utiliza para dejar constancia de que un alumno ha sido autorizado en un proyecto.
-     * <!-- end-user-doc -->
+     * Método que se utiliza para dejar constancia de que un alumno
+     * ha sido autorizado en un proyecto.
+     *
      * @throws DBModificationException 
-     * @throws DBCreationException 
-     * @generated NOT
+     * @throws DBCreationException
      */
     public void actualizaEstadoAlumno(final int studentID, boolean studentState) throws DBModificationException, DBCreationException {
         ConectaDb conexion = new ConectaDbImpl();
@@ -81,12 +88,11 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * Método que se utiliza para actualizar al alumno autorizado en un proyecto dado.
-     * <!-- end-user-doc -->
+     * Método que se utiliza para actualizar al alumno autorizado 
+     * en un proyecto dado.
+     *
      * @throws DBModificationException 
-     * @throws DBCreationException 
-     * @generated NOT
+     * @throws DBCreationException
      */
     public void autorizarAlumnoProyecto(final int studentID, final int proyectID) throws DBModificationException, DBCreationException {
         ConectaDb conexion = new ConectaDbImpl();
@@ -122,7 +128,6 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         modificaProyecto(proyectID, aceptado);
 
         try {
-
             Proyecto proy = this.verDetallesProyecto(proyectID);
 
             Responsable res = (ResponsableImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(proy.getResponsable()));
@@ -175,16 +180,25 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         conexion.autorizarProyectoDb(proyectID);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String[][] dameRespPendientes() throws DBConsultException, DBCreationException {
         ConectaDb conexion = new ConectaDbImpl();
         return conexion.pendingResp();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String[][] dameAlumPendientes() throws DBConsultException, DBCreationException {
         ConectaDb conexion = new ConectaDbImpl();
         return conexion.pendingAlum();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void rechazarResponsable(final int respID) throws DBCreationException, DBModificationException {
         try {
             Responsable res = (ResponsableImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(respID));
@@ -200,6 +214,9 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         conexion.rechazaResponsableDb(respID);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void rechazarAlumnoProyecto(final int studentID, final int proyectID) throws DBCreationException, DBModificationException {
         
         try {
