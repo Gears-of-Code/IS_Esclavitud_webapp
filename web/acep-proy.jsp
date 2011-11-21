@@ -1,7 +1,6 @@
 <%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.Admin"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBCreationException"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBModificationException"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuariosFactoryImpl" %>
         
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="false" %>

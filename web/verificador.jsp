@@ -1,9 +1,9 @@
 
+<%@page import="mx.gearsofcode.proyservsocial.logico.inicioDeSesion.impl.SesionImpl"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBCreationException"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBConsultException"%>
 <%@page import="javax.servlet.http.HttpSession"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.inicioDeSesion.impl.InicioDeSesionFactoryImpl"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.inicioDeSesion.InicioDeSesionFactory"%>
+
 <%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.inicioDeSesion.Sesion"%>
 <%@page import="java.security.MessageDigest"%>
@@ -38,7 +38,7 @@
         //out.println("passwd with MD5 is: " + pwdmd5 + "<br>");
        /***** FIN de Algoritmo MD5 *****/               
         Sesion sesion;
-        sesion = new InicioDeSesionFactoryImpl().createSesion(); 
+        sesion = new SesionImpl(); 
         
                                
         UsuarioRegistrado usuario;
