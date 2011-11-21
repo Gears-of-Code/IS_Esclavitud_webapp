@@ -122,5 +122,7 @@ public interface Alumno extends UsuarioRegistrado {
     void postularseAProyecto(int proyectID) throws DBModificationException, DBCreationException ;
 
     String convierteCarrera(int carrId);
+    void despostularseAProyecto(int proyectID) throws DBModificationException, DBCreationException ;
+
     
 } // Alumno

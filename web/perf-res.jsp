@@ -1,7 +1,7 @@
+<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.impl.ResponsableImpl"%>
 <%@page import="java.lang.Integer"%>
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.*" %>
-<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuariosFactoryImpl" %>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBCreationException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>        
 <%@page session="false" %>
@@ -13,7 +13,7 @@ if(sesion == null){
 }else{
     int id = Integer.parseInt(request.getParameter("id_u"));
     
-    Responsable res = new UsuariosFactoryImpl().createResponsable();
+    Responsable res = new ResponsableImpl();
     res = (Responsable)(res.verDetallesUsuario(id));
     
 %>
