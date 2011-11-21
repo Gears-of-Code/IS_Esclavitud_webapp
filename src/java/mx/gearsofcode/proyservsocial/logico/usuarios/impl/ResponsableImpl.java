@@ -9,14 +9,14 @@ package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
+import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
-import mx.gearsofcode.proyservsocial.logico.impl.LogicoFactoryImpl;
-import mx.gearsofcode.proyservsocial.logico.proyectos.impl.ProyectosFactoryImpl;
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
+import mx.gearsofcode.proyservsocial.logico.proyectos.impl.ProyectoImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +37,7 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
         Responsable {
 
 //    protected static final int ID_RESP = -1;
-  //  protected int id_resp = ID_RESP;
+    //  protected int id_resp = ID_RESP;
     /**
      * The default value of the '{@link #getDescripcion() <em>Descripcion</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -104,7 +104,7 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
      * <!-- end-user-doc -->
      * @generated
      */
-    protected ResponsableImpl() {
+    public ResponsableImpl() {
         super();
     }
 
@@ -127,14 +127,14 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
         descripcion = newDescripcion;
     }
 
-/*    public int getIdResp() {
-        return id_resp;
+    /*    public int getIdResp() {
+    return id_resp;
     }
-
+    
     public void setIdResp(final int idresponsable) {
-        id_resp = idresponsable;
+    id_resp = idresponsable;
     }
-*/
+     */
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -183,7 +183,7 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
      * @generated NOT
      */
     public void aceptaAlumnoProyecto(final int proyectID, int[] studentIDs) throws DBModificationException, DBCreationException {
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         for (int i = 0; i < studentIDs.length; i++) {
             int studentID = studentIDs[i];
             conexion.aceptarAlumnoProyectoDb(proyectID, studentID);
@@ -215,7 +215,7 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
         this.sitioweb = website;
         this.tipo = type;
         this.username = login;
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         try {
             conexion.registrarDb(this);
         } catch (DBConsultException ex) {
@@ -241,7 +241,7 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     public void proponerProyecto(final String nomProy, final String descrProy,
             final String dirProy, final String mailProy, final int telProy,
             final int capMax, final int[] carreraProy, final int[] areaDeConocimiento) throws DBCreationException {
-        Proyecto nuevoProyecto = new ProyectosFactoryImpl().createProyecto();
+        Proyecto nuevoProyecto = new ProyectoImpl();
         nuevoProyecto.setNombre(nomProy);
         nuevoProyecto.setDescripcion(descrProy);
         nuevoProyecto.setDireccion(dirProy);
@@ -251,7 +251,7 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
         nuevoProyecto.setResponsable(this.getId());
         nuevoProyecto.setAreaConocimiento(areaDeConocimiento);
         nuevoProyecto.setCarreras(carreraProy);
-        conexion = new LogicoFactoryImpl().createConectaDb();
+        conexion = new ConectaDbImpl();
         conexion.proponerProyectoDb(nuevoProyecto);
     }
 
@@ -275,7 +275,7 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     }
 
     public String[][] dameAC() throws DBConsultException, DBCreationException {
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         try {
             return conexion.fetchAC();
         } catch (DBConsultException ex) {
@@ -285,7 +285,7 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     }
 
     public String[][] dameCAR() throws DBConsultException, DBCreationException {
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         try {
             return conexion.fetchCAR();
         } catch (DBConsultException ex) {

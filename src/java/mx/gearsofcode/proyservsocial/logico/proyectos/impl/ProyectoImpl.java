@@ -10,15 +10,14 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
-import mx.gearsofcode.proyservsocial.logico.proyectos.ProyectosPackage;
 
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
-import mx.gearsofcode.proyservsocial.logico.impl.LogicoFactoryImpl;
 
+import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
 
 /**
@@ -62,7 +61,7 @@ import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
  * </ul>
  * </p>
  */
-public class ProyectoImpl extends EObjectImpl implements Proyecto {
+public class ProyectoImpl implements Proyecto {
     
     final static int ALUMNO_ID = TipoUsuario.ALUMNO_VALUE;
     final static int ADMINISTRADOR_ID = TipoUsuario.ADMINISTRADOR_VALUE;
@@ -302,9 +301,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
     public void setId(int newId) {
         int oldId = id;
         id = newId;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    ProyectosPackage.PROYECTO__ID, oldId, id));
     }
 
     /**
@@ -324,9 +320,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
     public void setNombre(String newNombre) {
         String oldNombre = nombre;
         nombre = newNombre;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    ProyectosPackage.PROYECTO__NOMBRE, oldNombre, nombre));
     }
 
     /**
@@ -346,10 +339,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
     public void setResponsable(int newResponsable) {
         int oldResponsable = responsable;
         responsable = newResponsable;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    ProyectosPackage.PROYECTO__RESPONSABLE, oldResponsable,
-                    responsable));
     }
 
     /**
@@ -369,10 +358,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
     public void setAreaConocimiento(int [] newAreaConocimiento) {
         int [] oldAreaConocimiento = areaConocimiento;
         areaConocimiento = newAreaConocimiento;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    ProyectosPackage.PROYECTO__AREA_CONOCIMIENTO,
-                    oldAreaConocimiento, areaConocimiento));
     }
 
     /**
@@ -392,9 +377,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
     public void setEmail(String newEmail) {
         String oldEmail = email;
         email = newEmail;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    ProyectosPackage.PROYECTO__EMAIL, oldEmail, email));
     }
 
     /**
@@ -414,9 +396,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
     public void setTelefono(int newTelefono) {
         int oldTelefono = telefono;
         telefono = newTelefono;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    ProyectosPackage.PROYECTO__TELEFONO, oldTelefono, telefono));
     }
 
     /**
@@ -436,10 +415,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
     public void setDireccion(String newDireccion) {
         String oldDireccion = direccion;
         direccion = newDireccion;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    ProyectosPackage.PROYECTO__DIRECCION, oldDireccion,
-                    direccion));
     }
 
     /**
@@ -459,9 +434,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
     public void setCarreras(int [] newCarrera) {
         int[] oldCarrera = carrera;
         carrera = (int[]) (newCarrera == null ? CARRERA_EDEFAULT : newCarrera);
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    ProyectosPackage.PROYECTO__CARRERA, oldCarrera, carrera));
     }
 
     /**
@@ -477,10 +449,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
     public void setMaxParticipantes(int newMaxParticipante) {
         int oldMaxParticipante = maxParticipante;
         maxParticipante = newMaxParticipante;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    ProyectosPackage.PROYECTO__MAX_PARTICIPANTE,
-                    oldMaxParticipante, maxParticipante));
     }
 
     /**
@@ -497,10 +465,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
     public void setDescripcion(String newDescripcion) {
         String oldDescripcion = descripcion;
         descripcion = newDescripcion;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    ProyectosPackage.PROYECTO__DESCRIPCION, oldDescripcion,
-                    descripcion));
     }
 
     /**
@@ -520,9 +484,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
     private void setEstado(final boolean newEstado) {
         boolean oldEstado = estado;
         estado = newEstado;
-        if (eNotificationRequired())  // Evaluar si esto sirve o se elimina.
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    ProyectosPackage.PROYECTO__ESTADO, oldEstado, estado));
     }
 
     
@@ -543,7 +504,7 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
             LinkedList<String[]> queryResult = null;
             
             try {
-                conexion = new LogicoFactoryImpl().createConectaDb();
+                conexion = new ConectaDbImpl();
                 queryResult = conexion.verPostuladosDb(id);
             } catch (DBCreationException dbe) {
                 dbe.getCause();
@@ -578,8 +539,6 @@ public class ProyectoImpl extends EObjectImpl implements Proyecto {
      */
     @Override
 	public String toString() {
-	if (eIsProxy())
-	    return super.toString();
 
 	StringBuffer result = new StringBuffer(super.toString());
 	result.append(" (id: ");

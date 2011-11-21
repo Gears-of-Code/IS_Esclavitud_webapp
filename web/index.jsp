@@ -20,7 +20,7 @@ if(sesion == null){
     <script>
         $(document).ready(function(){
             $.getScript("funciones.js");
-            $("#contenido").load('bienvenido.jsp');            
+            $("#contenido").load('reg-resp.jsp');            
         });
     </script>
     </head>

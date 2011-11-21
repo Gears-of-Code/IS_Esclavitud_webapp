@@ -14,11 +14,9 @@ import mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado;
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 
-import mx.gearsofcode.proyservsocial.logico.impl.LogicoFactoryImpl;
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
-import mx.gearsofcode.proyservsocial.logico.proyectos.impl.ProyectosFactoryImpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +24,9 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.LinkedHashSet;
 
+import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
+import mx.gearsofcode.proyservsocial.logico.proyectos.impl.ProyectoImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Alumno;
 import mx.gearsofcode.proyservsocial.logico.usuarios.CarreraAlumno;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
@@ -423,7 +423,7 @@ public class UsuarioRegistradoImpl implements
      */
     public String[][] verProyectos() throws DBConsultException, DBCreationException {
 
-        conexion = new LogicoFactoryImpl().createConectaDb();
+        conexion = new ConectaDbImpl();
         LinkedList<String[]> queryResult = conexion.verProyectosDb(tipo, id);
 
         // String[] bloqueproyectos contiene ["id","Nombre"]
@@ -444,7 +444,7 @@ public class UsuarioRegistradoImpl implements
      */
     public String[][] verMisProyectos() throws DBConsultException, DBCreationException {
 
-        conexion = new LogicoFactoryImpl().createConectaDb();
+        conexion = new ConectaDbImpl();
         boolean aux = (this.tipo == 2)? ((AlumnoImpl)this).estado: false;
         LinkedList<String[]> queryResult = conexion.verMisProyectosDb(tipo, id, aux); //Tipo de usuario y id de usuario.
 
@@ -485,9 +485,9 @@ public class UsuarioRegistradoImpl implements
      */
     public Proyecto verDetallesProyecto(final int idProyect) throws DBConsultException, DBCreationException {
 
-        conexion = new LogicoFactoryImpl().createConectaDb();
+        conexion = new ConectaDbImpl();
         ResultSet queryResult = conexion.verDetallesProyectoDb(idProyect);
-        Proyecto unProyecto = new ProyectosFactoryImpl().createProyecto();
+        Proyecto unProyecto = new ProyectoImpl();
         /*
         [1] -> nombre  responsable
         [2] -> nombre  proyectos
@@ -574,7 +574,7 @@ public class UsuarioRegistradoImpl implements
         int userType = -1;
 
         try {
-            conexion = new LogicoFactoryImpl().createConectaDb();
+            conexion = new ConectaDbImpl();
             userType = conexion.getUserType(userId);
             queryResult = conexion.fetchUserInfo(userId, userType);
 

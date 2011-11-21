@@ -9,7 +9,7 @@ package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
-
+import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
 
 import mx.gearsofcode.proyservsocial.logico.usuarios.Admin;
@@ -37,7 +37,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      * <!-- end-user-doc -->
      * @generated
      */
-    protected AdminImpl() {
+    public  AdminImpl() {
         super();
     }
 
@@ -52,7 +52,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      * @generated NOT
      */
     public void aceptaResponsable(final int respID) throws DBModificationException, DBCreationException {
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         conexion.aceptarResponsableDb(respID);
         try {
             Responsable res = (ResponsableImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(respID));
@@ -77,7 +77,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      * @generated NOT
      */
     public void actualizaEstadoAlumno(final int studentID, boolean studentState) throws DBModificationException, DBCreationException {
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         conexion.modificarEstadoAlumno(studentID, studentState);
     }
 
@@ -90,7 +90,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      * @generated NOT
      */
     public void autorizarAlumnoProyecto(final int studentID, final int proyectID) throws DBModificationException, DBCreationException {
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         conexion.autorizarAlumnoProyecto(studentID, proyectID);
         this.actualizaEstadoAlumno(studentID, true);
 
@@ -171,22 +171,22 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      * para autorizar o rechar el proyecto.
      */
     private void modificaProyecto(final int proyectID, final boolean estado) throws DBCreationException, DBModificationException {
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         conexion.autorizarProyectoDb(proyectID);
     }
 
     public String[][] dameRespPendientes() throws DBConsultException, DBCreationException {
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         return conexion.pendingResp();
     }
 
     public String[][] dameAlumPendientes() throws DBConsultException, DBCreationException {
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         return conexion.pendingAlum();
     }
 
     public void rechazarResponsable(final int respID) throws DBCreationException, DBModificationException {
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         conexion.rechazaResponsableDb(respID);
 
         try {
@@ -202,7 +202,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
     }
 
     public void rechazarAlumnoProyecto(final int studentID, final int proyectID) throws DBCreationException, DBModificationException {
-        ConectaDb conexion = new LogicoFactoryImpl().createConectaDb();
+        ConectaDb conexion = new ConectaDbImpl();
         conexion.rechazaAlumnoProyectoDb(proyectID, studentID);
         try {
 

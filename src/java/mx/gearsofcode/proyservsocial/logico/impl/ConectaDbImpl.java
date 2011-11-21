@@ -52,7 +52,7 @@ public class ConectaDbImpl implements ConectaDb {
     private final static String url = "jdbc:mysql://localhost:3306/gearsofcode";
 //    private static String dbName = "gearsofcode";
     private final static String user = "root";
-    private final static String password = "ciortv";
+    private final static String password = "goldsun627";
     // Variables para estados de los proyectos y usuarios.
     final private int NO_AUTORIZADO = 0;
     final private int AUTORIZADO = 1;

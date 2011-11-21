@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +20,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * @model
  * @generated
  */
-public enum CarreraProyecto implements Enumerator {
+public enum CarreraProyecto  {
     /**
      * The '<em><b>Matematicas</b></em>' literal object.
      * <!-- begin-user-doc -->
