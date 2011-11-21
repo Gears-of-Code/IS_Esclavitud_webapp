@@ -445,10 +445,12 @@ public class ConectaDbImpl implements ConectaDb {
      *
      * @param idResponsable id del responsable que se quiere eliminar.
      * @throws Se lanza una excepcion si no se puede eliminar al responsable.
+     
      */
     public void rechazaResponsableDb(final int idResponsable)
             throws DBCreationException, DBModificationException {
 
+     // TODO: Rechazar debe eliminar también de la tabla de usuarios, no sólo la de responsables.
         String query = "DELETE FROM responsables WHERE id_u  = "
                 + idResponsable;
         Connection connect = null;
