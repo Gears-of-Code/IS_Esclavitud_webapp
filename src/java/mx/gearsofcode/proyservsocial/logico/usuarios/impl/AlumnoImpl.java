@@ -8,128 +8,106 @@ package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
+
 import mx.gearsofcode.proyservsocial.logico.usuarios.Alumno;
-import mx.gearsofcode.proyservsocial.logico.usuarios.CarreraAlumno;
+
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Alumno</b></em>'.
- * <!-- end-user-doc -->
+ * Clase que implemente la interfaz de '<em><b>Alumno</b></em>'.
+ * Contiene los metodos para acceder a los elementos de un alumno
+ * y sus funciones particulares.
  * <p>
- * The following features are implemented:
+ * Las siguientes funciones se encuentran disponibles:
  * <ul>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.AlumnoImpl#getCarrera <em>Carrera</em>}</li>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.AlumnoImpl#getPorcentaje <em>Porcentaje</em>}</li>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.AlumnoImpl#isEstado <em>Estado</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#postularseAProyecto <em>Postularse</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#despostularseAProyecto <em>Despostularse</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#convierteCarrera <em>Convierte Carrera</em>}</li>
  * </ul>
  * </p>
- *
- * @generated
  */
 public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
+
     /**
-     * The default value of the '{@link #getCarrera() <em>Carrera</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #getCarrera() <em>Carrera</em>}'
+     * si no hay ningun valor seleccionado.
+     *
      * @see #getCarrera()
-     * @generated
-     * @ordered
      */
     protected static final String CARRERA_EDEFAULT = "unemployed";
 
     /**
-     * The cached value of the '{@link #getCarrera() <em>Carrera</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #getCarrera() <em>Carrera</em>}'.
+     *
      * @see #getCarrera()
-     * @generated
-     * @ordered
      */
     protected String carrera = CARRERA_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getPorcentaje() <em>Porcentaje</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #getPorcentaje() <em>Porcentaje</em>}'.
+     *
      * @see #getPorcentaje()
-     * @generated
-     * @ordered
      */
     protected static final int PORCENTAJE_EDEFAULT = 0;
 
     /**
-     * The cached value of the '{@link #getPorcentaje() <em>Porcentaje</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #getPorcentaje() <em>Porcentaje</em>}'.
+     *
      * @see #getPorcentaje()
-     * @generated
-     * @ordered
      */
     protected int porcentaje = PORCENTAJE_EDEFAULT;
 
     /**
-     * The default value of the '{@link #isEstado() <em>Estado</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #isEstado() <em>Estado</em>}'.
+     *
      * @see #isEstado()
-     * @generated
-     * @ordered
      */
     protected static final boolean ESTADO_EDEFAULT = false;
 
     /**
-     * The cached value of the '{@link #isEstado() <em>Estado</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * Si el estado del alumno es true, entonces el alumno ya esta autorizado en algun proyecto.
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #isEstado() <em>Estado</em>}'.
+     *
+     * Si el estado del alumno es true, entonces el alumno ya fue autorizado
+     * en algun proyecto.
+     *
      * @see #isEstado()
-     * @generated
-     * @ordered
      */
     protected boolean estado = ESTADO_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * Constructor de un objeto tipo alumno.
      */
     public AlumnoImpl() {
         super();
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public String getCarrera() {
         return carrera;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setCarrera(String newCarrera) {
         this.carrera = newCarrera;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public int getPorcentaje() {
         return porcentaje;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setPorcentaje(int newPorcentaje) {
         int oldPorcentaje = porcentaje;
@@ -137,18 +115,14 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public boolean isEstado() {
         return estado;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setEstado(boolean newEstado) {
         boolean oldEstado = estado;
@@ -156,14 +130,12 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
     }
 
     /**
-     * <!-- begin-user-doc -->
      * Metodo que usa la conexion del alumno para registrar que queda postulado.
      * No debe ser usado si el alumno ya esta autorizado.
-     * <!-- end-user-doc -->
+     *
      * @param proyectID ID del proyecto donde se postula el alumno.
-     * @throws DBModificationException 
-     * @throws DBCreationException 
-     * @generated NOT
+     * @throws DBModificationException
+     * @throws DBCreationException
      */
     public void postularseAProyecto(int proyectID) throws DBModificationException, DBCreationException {
         if(!this.estado){
@@ -174,9 +146,10 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * Imprime todos los elementos del objeto en una cadena.
+     *
+     * @return String Cadena con toda la informacion
+     * del objeto.
      */
     @Override
     public String toString() {
@@ -191,7 +164,7 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
         return result.toString();
     }
 
-    
+
 //            return MATEMATICAS;
 //            return ACTUARIA;
 //            return CIENCIAS_COMPUTACIONALES;
@@ -212,10 +185,10 @@ public class AlumnoImpl extends UsuarioRegistradoImpl implements Alumno {
             case 4:
                 return "MATEMATICAS";
         }
-        
+
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     public void despostularseAProyecto(int proyectID) throws DBModificationException, DBCreationException {
         ConectaDbImpl con = new ConectaDbImpl();
         con.despostularAlumnoProyectoDb(proyectID, this.id);
