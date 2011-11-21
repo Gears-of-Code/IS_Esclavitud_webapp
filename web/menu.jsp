@@ -10,6 +10,7 @@ if(tipo == 1){
         out.print("<div class='entrada-menu' pg='aut-proy-adm.jsp'>&nbsp;&nbsp;&nbsp;&nbsp;Proyectos</div>");
         out.print("<div class='entrada-menu' pg='aut-resp-adm.jsp'>&nbsp;&nbsp;&nbsp;&nbsp;Responsables</div>");
         out.print("<div class='entrada-menu' pg='aut-alum-adm.jsp'>&nbsp;&nbsp;&nbsp;&nbsp;Alumnos en proyectos</div><br /><br />");
+        out.print("<div class='entrada-menu' pg='estadisticas.jsp'>Estadísticas</div><br /><br />");
 
 }else if(tipo == 3){
         out.print("<div class='titulo-menu'>Responsable</div>");

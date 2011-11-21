@@ -90,4 +90,14 @@ $(".button-reg").live('click', function(){
 			$("#contenido").load(pg)
 		});
     
-})
+});
+
+//***** Verificador de entrada: solo numeros, tab, izquierda, derecha, inicio, fin y punto *****//
+$("#telefono").live('keydown', function(event) {
+
+    if(event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 39 || event.keyCode == 37 || event.keyCode == 110 || event.keyCode == 190 || event.keyCode == 9 || event.keyCode == 35 || event.keyCode == 36){
+    // Dejamos que pase el evento
+    }else if((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )    ){
+        event.preventDefault();
+    }
+}); 
