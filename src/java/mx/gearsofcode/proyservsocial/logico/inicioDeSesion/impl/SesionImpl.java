@@ -9,14 +9,15 @@ package mx.gearsofcode.proyservsocial.logico.inicioDeSesion.impl;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.Sesion;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
 
-import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
-import mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado;
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
-
 import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
+
+import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
+import mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado;
+
 import mx.gearsofcode.proyservsocial.logico.usuarios.impl.AdminImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.impl.AlumnoImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.impl.ResponsableImpl;
@@ -41,58 +42,17 @@ import java.sql.SQLException;
 public class SesionImpl implements Sesion {
 
     /**
-     * The cached value of the '{@link #getUsuario() <em>Usuario</em>}'
-     * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @see #getUsuario()
-     * @generated
-     * @ordered
-     */
-    protected UsuarioRegistrado usuario;
-
-    /**
      * Se declara un elemento tipo ConectaDb. Clase ConectaDb contiene los
      * metodos de conexion a la base de datos. Aqui se realizan los queries
      * directamente a la base de datos.
      **/
     private ConectaDb conexion = null;
 
-
     /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
+     * Constructor de la clase Sesion.
      */
     public SesionImpl() {
         super();
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    public UsuarioRegistrado getUsuario() {
-        return usuario;
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    public UsuarioRegistrado basicGetUsuario() {
-        return usuario;
-    }
-
-    /**
-     * <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @generated
-     */
-    public void setUsuario(UsuarioRegistrado newUsuario) {
-        UsuarioRegistrado oldUsuario = usuario;
-        usuario = newUsuario;
     }
 
     /**
@@ -129,8 +89,8 @@ public class SesionImpl implements Sesion {
             usuarioMail = data.getString("email");
             usuarioPhone = data.getInt("telefono");
         } catch (SQLException e) {
-            DBConsultException ex = new DBConsultException(e.getSQLState() + "   "
-                    + e.getMessage());
+            DBConsultException ex = new DBConsultException(e.getSQLState()
+							   + "   " + e.getMessage());
             ex.setErrorCode(6);
             throw ex;
 
@@ -138,11 +98,8 @@ public class SesionImpl implements Sesion {
             dbe.getCause();
             System.out.println(dbe.toString());
             throw new DBConsultException("uID" + idUsuario + " uTY[" + usuarioTipo + "]UPUP" + dbe.toString());
-        }
+        } // TODO: Check exception message
 
-//        if (1 < 2) {
-//            throw new DBConsultException("uID" + idUsuario + " uTY[" + usuarioTipo + "]" + data.toString());
-//        }
         usuarioTipo = usuarioTipo.toUpperCase(); // Los tipos estan en mayus, entonces hay que darle gusto.
         int tipoUsuario = TipoUsuario.valueOf(usuarioTipo).getValue(); 
 	// TipoUsuario realiza un mapeo del tipo de usuario a int.
@@ -152,8 +109,6 @@ public class SesionImpl implements Sesion {
         switch (tipoUsuario) {
             case TipoUsuario.ADMINISTRADOR_VALUE:
                 UsuarioRegistrado admin = new AdminImpl();
-                admin.setUsername(nombreUsuario);
-                admin.setNombre(usuarioNombre);
                 admin.setId(idUsuario);
                 admin.setTipo(tipoUsuario);
                 inicioUsuario = admin;
@@ -167,17 +122,15 @@ public class SesionImpl implements Sesion {
                         try {
                             if (tmpRes.getBoolean("estado")) {
                                 UsuarioRegistrado resp = new ResponsableImpl();
-                                resp.setUsername(nombreUsuario);
                                 ((Responsable) resp).setId(idUsuario); 
                                 resp.setTipo(tipoUsuario);
-                                resp.setNombre(usuarioNombre);
                                 inicioUsuario = resp;
                             } else {
                                 DBConsultException cons = new DBConsultException("El usuario aun no ha sido autorizado.");
                                 cons.setErrorCode(7);
                                 throw cons;
                             }
-                        } catch (SQLException e) {
+                        } catch (SQLException e) { // TODO: Check excpetion needed.
                             throw new DBConsultException("WEEEEEEEEEEEEEEEE" + e.getMessage() + "  " + e.getSQLState());
                         }
                     } else {
@@ -185,17 +138,13 @@ public class SesionImpl implements Sesion {
                     }
                 } catch (SQLException e) {
                     throw new DBConsultException("WOOOOOOOOOT" + e.getMessage() + "  " + e.getSQLState());
-
                 }
-
                 break;
 
             case TipoUsuario.ALUMNO_VALUE:
                 UsuarioRegistrado alum = new AlumnoImpl();
-                alum.setUsername(nombreUsuario);
                 alum.setId(idUsuario);
                 alum.setTipo(tipoUsuario);
-                alum.setNombre(usuarioNombre);
                 inicioUsuario = alum;
                 break;
 
@@ -206,6 +155,8 @@ public class SesionImpl implements Sesion {
 		// El usuario tiene un tipo no valido.
         }
 
+	inicioUsuario.setUsername(nombreUsuario);
+	inicioUsuario.setNombre(usuarioNombre);
         inicioUsuario.setEmail(usuarioMail);
         inicioUsuario.setTelefono("" + usuarioPhone);
         return inicioUsuario;
