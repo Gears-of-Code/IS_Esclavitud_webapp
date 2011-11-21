@@ -6,189 +6,146 @@
  */
 package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.Sesion;
+import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
 
 import mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado;
-import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
-import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
-
-import mx.gearsofcode.proyservsocial.logico.ConectaDb;
-
-import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.LinkedHashSet;
-
-import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
-import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
-import mx.gearsofcode.proyservsocial.logico.proyectos.impl.ProyectoImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Alumno;
 import mx.gearsofcode.proyservsocial.logico.usuarios.CarreraAlumno;
 import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
 
+import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
+import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
+
+import mx.gearsofcode.proyservsocial.logico.ConectaDb;
+import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
+
+import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
+import mx.gearsofcode.proyservsocial.logico.proyectos.impl.ProyectoImpl;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import java.util.LinkedList;
+import java.util.Set;
+import java.util.LinkedHashSet;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Usuario Registrado</b></em>'.
- * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * <ul>
- *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuarioRegistradoImpl#getId <em>Id</em>}</li>
- *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuarioRegistradoImpl#getUsername <em>Username</em>}</li>
- *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuarioRegistradoImpl#getContraseña <em>Contraseña</em>}</li>
- *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuarioRegistradoImpl#getTipo <em>Tipo</em>}</li>
- *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuarioRegistradoImpl#getNombre <em>Nombre</em>}</li>
- *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuarioRegistradoImpl#getTelefono <em>Telefono</em>}</li>
- *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuarioRegistradoImpl#getEmail <em>Email</em>}</li>
- *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuarioRegistradoImpl#getSesion <em>Sesion</em>}</li>
- * </ul>
- * </p>
- *
- * @generated
+ * Clase que implementa la interfaz de '<em><b>Usuario Registrado</b></em>'.
+ * Contiene los metodos para acceder a los datos basicos
+ * y funciones generales de los usuarios del sistema
  */
 public class UsuarioRegistradoImpl implements
         UsuarioRegistrado {
 
     /**
-     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra  '{@link #getId() <em>Id</em>}'
+     * si no hay un id.
+     *
      * @see #getId()
-     * @generated
-     * @ordered
      */
     protected static final int ID_EDEFAULT = -1;
+
     /**
-     * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #getId() <em>Id</em>}'.
+     *
      * @see #getId()
-     * @generated
-     * @ordered
      */
     protected int id = ID_EDEFAULT;
+
     /**
-     * The default value of the '{@link #getUsername() <em>Username</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #getUsername() <em>Username</em>}'
+     * si no hay un username.
+     *
      * @see #getUsername()
-     * @generated
-     * @ordered
      */
-    protected static final String USERNAME_EDEFAULT = null;
+    protected static final String USERNAME_EDEFAULT = "";
+
     /**
-     * The cached value of the '{@link #getUsername() <em>Username</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #getUsername() <em>Username</em>}'.
+     *
      * @see #getUsername()
-     * @generated
-     * @ordered
      */
     protected String username = USERNAME_EDEFAULT;
+
     /**
-     * The default value of the '{@link #getContraseña() <em>Contraseña</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #getContraseña() <em>Contraseña</em>}'
+     * si no hay contraseña.
+     *
      * @see #getContraseña()
-     * @generated
-     * @ordered
      */
-    protected static final String CONTRASEÑA_EDEFAULT = null;
+    protected static final String CONTRASEÑA_EDEFAULT = "";
+
     /**
-     * The cached value of the '{@link #getContraseña() <em>Contraseña</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #getContraseña() <em>Contraseña</em>}'.
+     *
      * @see #getContraseña()
-     * @generated
-     * @ordered
      */
     protected String contraseña = CONTRASEÑA_EDEFAULT;
+
     /**
-     * The default value of the '{@link #getTipo() <em>Tipo</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #getTipo() <em>Tipo</em>}'
+     * si no hay un tipo definido.
+     *
      * @see #getTipo()
-     * @generated
-     * @ordered
      */
     protected static final int TIPO_EDEFAULT = -1;
+
     /**
-     * The cached value of the '{@link #getTipo() <em>Tipo</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #getTipo() <em>Tipo</em>}'.
+     *
      * @see #getTipo()
-     * @generated
-     * @ordered
      */
     protected int tipo = TIPO_EDEFAULT;
+
     /**
-     * The default value of the '{@link #getNombre() <em>Nombre</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #getNombre() <em>Nombre</em>}'
+     * si no hay un nombre de usuario definido.
+     *
      * @see #getNombre()
-     * @generated
-     * @ordered
      */
-    protected static final String NOMBRE_EDEFAULT = null;
+    protected static final String NOMBRE_EDEFAULT = "";
+
     /**
-     * The cached value of the '{@link #getNombre() <em>Nombre</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #getNombre() <em>Nombre</em>}'.
+     *
      * @see #getNombre()
-     * @generated
-     * @ordered
      */
     protected String nombre = NOMBRE_EDEFAULT;
+
     /**
-     * The default value of the '{@link #getTelefono() <em>Telefono</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #getTelefono() <em>Telefono</em>}'
+     * si no hay un telefono definido.
+     *
      * @see #getTelefono()
-     * @generated
-     * @ordered
      */
-    protected static final String TELEFONO_EDEFAULT = null;
+    protected static final String TELEFONO_EDEFAULT = "";
+
     /**
-     * The cached value of the '{@link #getTelefono() <em>Telefono</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #getTelefono() <em>Telefono</em>}'.
+     *
      * @see #getTelefono()
-     * @generated
-     * @ordered
      */
     protected String telefono = TELEFONO_EDEFAULT;
+
     /**
-     * The default value of the '{@link #getEmail() <em>Email</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #getEmail() <em>Email</em>}'
+     * si no hay un email definido.
+     *
      * @see #getEmail()
-     * @generated
-     * @ordered
      */
-    protected static final String EMAIL_EDEFAULT = null;
+    protected static final String EMAIL_EDEFAULT = "";
+
     /**
-     * The cached value of the '{@link #getEmail() <em>Email</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #getEmail() <em>Email</em>}'.
+     *
      * @see #getEmail()
-     * @generated
-     * @ordered
      */
     protected String email = EMAIL_EDEFAULT;
-    /**
-     * The cached value of the '{@link #getSesion() <em>Sesion</em>}' reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getSesion()
-     * @generated
-     * @ordered
-     */
-    protected Sesion sesion;
+
     /**
      * Se declara un elemento tipo ConectaDb.
      * Clase ConectaDb contiene los metodos de conexion a la base de datos.
@@ -197,27 +154,21 @@ public class UsuarioRegistradoImpl implements
     private ConectaDb conexion = null;
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * Constructor del objeto UsuarioRegistrado.
      */
     protected UsuarioRegistradoImpl() {
         super();
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public int getId() {
         return id;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setId(int newId) {
         int oldId = id;
@@ -225,18 +176,14 @@ public class UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setUsername(String newUsername) {
         String oldUsername = username;
@@ -244,18 +191,14 @@ public class UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public String getContraseña() {
         return contraseña;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setContraseña(String newContraseña) {
         String oldContraseña = contraseña;
@@ -263,9 +206,7 @@ public class UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public int getTipo() {
         /*
@@ -291,9 +232,7 @@ public class UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setTipo(final int newTipo) {
         int oldTipo = tipo;
@@ -301,18 +240,14 @@ public class UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setNombre(String newNombre) {
         String oldNombre = nombre;
@@ -320,18 +255,14 @@ public class UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public String getTelefono() {
         return telefono;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setTelefono(String newTelefono) {
         String oldTelefono = telefono;
@@ -339,18 +270,14 @@ public class UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setEmail(String newEmail) {
         String oldEmail = email;
@@ -358,39 +285,10 @@ public class UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public Sesion getSesion() {
-        if (sesion != null) 
-            return sesion;
-        return null;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public Sesion basicGetSesion() {
-        return sesion;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public void setSesion(Sesion newSesion) {
-        Sesion oldSesion = sesion;
-        sesion = newSesion;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * Imprime todos los elementos del objeto en una cadena.
+     *
+     * @return String Cadena con toda la informacion
+     * del objeto.
      */
     @Override
     public String toString() {
@@ -459,6 +357,11 @@ public class UsuarioRegistradoImpl implements
     /**
      * Funcion auxiliar que construye un arreglo bidimensional
      * a partir de una lista ligada.
+     *
+     * @param queryResults Es una lista ligada de cadenas que contiene
+     * los resultados del query a la base de datos.
+     * @return Arreglo bidimensional con los datos solicitados de la
+     * forma [id, nombre].
      */
     private String[][] armaArregloDeLista(final LinkedList<String[]> queryResults) {
 
@@ -483,7 +386,8 @@ public class UsuarioRegistradoImpl implements
      * @param idProyecto Un identificador de algun proyecto.
      * @throws DBCreationException
      */
-    public Proyecto verDetallesProyecto(final int idProyect) throws DBConsultException, DBCreationException {
+    public Proyecto verDetallesProyecto(final int idProyect) throws
+        DBConsultException, DBCreationException {
 
         conexion = new ConectaDbImpl();
         ResultSet queryResult = conexion.verDetallesProyectoDb(idProyect);
@@ -551,6 +455,11 @@ public class UsuarioRegistradoImpl implements
     /**
      * Funcion auxiliar que construye un arreglo bidimensional
      * a partir de una lista ligada.
+     *
+     * @param queryResults Es una lista ligada de enteros que contiene
+     * los resultados del query a la base de datos.
+     * @return Arreglo con los datos solicitados de la
+     * forma [id].
      */
     private int[] armaArregloDeSet(final LinkedHashSet<Integer> queryResults) {
 
@@ -568,7 +477,8 @@ public class UsuarioRegistradoImpl implements
         return bloque;
     }
 
-    public UsuarioRegistrado verDetallesUsuario(int userId) throws DBConsultException {
+
+    public UsuarioRegistrado verDetallesUsuario(final int userId) throws DBConsultException {
         UsuarioRegistrado user = null;
         ResultSet queryResult = null;
         int userType = -1;

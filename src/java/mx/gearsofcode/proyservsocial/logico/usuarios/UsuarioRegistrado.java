@@ -8,8 +8,10 @@ package mx.gearsofcode.proyservsocial.logico.usuarios;
 
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.Sesion;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
+
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
+
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
 
 /**
@@ -17,7 +19,7 @@ import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
  * basica de un usuario comun del sistema e incluye las funciones globales.
  *
  * <p>
- * The following features are supported:
+ * Las siguientes funciones estan activas
  * <ul>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado#getId <em>Id</em>}</li>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado#getUsername <em>Username</em>}</li>
@@ -31,259 +33,202 @@ import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
  * </p>
  */
 public interface UsuarioRegistrado {
-    
+
     /**
-     * Constantes para los tipos de usuarios segun lo especificado en la base de datos.
-     * 
+     * Constantes para los tipos de usuarios segun lo especificado
+     * en la base de datos.
+     *
      * Nota: Las constantes esta colocadas a proposito en este orden
-     * para resaltal la diferencia con la base de datos.
+     * para resaltar la diferencia con la base de datos.
      */
-    
     public static int ADMINISTRADOR = 0;
     public static int RESPONSABLE = 2;
     public static int ALUMNO = 1;
-    
+
     /**
-     * Returns the value of the '<em><b>Id</b></em>' attribute.
-     * The default value is <code>"-1"</code>.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Id</em>' attribute isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Id</em>' attribute.
+     * Entrega el valor del '<em><b>Id</b></em>' del usuario.
+     * El valor por default es <code>"-1"</code>.
+     *
+     * @return El '<em>Id</em>' del usuario.
      * @see #setId(int)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getUsuarioRegistrado_Id()
-     * @model default="-1" required="true" ordered="false"
-     * @generated
      */
     int getId();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado#getId <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Id</em>' attribute.
+     * Coloca el '<em><b>Id</b></em>' del usuario.
+     *
+     * @param value El valor del '<em>Id</em>' usuario.
      * @see #getId()
-     * @generated
      */
     void setId(int value);
 
     /**
-     * Returns the value of the '<em><b>Username</b></em>' attribute.
-     * <!-- begin-user-doc -->
+     * Entrega el '<em><b>Username</b></em>' del usuario.
+     *
      * <p>
-     * If the meaning of the '<em>Username</em>' attribute isn't clear,
-     * there really should be more of a description here...
+     * El '<em>Username</em>' es el nombre que ocupa el usuario
+     * dentro del sistema.
      * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Username</em>' attribute.
+     *
+     * @return El '<em>Username</em>' que identifica al usuario
+     * dentro del sistema.
      * @see #setUsername(String)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getUsuarioRegistrado_Username()
-     * @model required="true" ordered="false"
-     * @generated
      */
     String getUsername();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado#getUsername <em>Username</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Username</em>' attribute.
+     * Coloca el '<em><b>Username</b></em>' del usuario.
+     *
+     * @param value El valor del '<em>Username</em>' del usuario.
      * @see #getUsername()
-     * @generated
      */
     void setUsername(String value);
 
     /**
-     * Returns the value of the '<em><b>Contraseña</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Contraseña</em>' attribute isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Contraseña</em>' attribute.
+     * Entrega la '<em><b>Contraseña</b></em>' del usuario.
+     *
+     * @return La '<em>Contraseña</em>' almacenada del usuario.
      * @see #setContraseña(String)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getUsuarioRegistrado_Contraseña()
-     * @model required="true" ordered="false"
-     * @generated
      */
+    // TODO: Revisar si en algun lado se ocupa esto.
     String getContraseña();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado#getContraseña <em>Contraseña</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Contraseña</em>' attribute.
+     * Coloca la '<em><b>Contrasena</b></em>' del usuario.
+     *
+     * @param value La '<em>Contraseña</em>' del usuario.
      * @see #getContraseña()
-     * @generated
      */
     void setContraseña(String value);
 
     /**
-     * Returns the value of the '<em><b>Tipo</b></em>' attribute.
-     * The literals are from the enumeration {@link mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario}.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Tipo</em>' attribute isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Tipo</em>' attribute.
+     * Entrega un numero que determina el '<em><b>Tipo</b></em>'
+     * de usuario que esta en el sistema.
+     * El tipo se utiliza para mapear a cada clase de usuario a
+     * un objeto dentro del sistema.
+     *
+     * @return El valor numerico '<em>Tipo</em>' que define que
+     * clase de usuario esta en el sistema.
      * @see mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario
-     * @see #setTipo(TipoUsuario)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getUsuarioRegistrado_Tipo()
-     * @model required="true" ordered="false"
-     * @generated
+     * @see #setTipo(int)
      */
     int getTipo();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado#getTipo <em>Tipo</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Tipo</em>' attribute.
+     * Coloca el '<em><b>Tipo</b></em>' del usuario al que pertenece
+     * el usuario.
+     *
+     * @param value El '<em>Tipo</em>' correspondiente a la clase
+     * de usuario que se necesita.
      * @see mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario
      * @see #getTipo()
-     * @generated
      */
     void setTipo(final int value);
 
     /**
-     * Returns the value of the '<em><b>Nombre</b></em>' attribute.
-     * <!-- begin-user-doc -->
+     * Regresa el '<em><b>Nombre</b></em>' del usuario.
+     *
      * <p>
-     * If the meaning of the '<em>Nombre</em>' attribute isn't clear,
-     * there really should be more of a description here...
+     * El '<em>Nombre</em>' real de la persona que corresponde
+     * a este usuario.
      * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Nombre</em>' attribute.
+     *
+     * @return El '<em>Nombre</em>' real de nuestro usuario.
      * @see #setNombre(String)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getUsuarioRegistrado_Nombre()
-     * @model required="true" ordered="false"
-     * @generated
      */
     String getNombre();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado#getNombre <em>Nombre</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Nombre</em>' attribute.
+     * Coloca el '<em><b>Nombre</b></em>' real del usuario.
+     *
+     * @param value El '<em>Nombre</em>' de la persona que representa
+     * a este usuario.
      * @see #getNombre()
-     * @generated
      */
     void setNombre(String value);
 
     /**
-     * Returns the value of the '<em><b>Telefono</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Telefono</em>' attribute isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Telefono</em>' attribute.
+     * Entrega el '<em><b>Telefono</b></em>' del usuario.
+     *
+     * @return El '<em>Telefono</em>' del usuario.
      * @see #setTelefono(String)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getUsuarioRegistrado_Telefono()
-     * @model required="true" ordered="false"
-     * @generated
      */
     String getTelefono();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado#getTelefono <em>Telefono</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Telefono</em>' attribute.
+     * Coloca el '<em><b>Telefono</b></em>' del usuario.
+     *
+     * @param value El '<em>Telefono</em>' del usuario.
      * @see #getTelefono()
-     * @generated
      */
     void setTelefono(String value);
 
     /**
-     * Returns the value of the '<em><b>Email</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Email</em>' attribute isn't clear,
-     * there really should be more of a description here...
+     * Entrega el '<em><b>Email</b></em>' registrado del usuario.
+     *
+     *<p>
+     * La direccion de '<em>Email</em>' que el usuario tiene registrado
+     * para poder enviarle notificaciones automaticas.
      * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Email</em>' attribute.
+     *
+     * @return La direccion de '<em>Email</em>' del usuario.
      * @see #setEmail(String)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getUsuarioRegistrado_Email()
-     * @model required="true" ordered="false"
-     * @generated
      */
     String getEmail();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado#getEmail <em>Email</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Email</em>' attribute.
+     *  Coloca el '<em><b>Email</b></em>' del usuario.
+     *
+     * @param value La direccion del '<em>Email</em>' del usuario.
      * @see #getEmail()
-     * @generated
      */
     void setEmail(String value);
 
     /**
-     * Returns the value of the '<em><b>Sesion</b></em>' reference.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Sesion</em>' reference isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Sesion</em>' reference.
-     * @see #setSesion(Sesion)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getUsuarioRegistrado_Sesion()
-     * @model required="true" ordered="false"
-     * @generated
-     */
-    Sesion getSesion();
-
-    /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado#getSesion <em>Sesion</em>}' reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Sesion</em>' reference.
-     * @see #getSesion()
-     * @generated
-     */
-    void setSesion(Sesion value);
-    
-    /**
      * Consulta todos los proyectos a los que un usuario puede acceder.
      * Dependiendo del tipo de usuario los proyectos que se le muestran.
-     * @throws DBConsultException 
-     * @throws DBCreationException 
+     *
+     * @return Un arreglo con los datos de los proyectos a mostrar. El
+     * arreglo viene de la forma [Id_Proyecto, Nombre_de_Proyecto].
+     * @throws DBConsultException
+     * @throws DBCreationException
      */
     String[][] verProyectos() throws DBConsultException, DBCreationException;
-    
+
     /**
-     * Muestra una lista reducida de los proyectos dependiendo de que id y tipo
-     * de usuario se este usando.
+     * Muestra una lista reducida de los proyectos dependiendo de que id
+     * y tipo de usuario se este usando.
      * El admin debe de ver los proyectos que esten pendientes de autorizar.
      * El responsable sus propios proyectos.
      * El alumno los proyectos a los que se ha psotulado.
-     * 
+     *
+     * @return Un arreglo con los datos de los proyectos a mostrar. El
+     * arreglo viene de la forma [Id_Proyecto, Nombre_de_Proyecto].
      * @throws DBConsultException
-     * @throws DBCreationException 
+     * @throws DBCreationException
      */
     String[][] verMisProyectos() throws DBConsultException, DBCreationException;
-    
+
     /**
      * Muestra la informacion detallada de un proyecto en particular.
-     * 
-     * @param idProyect
+     *
+     * @param idProyect El identificador unico del proyecto.
+     * @return Un objeto proyecto que contiene todos los datos del
+     * proyecto solicitado.
      * @throws DBConsultException
-     * @throws DBCreationException 
+     * @throws DBCreationException
      */
-    Proyecto verDetallesProyecto(final int idProyect) throws DBConsultException, DBCreationException;
-    
-    UsuarioRegistrado verDetallesUsuario(int userId) throws DBConsultException;
+    Proyecto verDetallesProyecto(final int idProyect) throws
+        DBConsultException, DBCreationException;
+
+    /**
+     * Muestra la informacion detallada de un usuario en particular.
+     *
+     * @param userId El identificador unico de un usuario.
+     * @return Un objeto usuarioRegistrado que contiene todos los
+     * datos del usuario solicitado.
+     * @throws DBConsultException
+     */
+    UsuarioRegistrado verDetallesUsuario(final int userId) throws DBConsultException;
 
 } // UsuarioRegistrado
