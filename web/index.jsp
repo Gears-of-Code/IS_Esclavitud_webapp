@@ -33,6 +33,9 @@ if(sesion == null){
             
             <%
             Integer t = (Integer)sesion.getAttribute("tipo");
+            if(t == null){
+                    response.sendRedirect("iniciosesion.jsp");//TODO really fix this
+            }
             int tipo = t.intValue();
             %>
     <%@include file="menu.jsp" %>
