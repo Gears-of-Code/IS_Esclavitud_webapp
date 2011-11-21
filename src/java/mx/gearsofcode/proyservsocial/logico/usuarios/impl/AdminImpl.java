@@ -59,8 +59,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
             String userMail = res.getEmail();
             Mailing dove = new Mailing();
             String accepted = "Has sido aceptado al sistema de servicio social de la facultad de ciencias.";
-            String content = "Este correo es para informarte que tu solicitud para ser un Responsable de Proyecto en nuestra facultad ha sido existosa. Te recordamos que las credenciales que proporcionaste en tu registro son:\nUsuario: " + res.getUsername() + "\nContraseña:" + res.getContraseña() + "\nSi tienes algun problema, favor de revisar el manual del usuaio o contactar al administrador del sistema.\n\n\nEste mensaje fue generado de forma automática y por tanto no hay necesidad de responderlo.";
-
+            String content = "Este correo es para informarte que tu solicitud para ser un Responsable de Proyecto en nuestra facultad ha sido existosa. Te recordamos que no debes perder las credenciales que proporcionaste en tu registro.\nSi tienes algun problema, favor de revisar el manual del usuaio o contactar al administrador del sistema.\n\n\nEste mensaje fue generado de forma automática y por tanto no hay necesidad de responderlo.";
             dove.sendmail(userMail, accepted, content);
         } catch (DBConsultException cons) {
             throw new DBCreationException(cons.getMessage());
@@ -147,9 +146,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      *            con el tipo del administrador.
      */
     public void rechazarProyecto(final int proyectID) throws DBCreationException, DBModificationException {
-        boolean rechazado = false;
-        modificaProyecto(proyectID, rechazado);
-
+       
         try {
 
             Proyecto proy = this.verDetallesProyecto(proyectID);
@@ -164,6 +161,9 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         } catch (DBConsultException cons) {
             throw new DBCreationException(cons.getMessage());
         }
+         boolean rechazado = false;
+        modificaProyecto(proyectID, rechazado);
+
     }
 
     /**
@@ -186,9 +186,6 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
     }
 
     public void rechazarResponsable(final int respID) throws DBCreationException, DBModificationException {
-        ConectaDb conexion = new ConectaDbImpl();
-        conexion.rechazaResponsableDb(respID);
-
         try {
             Responsable res = (ResponsableImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(respID));
             String userMail = res.getEmail();
@@ -199,11 +196,12 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         } catch (DBConsultException cons) {
             throw new DBCreationException(cons.getMessage());
         }
+        ConectaDb conexion = new ConectaDbImpl();
+        conexion.rechazaResponsableDb(respID);
     }
 
     public void rechazarAlumnoProyecto(final int studentID, final int proyectID) throws DBCreationException, DBModificationException {
-        ConectaDb conexion = new ConectaDbImpl();
-        conexion.rechazaAlumnoProyectoDb(proyectID, studentID);
+        
         try {
 
             Alumno res = (AlumnoImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(studentID));
@@ -217,5 +215,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         } catch (DBConsultException cons) {
             throw new DBCreationException(cons.getMessage());
         }
+        ConectaDb conexion = new ConectaDbImpl();
+        conexion.rechazaAlumnoProyectoDb(proyectID, studentID);
     }
 } //AdminImpl
