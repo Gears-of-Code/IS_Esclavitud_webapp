@@ -16,13 +16,13 @@ import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.impl.AdminImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.impl.AlumnoImpl;
 import mx.gearsofcode.proyservsocial.logico.usuarios.impl.ResponsableImpl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * La clase '<em><b>Sesion</b></em>' se encarga de manejar parte del inicio de

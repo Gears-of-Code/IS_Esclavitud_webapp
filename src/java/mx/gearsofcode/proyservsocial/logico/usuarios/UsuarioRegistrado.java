@@ -13,9 +13,8 @@ import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Usuario Registrado</b></em>'.
- * <!-- end-user-doc -->
+ * Un '<em><b>Usuario Registrado</b></em>' se conforma de la informacion
+ * basica de un usuario comun del sistema e incluye las funciones globales.
  *
  * <p>
  * The following features are supported:
@@ -30,10 +29,6 @@ import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado#getSesion <em>Sesion</em>}</li>
  * </ul>
  * </p>
- *
- * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getUsuarioRegistrado()
- * @model
- * @generated
  */
 public interface UsuarioRegistrado {
     
