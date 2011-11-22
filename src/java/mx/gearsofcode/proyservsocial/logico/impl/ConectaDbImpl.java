@@ -1372,28 +1372,4 @@ public class ConectaDbImpl implements ConectaDb {
         return listaProy ;
     }
     
-    // TODO: Eliminar esto para la version final.
-    public static void main(String[] args){
-        try{
-        ConectaDbImpl d = new ConectaDbImpl();
-        System.out.println(toStringLinkedList(d.estadosAlumnosProyDb()));
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        
-    }
-    
-    private static String toStringLinkedList(LinkedList<String[]> lista){
-        String result = "";
-        String[] elem = null;
-        for (int i = 0; i< lista.size(); i++){
-            elem = lista.get(i);
-            for (int j = 0; j<elem.length; j++){
-                result += elem[j] + " ";
-            }
-            result += "\n";
-        }
-        return  result;
-    }  
-    
 } // ConectaDbImpl
