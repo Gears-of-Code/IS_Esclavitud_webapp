@@ -12,22 +12,24 @@
             Admin adm = (Admin) misesion.getAttribute("user");
 
             int id = Integer.parseInt(request.getParameter("id_u"));
-            String confirm = request.getParameter("b");
+            String b = request.getParameter("b");
 
-            if (confirm.compareToIgnoreCase("0") == 0) {
-                out.println("El Responsable ha sido Aceptado");
+            if (b.compareToIgnoreCase("0") == 0) {
                 adm.aceptaResponsable(id);
                 response.sendRedirect("aut-resp-adm.jsp");
-            } else if (confirm.compareToIgnoreCase("1") == 0){
+            } else if (b.compareToIgnoreCase("1") == 0){
                 adm.rechazarResponsable(id);
-                out.println("El Responsable ha sido Rechazado");
                 response.sendRedirect("aut-resp-adm.jsp");
             }
 
         } catch (DBModificationException e) {
-            out.print(e.getMessage());
+           %>
+			<script> notifica("DBModificationException"); </script>
+			<%
         } catch (DBCreationException d) {
-            out.print(d.getMessage());
+            %>
+			<script> notifica("DBCreationException"); </script>
+			<%
         }
 
     %>    

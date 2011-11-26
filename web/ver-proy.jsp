@@ -1,12 +1,9 @@
 
-<%@page import="mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.util.DBConsultException"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuariosFactoryImpl"%>
+<%@page import="mx.gearsofcode.proyservsocial.logico.proyectos"%>
+<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.*" %>
 <%@page import="java.lang.Integer"%>
 <%@page import="java.lang.String"%>
 <%@page import="javax.servlet.http.HttpSession"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.*" %>
-<%@page import="mx.gearsofcode.proyservsocial.logico.util.DBCreationException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>        
 <%@page session="false" %>
 
@@ -34,10 +31,10 @@ if(sesion == null){
 			out.println("Base de datos fuera de servicio. Intentelo más tarde.");
             out.println("Error DB Consult Exception");
             out.println("<br>Mensaje: "+e.getMessage());
-        }catch(DBCreationException e){
+        }catch(DBCreationException d){
 			out.println("Base de datos fuera de servicio. Intentelo más tarde.");
             out.println("Error DB Creation Exception");
-            out.println("<br>Mensaje: "+e.getMessage());
+            out.println("<br>Mensaje: "+d.getMessage());
         }
         %>
 </div>

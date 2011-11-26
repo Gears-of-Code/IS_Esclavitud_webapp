@@ -13,31 +13,31 @@
 
 HttpSession sesion = request.getSession(false);
 if(sesion == null){
-    response.sendRedirect("iniciosesion.jsp");
-}else{ 
-    try{
-        UsuarioRegistrado usr = (UsuarioRegistrado)sesion.getAttribute("user");
-        int id_p = Integer.parseInt(request.getParameter("id_p"));
-        Proyecto proyecto = usr.verDetallesProyecto(id_p);
+    response.sendRedirect("iniciosesnsultar Proyecto</span><br /><br />
+
 
         Mapper mapc = new Mapper(proyecto.getCarreras(), 1);
         Mapper mapa = new Mapper(proyecto.getAreaConocimiento(), 0);
         
-        mapc.map();
-        mapa.map();
-
-        UsuarioRegistrado res = new UsuariosFactoryImpl().createUsuarioRegistrado();
+        UsuarioRegistrado res = new UsuariosFactoryImpl().createUsuarioRegistrion.jsp");
+}else{ 
+            <br /><span class="titulo">Coado();
         res = res.verDetallesUsuario(proyecto.getResponsable());
 
-        String[] areasConocimiento = mapa.getTranslated();
+        String[] areasConocimiento = mapa.getTranslate
+        mapc.map();
+        mapa.map();
+d();
         String[] carreras = mapc.getTranslated();
+            <div class="bloqueinfo" align="right">Numero de aprobacio
+    try{
+        UsuarioRegistrado usr = (UsuarioRegistrado)sesion.getAttribute("user");
+        int id_p r.parseInt(request.getParameter("id_p"));
+        Proyecto proyecto = usr.verDetallesProyecto(id_p);= Intege
+
 
         %>
-        <div id="info">
-            <br /><span class="titulo">Consultar Proyecto</span><br /><br />
-
-
-            <div class="bloqueinfo" align="right">Numero de aprobacion: <% out.println(proyecto.getId()); %> </div>
+        <div id="info">n: <% out.println(proyecto.getId()); %> </div>
             <div class="bloqueinfo" align="right">Máximo participantes: <% out.println(proyecto.getMaxParticipantes()); %> </div>
             <div class="bloqueinfo" align="left">Responsable: 
                 <% out.println("<div class='button button-consultar' pg='perf-res.jsp?id_u="+res.getId()+"'>"+res.getNombre()+"</div>"); %> 
@@ -72,7 +72,9 @@ if(sesion == null){
                 <%
                 if(usr.getTipo() == 2){
                     //int p_id = proyecto.getId();
-                    out.println("<div>POSTULARSE</div>");
+//					<div class="button-reg">POSTULARSE</div>
+					<div class='button-reg' pg='postularse.jsp?id_p="+out.println(p_id)+"'>Postularse</div>
+                    //out.println("<div>POSTULARSE</div>");
                     //out.println("<div class='button-reg' pg='postularse.jsp?id_p="+out.println(p_id)+"'>Postularse</div>");
                 }
                 %>
