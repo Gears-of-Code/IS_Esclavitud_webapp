@@ -6,6 +6,7 @@
  */
 package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
@@ -37,7 +38,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      * <!-- end-user-doc -->
      * @generated
      */
-    public  AdminImpl() {
+    public AdminImpl() {
         super();
     }
 
@@ -146,7 +147,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      *            con el tipo del administrador.
      */
     public void rechazarProyecto(final int proyectID) throws DBCreationException, DBModificationException {
-       
+
         try {
 
             Proyecto proy = this.verDetallesProyecto(proyectID);
@@ -161,7 +162,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         } catch (DBConsultException cons) {
             throw new DBCreationException(cons.getMessage());
         }
-         boolean rechazado = false;
+        boolean rechazado = false;
         modificaProyecto(proyectID, rechazado);
 
     }
@@ -201,7 +202,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
     }
 
     public void rechazarAlumnoProyecto(final int studentID, final int proyectID) throws DBCreationException, DBModificationException {
-        
+
         try {
 
             Alumno res = (AlumnoImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(studentID));
@@ -217,5 +218,21 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         }
         ConectaDb conexion = new ConectaDbImpl();
         conexion.rechazaAlumnoProyectoDb(proyectID, studentID);
+    }
+
+    public LinkedList<String[]> alumnosPorCarreraDb() throws DBCreationException, DBConsultException {
+        ConectaDb conexion = new ConectaDbImpl();
+        return conexion.alumnosPorCarreraDb();
+    }
+
+    public LinkedList<String[]> proyectosPorCarrerasDb()
+            throws DBCreationException, DBConsultException {
+        ConectaDb conexion = new ConectaDbImpl();
+        return conexion.proyectosPorCarrerasDb();
+    }
+
+    public LinkedList<String[]> proyectosPorAreaDb() throws DBCreationException, DBConsultException {
+        ConectaDb conexion = new ConectaDbImpl();
+        return conexion.proyectosPorAreaDb();
     }
 } //AdminImpl
