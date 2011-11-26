@@ -220,19 +220,37 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         conexion.rechazaAlumnoProyectoDb(proyectID, studentID);
     }
 
-    public LinkedList<String[]> alumnosPorCarreraDb() throws DBCreationException, DBConsultException {
+    public String[][] alumnosPorCarreraDb() throws DBCreationException, DBConsultException {
+        String[][] arrayResult;
         ConectaDb conexion = new ConectaDbImpl();
-        return conexion.alumnosPorCarreraDb();
+        LinkedList<String[]> tmpResult = conexion.alumnosPorCarreraDb();
+        arrayResult = new String[tmpResult.size()][];
+        for(int i = 0; i < arrayResult.length; i++){
+            arrayResult[i] = tmpResult.get(i);
+        }
+        return arrayResult;
     }
 
-    public LinkedList<String[]> proyectosPorCarrerasDb()
+    public String[][] proyectosPorCarrerasDb()
             throws DBCreationException, DBConsultException {
+        String[][] arrayResult;
         ConectaDb conexion = new ConectaDbImpl();
-        return conexion.proyectosPorCarrerasDb();
+        LinkedList<String[]> tmpResult = conexion.proyectosPorCarrerasDb();
+        arrayResult = new String[tmpResult.size()][];
+        for(int i = 0; i < arrayResult.length; i++){
+            arrayResult[i] = tmpResult.get(i);
+        }
+        return arrayResult;
     }
 
-    public LinkedList<String[]> proyectosPorAreaDb() throws DBCreationException, DBConsultException {
+    public String[][] proyectosPorAreaDb() throws DBCreationException, DBConsultException {
+        String[][] arrayResult;
         ConectaDb conexion = new ConectaDbImpl();
-        return conexion.proyectosPorAreaDb();
+        LinkedList<String[]> tmpResult = conexion.proyectosPorAreaDb();
+        arrayResult = new String[tmpResult.size()][];
+        for(int i = 0; i < arrayResult.length; i++){
+            arrayResult[i] = tmpResult.get(i);
+        }
+        return arrayResult;
     }
 } //AdminImpl
