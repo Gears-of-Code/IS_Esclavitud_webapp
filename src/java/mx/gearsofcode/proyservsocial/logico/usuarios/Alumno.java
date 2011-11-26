@@ -10,119 +10,112 @@ import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Alumno</b></em>'.
- * <!-- end-user-doc -->
+ * La representacion de un '<em><b>Alumno</b></em>' se conforma de unos
+ * cuantos elementos adicionales a un UsuarioRegistrado.
+ * Aqui se enlistan dichos elementos y funciones que debe cumplir un
+ * elemento tipo Alumno.
  *
  * <p>
- * The following features are supported:
+ * Las siguientes funcionalidades deben implementarse:
  * <ul>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#getCarrera <em>Carrera</em>}</li>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#getPorcentaje <em>Porcentaje</em>}</li>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#isEstado <em>Estado</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#postularseAProyecto <em>Postularse</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#despostularseAProyecto <em>Despostularse</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#convierteCarrera <em>Convierte Carrera</em>}</li>
  * </ul>
  * </p>
- *
- * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getAlumno()
- * @model
- * @generated
  */
 public interface Alumno extends UsuarioRegistrado {
+
     /**
-     * Returns the value of the '<em><b>Carrera</b></em>' attribute.
-     * The default value is <code>""</code>.
-     * The literals are from the enumeration {@link mx.gearsofcode.proyservsocial.logico.usuarios.CarreraAlumno}.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Carrera</em>' attribute isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Carrera</em>' attribute.
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.CarreraAlumno
+     * Entrega el valor de la '<em><b>Carrera</b></em>' a la
+     * que pertenece el alumno.
+     *
+     * @return La carrera a la que el alumno pertenece.
      * @see #setCarrera(CarreraAlumno)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getAlumno_Carrera()
-     * @model default="" required="true" ordered="false"
-     * @generated
      */
     String getCarrera();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#getCarrera <em>Carrera</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Carrera</em>' attribute.
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.CarreraAlumno
+     * Coloca la '<em><b>Carrera<b></em>' a la que pertenece el alumno.
+     *
+     * @param value La '<em>Carrera</em>' a la que pertenece el alumno.
      * @see #getCarrera()
-     * @generated
      */
     void setCarrera(String value);
 
     /**
-     * Returns the value of the '<em><b>Porcentaje</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Porcentaje</em>' attribute isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Porcentaje</em>' attribute.
+     * Entrega el '<em><b>Porcentaje</b></em>' de avance de la
+     * carrera que tiene el alumno.
+     *
+     * @return El '<em>Porcentaje</em>' de avance que tiene el alumno.
      * @see #setPorcentaje(int)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getAlumno_Porcentaje()
-     * @model required="true" ordered="false"
-     * @generated
      */
     int getPorcentaje();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#getPorcentaje <em>Porcentaje</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Porcentaje</em>' attribute.
+     * Coloca el '<em><b>Porcentaje<b></em>' de avance en la carrera que
+     * tiene el alumno.
+     *
+     * @param value El '<em>Porcentaje</em>' de avance actual.
      * @see #getPorcentaje()
-     * @generated
      */
     void setPorcentaje(int value);
 
     /**
-     * Returns the value of the '<em><b>Estado</b></em>' attribute.
-     * The default value is <code>"false"</code>.
-     * <!-- begin-user-doc -->
+     * El '<em><b>Estado</b></em>' es el valor en el que se encuentra
+     * el alumno, inicialmente se encuentra es false que implica que
+     * esta disponible.
+     *
      * <p>
-     * If the meaning of the '<em>Estado</em>' attribute isn't clear,
-     * there really should be more of a description here...
+     * El '<em>Estado</em>' implica si el alumno se encuentra
+     * seleccionado en algun proyecto o si se encuentra disponible
+     * o en espera de ser aceptado.
+     * Los valores son:
+     * True = aceptado en algun proyecto o
+     * False = en espera de ser aceptado o disponible.
      * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Estado</em>' attribute.
+     *
+     * @return El '<em>Estado</em>' del alumno, true = aceptado o
+     * false = disponible.
      * @see #setEstado(boolean)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getAlumno_Estado()
-     * @model default="false" required="true" ordered="false"
-     * @generated
      */
     boolean isEstado();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.Alumno#isEstado <em>Estado</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Estado</em>' attribute.
+     * Cambia el '<em><b>Estado<b></em>' del alumno con respecto a
+     * si ya fue aceptado en un proyecto o no.
+     *
+     * @param value El '<em>Estado</em>' en el que se encuentra el alumno.
      * @see #isEstado()
-     * @generated
      */
     void setEstado(boolean value);
 
     /**
-     * <!-- begin-user-doc -->a
-     * <!-- end-user-doc -->
-     * @throws DBModificationException 
-     * @throws DBCreationException 
-     * @model
-     * @generated
+     * Un alumno se presenta como candidato a ser seleccionado para
+     * participar en el proyecto seleccionado.
+     *
+     * @param proyectID El numero identificador del proyecto.
+     * @throws DBModificationException
+     * @throws DBCreationException
      */
-    void postularseAProyecto(int proyectID) throws DBModificationException, DBCreationException ;
+    void postularseAProyecto(final int proyectID) throws DBModificationException, DBCreationException;
 
+    /**
+     *
+     */
+    // TODO: Documentacion de este metodo.
     String convierteCarrera(int carrId);
-    void despostularseAProyecto(int proyectID) throws DBModificationException, DBCreationException ;
 
-    
+    /**
+     * Un alumno retira su postulacion al proyecto seleccionado.
+     *
+     * @param proyectId El numero identificador del proyecto.
+     * @throws DBModificationException
+     * @throws DBCreationException
+     */
+    void despostularseAProyecto(int proyectID) throws DBModificationException, DBCreationException;
+
 } // Alumno

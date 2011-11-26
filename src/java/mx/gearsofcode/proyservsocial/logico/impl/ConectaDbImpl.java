@@ -31,33 +31,22 @@ import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
 
-//import org.eclipse.emf.ecore.EClass;
-//import org.eclipse.emf.ecore.EObject;
-//
-//import org.eclipse.emf.ecore.impl.EObjectImpl;
-//
-//import org.eclipse.emf.ecore.util.EcoreUtil;
-
 /**
  * Clase que se encarga de manejar las conexiones a la base de
  * datos del proyecto, aqui se hacen todas las sentencias SQL
  * y se pasan al servidor de la base de datos para procesarlas.
  *
  */
-//public class ConectaDbImpl extends EObjectImpl implements ConectaDb {
 public class ConectaDbImpl implements ConectaDb {
 
     // Variables para conexion.
     private final static String driver = "com.mysql.jdbc.Driver";
     private final static String url = "jdbc:mysql://localhost:3306/gearsofcode";
-//    private static String dbName = "gearsofcode";
     private final static String user = "root";
     private final static String password = "goldsun627";
     // Variables para estados de los proyectos y usuarios.
     final private int NO_AUTORIZADO = 0;
     final private int AUTORIZADO = 1;
-
-    // TODO: LIMPIAR LA BASURA
 
     /**
      * 
@@ -82,9 +71,6 @@ public class ConectaDbImpl implements ConectaDb {
                 Logger.getLogger(ConectaDbImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
             connect = DriverManager.getConnection(url, user, password);
-
-//            Class.forName(driver);
-//            connect = DriverManager.getConnection(url + dbName, user,                    password);
 
             if (connect == null) {
                 throw new DBCreationException("NOTHING TO SAY");
@@ -181,9 +167,6 @@ public class ConectaDbImpl implements ConectaDb {
         return listaDeProyectos;
     }
 
-    /**
-     * Este método tiene codigo redundate con verProyectos. Corregir
-     */
     @Override
     public LinkedList<String[]> verMisProyectosDb(final int tipoUsuario, final int idUsuario, boolean studentStatus)
             throws DBConsultException, DBCreationException {
@@ -231,12 +214,7 @@ public class ConectaDbImpl implements ConectaDb {
     }
 
     /**
-     * Se puede agregar una columna tipo BLOB (binary large object b) a la
-     * base de datos para guardar un Proyecto completo. De esta manera
-     * podemos regresar un objeto Proyecto, sin hacer el codigo ilegible.
-     * Solo hay que cuidar la integredida de la base de datos, a la hora
-     * de actualizar el un proyecto. Sin embargo ningun caso de uso,
-     * realiza modificaciones a los proyectos.
+     * Regresa todos lo detalles de un proyecto como un resultset
      */
     public ResultSet verDetallesProyectoDb(final int idProyecto)
             throws DBCreationException {
@@ -450,19 +428,26 @@ public class ConectaDbImpl implements ConectaDb {
     public void rechazaResponsableDb(final int idResponsable)
             throws DBCreationException, DBModificationException {
 
-     // TODO: Rechazar debe eliminar también de la tabla de usuarios, no sólo la de responsables.
-        String query = "DELETE FROM responsables WHERE id_u  = "
-                + idResponsable;
+        String query = "DELETE FROM ? WHERE id_u  = ?";
         Connection connect = null;
-        Statement statement = null;
+        PreparedStatement statement = null;
         ResultSet resultset = null;
 
         try {
 
             connect = cargarBase();
-            statement = connect.createStatement();
+            statement = connect.prepareStatement(query);
+            statement.setString(1,"responsables");
+            statement.setString(2, idResponsable + "");
 
-            if ((statement.executeUpdate(query)) == 0) {
+            if ((statement.executeUpdate()) == 0) {
+                throw new DBModificationException("Guy not found. " + idResponsable);
+            }
+            
+            statement.setString(1,"usuarios");
+            statement.setString(2, idResponsable + "");
+            
+            if ((statement.executeUpdate()) == 0) {
                 throw new DBModificationException("Guy not found. " + idResponsable);
             }
         } catch (SQLException sqlex) {
@@ -488,7 +473,6 @@ public class ConectaDbImpl implements ConectaDb {
 
         Connection connect = null;
         Statement statement = null;
-        ResultSet resultset = null;
 
         try {
 
@@ -561,7 +545,6 @@ public class ConectaDbImpl implements ConectaDb {
 
         Connection connect = null;
         Statement statement = null;
-        ResultSet resultset = null;
 
         try {
 
@@ -598,7 +581,6 @@ public class ConectaDbImpl implements ConectaDb {
 
         Connection connect = null;
         Statement statement = null;
-        ResultSet resultset = null;
 
         try {
 
@@ -772,107 +754,6 @@ public class ConectaDbImpl implements ConectaDb {
         } finally {
             cerrarBase(connect, statement);
         }
-    }
-
-    /**
-     *
-     */
-    private String getPairValues(final int id, final int[] dataArray) {
-
-        String coma = ",";
-        String result = "";
-        for (int i = 0; i < dataArray.length; i++) {
-            if ((i + 1) == dataArray.length) {
-                coma = "";
-            }
-            result += "(" + id + "," + dataArray[i] + ")" + coma;
-        }
-
-        return result;
-    }
-
-    private String insertaUsuario(final UsuarioRegistrado usuario) {
-        String nombreUsuario = usuario.getUsername();
-        String contrasena = usuario.getContraseña();
-        int tipo = usuario.getTipo();
-        String nombre = usuario.getNombre();
-        String telefono = usuario.getTelefono();
-        String email = usuario.getEmail();
-        int activado = NO_AUTORIZADO;
-        String update = "INSERT INTO usuarios (username,contrasena,tipo,nombre,"
-                + "telefono,email,activado) VALUES ("
-                + "'" + nombreUsuario + "','" + contrasena + "',"
-                + tipo + ",'" + nombre + "',"
-                + telefono + ",'" + email + "',"
-                + activado + ")";
-
-        return update;
-    }
-
-    private String insertaResponsable(final Responsable resp,
-            final int idUsuario) {
-        String descripcion = resp.getDescripcion();
-        String sitioweb = resp.getSitioweb();
-        int estado = NO_AUTORIZADO;
-
-        String update = "INSERT INTO responsables (id_u,descripcion,sitioweb,"
-                + "estado) VALUES ("
-                + idUsuario + ",'" + descripcion + "','"
-                + sitioweb + "'," + estado + ")";
-        return update;
-    }
-
-    /**
-     * Este metodo se utiliza para conseguir una lista de arreglos,
-     * cada uno con dos entradas. Cada uno de estos arreglos,
-     * tienen como primer elemento un entero que representa un id y una
-     * cadena que representa, generalmente, un nombre.
-     * @param rs
-     * @return Lista ligada de arreglos de cadenas de tamaño 2.
-     * @throws SQLException
-     */
-    private LinkedList<String[]> getIdxNombre(final ResultSet rs) throws SQLException {
-
-        LinkedList<String[]> lista = new LinkedList<String[]>();
-        String[] idxnombre = null;
-
-        while (rs.next()) {
-            idxnombre = new String[2];
-            idxnombre[0] = rs.getString(1);
-            idxnombre[1] = rs.getString(2);
-            lista.add(idxnombre);
-        }
-
-        return lista;
-    }
-
-    private int estadoA(final int idAlumno) throws DBCreationException {
-        return estadoAR(idAlumno, "estadoa");
-    }
-
-    private int estadoR(final int idAlumno) throws DBCreationException {
-        return estadoAR(idAlumno, "estador");
-    }
-
-    private int estadoAR(final int idAlumno, final String AR)
-            throws DBCreationException {
-        String query = "SELECT postulados (" + AR + ") "
-                + "WHERE id_u=" + idAlumno + ")";
-        int estado = -1;
-
-        ResultSet resultset = null;
-        Connection connect = null;
-        Statement statement = null;
-
-        try {
-            statement = connect.createStatement();
-            resultset = statement.executeQuery(query);
-            estado = resultset.getInt(1);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return estado;
-
     }
 
     @Override
@@ -1131,35 +1012,6 @@ public class ConectaDbImpl implements ConectaDb {
         return resultArray;
     }
     
- 
-    /**
-     * Nuevos metodos 
-     */
-    
-    /**
-     * Este metodo se utiliza para conseguir una lista de arreglos,
-     * cada uno con dos entradas. Cada uno de estos arreglos,
-     * tienen como primer elemento una cadena  que representa el
-     *  nombre (area de conocimiento,carrera o proyecto ) y entero
-     * que representa el numero de elementos.
-     * @param rs
-     * @return Lista ligada de arreglos de cadenas de tamaño 2.
-     * @throws SQLException
-     */
-    private LinkedList<String[]> getNombrexNum(final ResultSet rs) throws SQLException {
-
-        LinkedList<String[]> lista = new LinkedList<String[]>();
-        String[] nombrexnum = null;
-
-        while (rs.next()) {
-            nombrexnum = new String[2];
-            nombrexnum[0] = rs.getString(1);
-            nombrexnum[1] = rs.getString(2);
-            lista.add(nombrexnum);
-        }
-
-        return lista;
-}
     
     /**
      * El Alumno se despostula de un proycto (se elimina de db) .
@@ -1372,28 +1224,131 @@ public class ConectaDbImpl implements ConectaDb {
         return listaProy ;
     }
     
-    // TODO: Eliminar esto para la version final.
-    public static void main(String[] args){
-        try{
-        ConectaDbImpl d = new ConectaDbImpl();
-        System.out.println(toStringLinkedList(d.estadosAlumnosProyDb()));
-        }catch(Exception e){
-            System.out.println(e.getMessage());
+    /**
+     * Este metodo se utiliza para conseguir una lista de arreglos,
+     * cada uno con dos entradas. Cada uno de estos arreglos,
+     * tienen como primer elemento una cadena  que representa el
+     *  nombre (area de conocimiento,carrera o proyecto ) y entero
+     * que representa el numero de elementos.
+     * @param rs
+     * @return Lista ligada de arreglos de cadenas de tamaño 2.
+     * @throws SQLException
+     */
+    private LinkedList<String[]> getNombrexNum(final ResultSet rs) throws SQLException {
+
+        LinkedList<String[]> lista = new LinkedList<String[]>();
+        String[] nombrexnum = null;
+
+        while (rs.next()) {
+            nombrexnum = new String[2];
+            nombrexnum[0] = rs.getString(1);
+            nombrexnum[1] = rs.getString(2);
+            lista.add(nombrexnum);
         }
-        
+
+        return lista;
     }
     
-    private static String toStringLinkedList(LinkedList<String[]> lista){
+    private String getPairValues(final int id, final int[] dataArray) {
+
+        String coma = ",";
         String result = "";
-        String[] elem = null;
-        for (int i = 0; i< lista.size(); i++){
-            elem = lista.get(i);
-            for (int j = 0; j<elem.length; j++){
-                result += elem[j] + " ";
+        for (int i = 0; i < dataArray.length; i++) {
+            if ((i + 1) == dataArray.length) {
+                coma = "";
             }
-            result += "\n";
+            result += "(" + id + "," + dataArray[i] + ")" + coma;
         }
-        return  result;
-    }  
+
+        return result;
+    }
+
+    private String insertaUsuario(final UsuarioRegistrado usuario) {
+        String nombreUsuario = usuario.getUsername();
+        String contrasena = usuario.getContraseña();
+        int tipo = usuario.getTipo();
+        String nombre = usuario.getNombre();
+        String telefono = usuario.getTelefono();
+        String email = usuario.getEmail();
+        int activado = NO_AUTORIZADO;
+        String update = "INSERT INTO usuarios (username,contrasena,tipo,nombre,"
+                + "telefono,email,activado) VALUES ("
+                + "'" + nombreUsuario + "','" + contrasena + "',"
+                + tipo + ",'" + nombre + "',"
+                + telefono + ",'" + email + "',"
+                + activado + ")";
+
+        return update;
+    }
+
+    private String insertaResponsable(final Responsable resp,
+            final int idUsuario) {
+        String descripcion = resp.getDescripcion();
+        String sitioweb = resp.getSitioweb();
+        int estado = NO_AUTORIZADO;
+
+        String update = "INSERT INTO responsables (id_u,descripcion,sitioweb,"
+                + "estado) VALUES ("
+                + idUsuario + ",'" + descripcion + "','"
+                + sitioweb + "'," + estado + ")";
+        return update;
+    }
+    /* Private Methods */
+    
+    
+    
+    /**
+     * Este metodo se utiliza para conseguir una lista de arreglos,
+     * cada uno con dos entradas. Cada uno de estos arreglos,
+     * tienen como primer elemento un entero que representa un id y una
+     * cadena que representa, generalmente, un nombre.
+     * @param rs
+     * @return Lista ligada de arreglos de cadenas de tamaño 2.
+     * @throws SQLException
+     */
+    private LinkedList<String[]> getIdxNombre(final ResultSet rs) throws SQLException {
+
+        LinkedList<String[]> lista = new LinkedList<String[]>();
+        String[] idxnombre = null;
+
+        while (rs.next()) {
+            idxnombre = new String[2];
+            idxnombre[0] = rs.getString(1);
+            idxnombre[1] = rs.getString(2);
+            lista.add(idxnombre);
+        }
+
+        return lista;
+    }
+
+    private int estadoA(final int idAlumno) throws DBCreationException {
+        return estadoAR(idAlumno, "estadoa");
+    }
+
+    private int estadoR(final int idAlumno) throws DBCreationException {
+        return estadoAR(idAlumno, "estador");
+    }
+
+    private int estadoAR(final int idAlumno, final String AR)
+            throws DBCreationException {
+        String query = "SELECT postulados (" + AR + ") "
+                + "WHERE id_u=" + idAlumno + ")";
+        int estado = -1;
+
+        ResultSet resultset = null;
+        Connection connect = null;
+        Statement statement = null;
+
+        try {
+            statement = connect.createStatement();
+            resultset = statement.executeQuery(query);
+            estado = resultset.getInt(1);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return estado;
+
+    }
+    
     
 } // ConectaDbImpl

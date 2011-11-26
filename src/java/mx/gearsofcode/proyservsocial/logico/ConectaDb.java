@@ -149,4 +149,17 @@ public interface ConectaDb  {
     String[] translateAC(int [] array) throws DBConsultException, DBCreationException;
     
     String[] translateCAR(int [] array) throws DBConsultException, DBCreationException;
+    
+    LinkedList<String[]> estadosAlumnosProyDb () 
+            throws DBCreationException, DBConsultException;
+    
+    LinkedList<String[]> alumnosPorCarreraDb () throws DBCreationException, DBConsultException;
+    
+    LinkedList<String[]> proyectosPorCarrerasDb () 
+            throws DBCreationException, DBConsultException;
+    
+    LinkedList<String[]> proyectosPorAreaDb () throws DBCreationException, DBConsultException;
+    
+    void despostularAlumnoProyectoDb(final int idProyecto, final int idAlumno)
+            throws DBModificationException, DBCreationException;
 } // ConectaDb
