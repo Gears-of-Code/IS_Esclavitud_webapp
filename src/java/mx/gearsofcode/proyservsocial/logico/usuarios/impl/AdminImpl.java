@@ -186,7 +186,6 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
     }
 
     public void rechazarResponsable(final int respID) throws DBCreationException, DBModificationException {
-        
         try {
             Responsable res = (ResponsableImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(respID));
             String userMail = res.getEmail();
