@@ -173,7 +173,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      */
     private void modificaProyecto(final int proyectID, final boolean estado) throws DBCreationException, DBModificationException {
         ConectaDb conexion = new ConectaDbImpl();
-        conexion.autorizarProyectoDb(proyectID);
+        conexion.rechazarProyectoDb(proyectID);
     }
 
     public String[][] dameRespPendientes() throws DBConsultException, DBCreationException {
