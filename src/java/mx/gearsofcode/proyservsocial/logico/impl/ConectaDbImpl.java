@@ -437,14 +437,14 @@ public class ConectaDbImpl implements ConectaDb {
 
             connect = cargarBase();
             statement = connect.prepareStatement(query);
-            statement.setString(1,"responsables");
+            statement.setString(1,"`responsables`");
             statement.setString(2, idResponsable + "");
 
             if ((statement.executeUpdate()) == 0) {
                 throw new DBModificationException("Guy not found. " + idResponsable);
             }
             
-            statement.setString(1,"usuarios");
+            statement.setString(1,"`usuarios`");
             statement.setString(2, idResponsable + "");
             
             if ((statement.executeUpdate()) == 0) {
