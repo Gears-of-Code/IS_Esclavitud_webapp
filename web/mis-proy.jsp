@@ -1,11 +1,9 @@
-<%@page import="mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.util.DBConsultException"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.impl.UsuariosFactoryImpl"%>
 <%@page import="java.lang.Integer"%>
 <%@page import="java.lang.String"%>
 <%@page import="javax.servlet.http.HttpSession"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.*" %>
+<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.*"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBCreationException"%>
+<%@page import="mx.gearsofcode.proyservsocial.logico.util.DBConsultException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>        
 <%@page session="false" %>
 

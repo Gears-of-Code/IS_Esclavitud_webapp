@@ -57,11 +57,14 @@
         }catch(DBConsultException e){
             if(e.getErrorCode() == 7){
                 out.println("<br>Usuario no autorizado por administrador");
+				response.sendRedirect("iniciosesion.jsp");
             }else{
                 //out.println("Primera exception");     
                 out.println("<br>Usuario no registrado:<br>"+e.getMessage());
+				response.sendRedirect("iniciosesion.jsp");
             }
         }catch(DBCreationException d){            
             out.println("Base de datos fuera de servicio. Intentelo más tarde.");
+			response.sendRedirect("iniciosesion.jsp");
         }        
 %>

@@ -1,6 +1,7 @@
-<%@page import="mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto"%>
+<%@page import="mx.gearsofcode.proyservsocial.logico.proyectos.*"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBCreationException"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBConsultException"%>
+<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.impl.*" %>
 <%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.*" %>
 <%@page session="false"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -8,13 +9,12 @@
 <%
 HttpSession sesion = request.getSession(false);
 
-Admin adm = (Admin)sesion.getAttribute("user");
+UsuarioRegistrado adm = (Admin)sesion.getAttribute("user");
 String[][] proyectos;
 String[][] alumPendientes;
 
  try{   
-    proyectos = adm.verProyectos();
-    
+    proyectos = adm.verProyectos();    
     %>
 	<div id="info">
 	
@@ -25,11 +25,12 @@ String[][] alumPendientes;
         out.println("<b>" + proyectos[i][0] + "</b>");
         
         int id_p = Integer.parseInt((proyectos[i][1]));                
-        Proyecto proy = adm.verDetallesProyecto(4);
-        
-        alumPendientes = proy.verListaPostulados(id_p);
+		int id_usr = adm.getId();
+		
+        Proyecto proy = adm.verDetallesProyecto(id_p);
+        alumPendientes = proy.verListaPostulados(id_usr);
 
-        for(int s=0; s<alumPendientes.length; s++){                                   
+        for(int j=0; s<alumPendientes.length; j++){
 			out.println("<div class='entrada'>");
 			out.println("<div class='button button-rechazar' pg='acep-alum.jsp?id_p="+alumPendientes[s][1]+"&b=0'>Rechazar</div>");
 			out.println("<div class='button button-aceptar' pg='acep-alum.jsp?id_p="+alumPendientes[s][1]+"'>Aceptar</div>");                
