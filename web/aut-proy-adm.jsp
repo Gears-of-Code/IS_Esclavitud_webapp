@@ -22,7 +22,7 @@ try{
         for(int i=0; i<proyectos.length; i++){
             out.println("<div class='entrada'>");
                 out.println("<div class='button button-aceptar' pg='acep-proy.jsp?id_p="+proyectos[i][1]+"&b=0'>Aceptar</div>");
-                out.println("<div class='button button-consultar' pg='cons-proy-adm.jsp?id_p="+proyectos[i][1]+"'>Perfil</div>");
+                out.println("<div class='button button-consultar' pg='cons-proy.jsp?id_p="+proyectos[i][1]+"'>Consultar</div>");
                 out.println("<div class='button button-rechazar' pg='acep-proy.jsp?id_p="+proyectos[i][1]+"&b=1'>Rechazar</div>");
                 out.println("<div class='info' align='left'>"+proyectos[i][0]+"</div>  ");
             out.println("</div>");
