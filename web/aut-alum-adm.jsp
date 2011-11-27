@@ -34,10 +34,10 @@ String[][] alumPendientes;
 
         for(int j=0; j<alumPendientes.length; j++){
 			out.println("<div class='entrada'>");
-			out.println("<div class='button button-rechazar' pg='acep-alum.jsp?id_p="+alumPendientes[1][j]+"&b=0'>Rechazar</div>");
-			out.println("<div class='button button-aceptar' pg='acep-alum.jsp?id_p="+alumPendientes[1][j]+"&id_u=id_usr'>Aceptar</div>");
+			out.println("<div class='button button-rechazar' pg='acep-alum.jsp"+alumPendientes[j][0]+"?b=0'>Rechazar</div>");
+			out.println("<div class='button button-aceptar' pg='acep-alum.jsp"+alumPendientes[j][0]+"?id_u=id_usr'>Aceptar</div>");
 			
-			out.println("<div class='button button-consultar' pg='perf-alum.jsp?id_p="+alumPendientes[1][j]+"&b=1'>Perfil</div>");
+			out.println("<div class='button button-consultar' pg='perf-alum.jsp?id_p="+alumPendientes[j][0]+"&b=1'>Perfil</div>");
 			out.println("</div>");
 		}
 	}
