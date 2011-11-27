@@ -13,10 +13,10 @@
 		Admin adm = (Admin)misesion.getAttribute("user");
 		int id = Integer.parseInt(request.getParameter("id_p"));    
 
-		if(b.compareToIgnoreCase("0") == "0"){
+		if(b.compareToIgnoreCase("0") == 0){
 		    adm.autorizarProyecto(id);    
 		    response.sendRedirect("aut-proy-adm.jsp");
-		}else if(b.compareToIgnoreCase("1") == "0"){
+		}else if(b.compareToIgnoreCase("1") == 0){
 		    adm.rechazarProyecto(id);    
 		    response.sendRedirect("aut-proy-adm.jsp");
 		}

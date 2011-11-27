@@ -12,8 +12,7 @@ Admin usuario = (Admin) misesion.getAttribute("user");
 String[][] proyectos;
 
 try{
-    proyectos = usuario.verProyectos();
-
+    proyectos = usuario.verMisProyectos();
 %>
 
 <div id="info">
