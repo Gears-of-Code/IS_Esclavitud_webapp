@@ -156,7 +156,7 @@ public class UsuarioRegistradoImpl implements
     /**
      * Constructor del objeto UsuarioRegistrado.
      */
-    protected UsuarioRegistradoImpl() {
+    public UsuarioRegistradoImpl() {
         super();
     }
 
