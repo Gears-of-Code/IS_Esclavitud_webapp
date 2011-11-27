@@ -65,10 +65,10 @@ public interface Admin extends UsuarioRegistrado {
     void rechazarAlumnoProyecto(final int studentID, final int proyectID) throws DBCreationException, DBModificationException;
     
     //modulo de estadisticas
-     LinkedList<String[]> alumnosPorCarreraDb () throws DBCreationException, DBConsultException;
+     String[][] alumnosPorCarreraDb () throws DBCreationException, DBConsultException;
     
-    LinkedList<String[]> proyectosPorCarrerasDb () 
+   String[][] proyectosPorCarrerasDb () 
             throws DBCreationException, DBConsultException;
     
-    LinkedList<String[]> proyectosPorAreaDb () throws DBCreationException, DBConsultException;
+    String[][] proyectosPorAreaDb () throws DBCreationException, DBConsultException;
 } // Admin
