@@ -21,10 +21,10 @@ try{
         <%
         for(int i=0; i<respPendientes.length; i++){
             out.println("<div class='entrada'>");
-                out.println("<div class='button button-aceptar' pg='acep-resp.jsp?id_u="+respPendientes[i][0]+"&b=0'>Aceptar</div>");                
-                out.println("<div class='button button-consultar' pg='perf-res.jsp?id_u="+respPendientes[i][0]+"'>Perfil</div>");
-                out.println("<div class='button button-rechazar' pg='acep-resp.jsp?id_u="+respPendientes[i][0]+"&b=1'>Rechazar</div>");
-                out.println("<div class='info' align='left'>"+respPendientes[i][1]+"</div>  ");
+            out.println("<div class='button button-aceptar' pg='acep-resp.jsp?id_u="+respPendientes[i][1]+"&b=0'>Aceptar</div>");                
+            out.println("<div class='button button-consultar' pg='perf-res.jsp?id_u="+respPendientes[i][1]+"'>Perfil</div>");
+            out.println("<div class='button button-rechazar' pg='acep-resp.jsp?id_u="+respPendientes[i][1]+"&b=1'>Rechazar</div>");
+            out.println("<div class='info' align='left'>"+respPendientes[i][0]+"</div>  ");
             out.println("</div>");
         }
         %>

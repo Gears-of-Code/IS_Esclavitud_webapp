@@ -1,33 +1,33 @@
-<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.Admin"%>
+<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.*"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBCreationException"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBModificationException"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div id="info">
     <%
+    	out.print("1");
         try {
             HttpSession misesion = request.getSession(false);
             Admin adm = (Admin) misesion.getAttribute("user");
-
+			out.print("2");
             int id = Integer.parseInt(request.getParameter("id_u"));
-            String confirm = request.getParameter("b");
+            String b = request.getParameter("b");
 
-            if (confirm.compareToIgnoreCase("0") == 0) {
-                out.println("El Responsable ha sido Aceptado");
+			out.print("3");
+            if (b.compareToIgnoreCase("0") == 0) {
+            	out.print("aceptando");
                 adm.aceptaResponsable(id);
-                response.sendRedirect("aut-resp-adm.jsp");
-            } else if (confirm.compareToIgnoreCase("1") == 0){
+                //response.sendRedirect("aut-resp-adm.jsp");
+            }else if (b.compareToIgnoreCase("1") == 0){
+            	out.print("rechazando");
                 adm.rechazarResponsable(id);
-                out.println("El Responsable ha sido Rechazado");
-                response.sendRedirect("aut-resp-adm.jsp");
+                //response.sendRedirect("aut-resp-adm.jsp");
             }
-
         } catch (DBModificationException e) {
-            out.print(e.getMessage());
+           	out.print("DBModificationException: "+e.getMessage());
         } catch (DBCreationException d) {
-            out.print(d.getMessage());
+			out.print("DBCreationException");
         }
 
     %>    

@@ -6,6 +6,7 @@
  */
 package mx.gearsofcode.proyservsocial.logico.usuarios;
 
+import java.util.LinkedList;
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
@@ -145,5 +146,15 @@ public interface Admin extends UsuarioRegistrado {
      * @throws DBCreationException
      */
     String[][] dameAlumPendientes() throws DBConsultException, DBCreationException;
+
+    void rechazarAlumnoProyecto(final int studentID, final int proyectID) throws DBCreationException, DBModificationException;
+    
+    //modulo de estadisticas
+     String[][] alumnosPorCarreraDb () throws DBCreationException, DBConsultException;
+    
+   String[][] proyectosPorCarrerasDb () 
+            throws DBCreationException, DBConsultException;
+    
+    String[][] proyectosPorAreaDb () throws DBCreationException, DBConsultException;
 
 } // Admin

@@ -134,7 +134,7 @@ public class ConectaDbImpl implements ConectaDb {
                 case TipoUsuario.ADMINISTRADOR_VALUE:
                     query = "SELECT nombre, id_p "
                             + "FROM  proyectos "
-                            + "WHERE estado = 0";
+                            + "WHERE estado = 1";
                     resultset = statement.executeQuery(query);
                     break;
 
@@ -437,14 +437,14 @@ public class ConectaDbImpl implements ConectaDb {
 
             connect = cargarBase();
             statement = connect.prepareStatement(query);
-            statement.setString(1,"responsables");
+            statement.setString(1,"`responsables`");
             statement.setString(2, idResponsable + "");
 
             if ((statement.executeUpdate()) == 0) {
                 throw new DBModificationException("Guy not found. " + idResponsable);
             }
             
-            statement.setString(1,"usuarios");
+            statement.setString(1,"`usuarios`");
             statement.setString(2, idResponsable + "");
             
             if ((statement.executeUpdate()) == 0) {

@@ -6,6 +6,7 @@
  */
 package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,7 +48,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
     /**
      * Constructor de un objeto tipo administrador.
      */
-    public  AdminImpl() {
+    public AdminImpl() {
         super();
     }
 
@@ -151,7 +152,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      *            con el tipo del administrador.
      */
     public void rechazarProyecto(final int proyectID) throws DBCreationException, DBModificationException {
-       
+
         try {
 
             Proyecto proy = this.verDetallesProyecto(proyectID);
@@ -166,7 +167,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         } catch (DBConsultException cons) {
             throw new DBCreationException(cons.getMessage());
         }
-         boolean rechazado = false;
+        boolean rechazado = false;
         modificaProyecto(proyectID, rechazado);
 
     }
@@ -177,7 +178,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      */
     private void modificaProyecto(final int proyectID, final boolean estado) throws DBCreationException, DBModificationException {
         ConectaDb conexion = new ConectaDbImpl();
-        conexion.autorizarProyectoDb(proyectID);
+        conexion.rechazarProyectoDb(proyectID);
     }
 
     /**
@@ -218,7 +219,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      * {@inheritDoc}
      */
     public void rechazarAlumnoProyecto(final int studentID, final int proyectID) throws DBCreationException, DBModificationException {
-        
+
         try {
 
             Alumno res = (AlumnoImpl) (((UsuarioRegistradoImpl) this).verDetallesUsuario(studentID));
@@ -234,5 +235,39 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         }
         ConectaDb conexion = new ConectaDbImpl();
         conexion.rechazaAlumnoProyectoDb(proyectID, studentID);
+    }
+
+    public String[][] alumnosPorCarreraDb() throws DBCreationException, DBConsultException {
+        String[][] arrayResult;
+        ConectaDb conexion = new ConectaDbImpl();
+        LinkedList<String[]> tmpResult = conexion.alumnosPorCarreraDb();
+        arrayResult = new String[tmpResult.size()][];
+        for(int i = 0; i < arrayResult.length; i++){
+            arrayResult[i] = tmpResult.get(i);
+        }
+        return arrayResult;
+    }
+
+    public String[][] proyectosPorCarrerasDb()
+            throws DBCreationException, DBConsultException {
+        String[][] arrayResult;
+        ConectaDb conexion = new ConectaDbImpl();
+        LinkedList<String[]> tmpResult = conexion.proyectosPorCarrerasDb();
+        arrayResult = new String[tmpResult.size()][];
+        for(int i = 0; i < arrayResult.length; i++){
+            arrayResult[i] = tmpResult.get(i);
+        }
+        return arrayResult;
+    }
+
+    public String[][] proyectosPorAreaDb() throws DBCreationException, DBConsultException {
+        String[][] arrayResult;
+        ConectaDb conexion = new ConectaDbImpl();
+        LinkedList<String[]> tmpResult = conexion.proyectosPorAreaDb();
+        arrayResult = new String[tmpResult.size()][];
+        for(int i = 0; i < arrayResult.length; i++){
+            arrayResult[i] = tmpResult.get(i);
+        }
+        return arrayResult;
     }
 } //AdminImpl

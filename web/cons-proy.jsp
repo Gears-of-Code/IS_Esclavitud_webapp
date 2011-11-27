@@ -1,6 +1,6 @@
 
 <%@page import="java.lang.Integer"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto"%>
+<%@page import="mx.gearsofcode.proyservsocial.logico.proyectos.*"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBConsultException"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBCreationException"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.Mapper"%>
@@ -26,7 +26,7 @@ if(sesion == null){
         mapc.map();
         mapa.map();
 
-        UsuarioRegistrado res = new UsuariosFactoryImpl().createUsuarioRegistrado();
+        UsuarioRegistrado res = new UsuarioRegistradoImpl();
         res = res.verDetallesUsuario(proyecto.getResponsable());
 
         String[] areasConocimiento = mapa.getTranslated();
@@ -81,11 +81,8 @@ if(sesion == null){
 
            
     }catch(DBConsultException e){
-		out.println("Por el momento no se encuentra con la información solicitada.<br>");
         out.println("DBConsultException: "+e.getMessage());
-		out.println("<br>");
     }catch(DBCreationException d){
-		out.println("Base de datos fuera de servicio. Intentelo más tarde.");
         out.println("DBCreationException: "+d.getMessage());
     }catch(UnsupportedOperationException f){
             out.println("UnsupportedOperationException: "+f.getMessage());
