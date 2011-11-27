@@ -134,7 +134,7 @@ public class ConectaDbImpl implements ConectaDb {
                 case TipoUsuario.ADMINISTRADOR_VALUE:
                     query = "SELECT nombre, id_p "
                             + "FROM  proyectos "
-                            + "WHERE estado = 0";
+                            + "WHERE estado = 1";
                     resultset = statement.executeQuery(query);
                     break;
 
