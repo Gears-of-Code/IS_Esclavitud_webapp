@@ -231,7 +231,7 @@ public class ConectaDbImpl implements ConectaDb {
             statement = connect.createStatement();
             resultset = statement.executeQuery(query);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new DBCreationException(e.getCause() + " " + e.getMessage() + " " +e.getSQLState());
         }
 
         return resultset;
