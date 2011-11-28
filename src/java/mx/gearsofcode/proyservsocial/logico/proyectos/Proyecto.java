@@ -7,7 +7,6 @@
 package mx.gearsofcode.proyservsocial.logico.proyectos;
 
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
-import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '

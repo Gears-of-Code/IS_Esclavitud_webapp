@@ -6,7 +6,6 @@
  */
 package mx.gearsofcode.proyservsocial.logico.usuarios;
 
-import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.Sesion;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
 
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;

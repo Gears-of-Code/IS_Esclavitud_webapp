@@ -6,13 +6,9 @@
  */
 package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 
-import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.Sesion;
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
 
 import mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado;
-import mx.gearsofcode.proyservsocial.logico.usuarios.Alumno;
-import mx.gearsofcode.proyservsocial.logico.usuarios.CarreraAlumno;
-import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
 
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
@@ -25,9 +21,7 @@ import mx.gearsofcode.proyservsocial.logico.proyectos.impl.ProyectoImpl;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import java.util.LinkedList;
-import java.util.Set;
 import java.util.LinkedHashSet;
 
 import java.sql.ResultSet;

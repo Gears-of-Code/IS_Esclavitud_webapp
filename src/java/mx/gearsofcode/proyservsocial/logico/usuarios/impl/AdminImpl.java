@@ -7,8 +7,6 @@
 package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;

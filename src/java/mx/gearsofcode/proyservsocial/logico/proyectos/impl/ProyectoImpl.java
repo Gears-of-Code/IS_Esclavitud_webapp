@@ -6,18 +6,16 @@
  */
 package mx.gearsofcode.proyservsocial.logico.proyectos.impl;
 
-import java.sql.SQLException;
 import java.util.LinkedList;
 
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
 
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
-import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
-
 import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
+
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
 
 /**

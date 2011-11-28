@@ -16,14 +16,14 @@ import java.util.LinkedList;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 
-//import mx.gearsofcode.proyservsocial.logico.LogicoPackage;
+import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 
 import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
 
 import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
 import mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado;
+
 import mx.gearsofcode.proyservsocial.logico.inicioDeSesion.TipoUsuario;
 
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;

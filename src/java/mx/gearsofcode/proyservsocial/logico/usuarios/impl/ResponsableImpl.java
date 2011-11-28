@@ -8,9 +8,12 @@ package mx.gearsofcode.proyservsocial.logico.usuarios.impl;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import mx.gearsofcode.proyservsocial.logico.ConectaDb;
 import mx.gearsofcode.proyservsocial.logico.impl.ConectaDbImpl;
+
 import mx.gearsofcode.proyservsocial.logico.usuarios.Responsable;
+
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
