@@ -11,136 +11,143 @@ import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 import mx.gearsofcode.proyservsocial.logico.util.DBModificationException;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Responsable</b></em>'.
- * <!-- end-user-doc -->
+ * La representacion de un '<em><b>Responsable</b></em>' se conforma
+ * de unos cuantos elementos adicionales a un UsuarioRegistrado.
+ * Aqui se enlistan dichos elementos y funciiones que debe cumplir un
+ * elemento tipo Responsable.
  *
  * <p>
- * The following features are supported:
+ * Las siguientes funcionalidades deben implementarse:
  * <ul>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#getDescripcion <em>Descripcion</em>}</li>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#getSitioweb <em>Sitioweb</em>}</li>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#isEstado <em>Estado</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#aceptaAlumnoProyecto <em>Aceota Alumno Proyecto</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#registrarse <em>Registrarse</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#proponerProyecto <em>Proponer Proyecto</em>}</li>
  * </ul>
  * </p>
- *
- * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getResponsable()
- * @model
- * @generated
  */
 public interface Responsable extends UsuarioRegistrado {
+
     /**
-     * Returns the value of the '<em><b>Descripcion</b></em>' attribute.
-     * <!-- begin-user-doc -->
+     * Entrega una breve '<em><b>Descripcion</b></em>' de quien es
+     * el responsable.
      * <p>
-     * If the meaning of the '<em>Descripcion</em>' attribute isn't clear,
-     * there really should be more of a description here...
+     * Breve '<em>Descripcion</em>' implica saber quien es, que
+     * hace o en que eventos o investigaciones ha participado. Es
+     * parte del perfil del responsable.
      * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Descripcion</em>' attribute.
+     *
+     * @return La '<em>Descripcion</em>' del responsable.
      * @see #setDescripcion(String)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getResponsable_Descripcion()
-     * @model required="true" ordered="false"
-     * @generated
      */
     String getDescripcion();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#getDescripcion <em>Descripcion</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Descripcion</em>' attribute.
+     * Coloca la '<em><b>Descripcion<b></em>}' del responsable.
+     *
+     * @param value La '<em>Descripcion</em>' breve de un responsable.
      * @see #getDescripcion()
-     * @generated
      */
     void setDescripcion(String value);
 
     /**
-     * Returns the value of the '<em><b>Sitioweb</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Sitioweb</em>' attribute isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Sitioweb</em>' attribute.
+     * Entrega la direccion del '<em><b>Sitioweb</b></em>' donde
+     * se puede encontrar mas informacion sobre el responsable.
+     * Es un atributo opcional.
+     *
+     * @return El URL del '<em>Sitioweb</em>' del responsable.
      * @see #setSitioweb(String)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getResponsable_Sitioweb()
-     * @model required="true" ordered="false"
-     * @generated
      */
     String getSitioweb();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#getSitioweb <em>Sitioweb</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Sitioweb</em>' attribute.
+     * Coloca la URL del '<em><b>Sitioweb<b></em>}' del responsable.
+     *
+     * @param value La URL del '<em>Sitioweb</em>'.
      * @see #getSitioweb()
-     * @generated
      */
     void setSitioweb(String value);
 
     /**
-     * Returns the value of the '<em><b>Estado</b></em>' attribute.
-     * The default value is <code>"false"</code>.
-     * <!-- begin-user-doc -->
+     * Entrega el '<em><b>Estado</b></em>' ya sea aceptado o no
+     * autorizado del responsable.
+     * El valor por omision <code>"false"</code> que equivale a no
+     * autorizado.
      * <p>
-     * If the meaning of the '<em>Estado</em>' attribute isn't clear,
-     * there really should be more of a description here...
+     * El '<em>Estado</em>' determina si el responsable ya fue
+     * autorizado o si se encuentra en proceso de autorizacion por
+     * parte del administrador.
      * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Estado</em>' attribute.
+     *
+     * @return El '<em>Estado</em>' del responsable, true es autorizado
+     * false es en proceso de autorizacion.
      * @see #setEstado(boolean)
-     * @see mx.gearsofcode.proyservsocial.logico.usuarios.UsuariosPackage#getResponsable_Estado()
-     * @model default="false" required="true" ordered="false"
-     * @generated
      */
     boolean isEstado();
 
     /**
-     * Sets the value of the '{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#isEstado <em>Estado</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Estado</em>' attribute.
+     * Coloca el '<em><b>Estado<b></em>}' del responsable.
+     * False es no autorizado o en proceso de autorizacion por el
+     * responsable, True es aceptado como responsable.
+     *
+     * @param value El '<em>Estado</em>' al que se cambia un
+     * responsable.
      * @see #isEstado()
-     * @generated
      */
     void setEstado(boolean value);
 
-    
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @throws DBModificationException 
-     * @throws DBCreationException 
-     * @model
-     * @generated
+     * Metodo que coloca a un alumno en espera de ser autorizado por el
+     * administrador del sistema.
+     *
+     * @param proyectID El ID del proyecto donde se aceptaran los alumnos.
+     * @param studentIDs La lista con IDs de los estudiantes a ser aceptados.
+     * @throws DBModificationException
+     * @throws DBCreationException
      */
     void aceptaAlumnoProyecto(int proyectID, int [] studentIDs) throws DBModificationException, DBCreationException;
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @throws DBCreationException 
-     * @model
-     * @generated
+     * Metodo con el cual un candidato a responsable pide ser aceptado
+     * por un administrador en el sistema para poder proponer proyectos.
+     *
+     * @param password Cadena con el password encriptado.
+     * @param description Breve descripcion del responsable.
+     * @param mail Correo de contacto del responsable.
+     * @param phone Telefono de contacto del responsable.
+     * @param name Nombre del candidato.
+     * @param website URL del sitio web de contacto del responsable.
+     * @param type Valor numerico que representa a un responsable.
+     * @param login Nombre de usuario dentro del sistema.
+     * @throws DBCreationException
      */
     void registrarse(String password, String description, String mail, String phone, String name, String website, int type, String login) throws DBCreationException;
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @throws DBCreationException 
-     * @model
-     * @generated
+     * Metodo que utiliza un responsable para dar de alta un nuevo proyecto
+     * para que este sea revisado por el administrador y proceda a ser
+     * aceptado o rechazado.
+     *
+     * @param nomProy Nombre del proyecto.
+     * @param descrProy Descripcion general del objetivo del proyecto.
+     * @param dirProy Direccion donde se realizara el proyecto.
+     * @param mailProy Correo de contacto para informacion sobre el proyecto.
+     * @param telProy Telefono de contacto para informacion sobre el proyecto.
+     * @param capMax Numero maximo de alumnos que se aceptaran en el proyecto.
+     * @param carreraProy Carreras de las que se solicitan alumnos.
+     * @param areaDeConocimiento Areas de conocimiento que se ven involucradas
+     * en el desarollo del proyecto.
+     * @throws DBCreationException
      */
-    void proponerProyecto(final String nomProy, final String descrProy, 
-            final String dirProy, final String mailProy, final int telProy, 
+    void proponerProyecto(final String nomProy, final String descrProy,
+            final String dirProy, final String mailProy, final int telProy,
             final int capMax, final int[] carreraProy, final int[] areaDeConocimiento) throws DBCreationException;
 
+    // TODO: Documentacion de estos metodos.
     String [][] dameAC() throws DBConsultException, DBCreationException;
 
     String [][] dameCAR() throws DBConsultException, DBCreationException;
-    
+
 } // Responsable

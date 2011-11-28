@@ -19,15 +19,17 @@ import mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto;
 import mx.gearsofcode.proyservsocial.logico.proyectos.impl.ProyectoImpl;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Responsable</b></em>'.
- * <!-- end-user-doc -->
+ * Clase que implementa la interfaz '<em><b>Responsable<b><em>'.
+ * contiene las funciones y atributos particulares de un responsable.
  * <p>
- * The following features are implemented:
+ * Las siguientes funciones se encuentran disponibles:
  * <ul>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.ResponsableImpl#getDescripcion <em>Descripcion</em>}</li>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.ResponsableImpl#getSitioweb <em>Sitioweb</em>}</li>
  *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.impl.ResponsableImpl#isEstado <em>Estado</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#aceptaAlumnoProyecto <em>Aceota Alumno Proyecto</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#registrarse <em>Registrarse</em>}</li>
+ *   <li>{@link mx.gearsofcode.proyservsocial.logico.usuarios.Responsable#proponerProyecto <em>Proponer Proyecto</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,59 +41,51 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
 //    protected static final int ID_RESP = -1;
     //  protected int id_resp = ID_RESP;
     /**
-     * The default value of the '{@link #getDescripcion() <em>Descripcion</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #getDescripcion() <em>Descripcion</em>}'
+     * si no hay una descripcion disponible.
+     *
      * @see #getDescripcion()
-     * @generated
-     * @ordered
      */
-    protected static final String DESCRIPCION_EDEFAULT = null;
+    protected static final String DESCRIPCION_EDEFAULT = "No hay descripcion disponible.";
+
     /**
-     * The cached value of the '{@link #getDescripcion() <em>Descripcion</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #getDescripcion() <em>Descripcion</em>}'.
+     *
      * @see #getDescripcion()
-     * @generated
-     * @ordered
      */
     protected String descripcion = DESCRIPCION_EDEFAULT;
+
     /**
-     * The default value of the '{@link #getSitioweb() <em>Sitioweb</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #getSitioweb() <em>Sitioweb</em>}'
+     * si no hay un sitio web disponible.
+     *
      * @see #getSitioweb()
-     * @generated
-     * @ordered
      */
     protected static final String SITIOWEB_EDEFAULT = null;
+
     /**
-     * The cached value of the '{@link #getSitioweb() <em>Sitioweb</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #getSitioweb() <em>Sitioweb</em>}'.
+     *
      * @see #getSitioweb()
-     * @generated
-     * @ordered
      */
     protected String sitioweb = SITIOWEB_EDEFAULT;
+
     /**
-     * The default value of the '{@link #isEstado() <em>Estado</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor por default que muestra '{@link #isEstado() <em>Estado</em>}'.
+     * Este valor es con el que siempre inicia el responsable antes de ser
+     * autorizado.
+     *
      * @see #isEstado()
-     * @generated
-     * @ordered
      */
     protected static final boolean ESTADO_EDEFAULT = false;
+
     /**
-     * The cached value of the '{@link #isEstado() <em>Estado</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+     * Valor almacenado en '{@link #isEstado() <em>Estado</em>}'.
+     *
      * @see #isEstado()
-     * @generated
-     * @ordered
      */
     protected boolean estado = ESTADO_EDEFAULT;
+
     /**
      * Se declara un elemento tipo ConectaDb.
      * Clase ConectaDb contiene los metodos de conexion a la base de datos.
@@ -100,54 +94,36 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     private ConectaDb conexion = null;
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * Constructor del objeto ResponsableImpl.
      */
     public ResponsableImpl() {
         super();
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public String getDescripcion() {
         return descripcion;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setDescripcion(String newDescripcion) {
         String oldDescripcion = descripcion;
         descripcion = newDescripcion;
     }
 
-    /*    public int getIdResp() {
-    return id_resp;
-    }
-    
-    public void setIdResp(final int idresponsable) {
-    id_resp = idresponsable;
-    }
-     */
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public String getSitioweb() {
         return sitioweb;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setSitioweb(String newSitioweb) {
         String oldSitioweb = sitioweb;
@@ -155,18 +131,14 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public boolean isEstado() {
         return estado;
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * {@inheritDoc}
      */
     public void setEstado(boolean newEstado) {
         boolean oldEstado = estado;
@@ -174,13 +146,11 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
      * Se apoya de la conexion a la BD para aceptar a un alumno.
+     *
      * @param proyectID El ID del proyecto donde se aceptaran los alumnos.
      * @param studentIDs La lista con IDs de los estudiantes a ser aceptados.
-     * <!-- end-user-doc -->
-     * @throws DBCreationException 
-     * @generated NOT
+     * @throws DBCreationException
      */
     public void aceptaAlumnoProyecto(final int proyectID, int[] studentIDs) throws DBModificationException, DBCreationException {
         ConectaDb conexion = new ConectaDbImpl();
@@ -191,20 +161,10 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
      * Metodo con el que el objeto que llama se registra en la base de datos
      * usando la Conexion de ConectaDB
-     * <!-- end-user-doc -->
-     * @param password 
-     * @param description 
-     * @param mail 
-     * @param phone 
-     * @param name 
-     * @param website 
-     * @param type 
-     * @param login 
-     * @throws DBCreationException 
-     * @generated NOT
+     *
+     * @throws DBCreationException
      */
     public void registrarse(String password, String description, String mail, String phone, String name, String website, int type, String login) throws DBCreationException {
         this.contraseña = password;
@@ -226,8 +186,9 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
 
     /**
      * Metodo que dara de alta un nuevo proyecto en la base
-     * de datos. Este proyecto siempre esta en estado false 
+     * de datos. Este proyecto siempre esta en estado false
      * que implica que esta en "proceso de autorizacion".
+     *
      * @param nomProy Nombre del proyecto.
      * @param descrProy Descripcion de lo que se hara en el proyecto.
      * @param dirProy Direccion del sitio donde se realizara el proyecto.
@@ -236,7 +197,7 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
      * @param capMax Numero maximo de participantes para este proyecto.
      * @param carreraProy A que carreras esta dirigido o se prefieren para este servicio social.
      * @param areaDeConocimiento A que areas de conocimiento esta dirigido el proyecto.
-     * @throws DBCreationException 
+     * @throws DBCreationException
      */
     public void proponerProyecto(final String nomProy, final String descrProy,
             final String dirProy, final String mailProy, final int telProy,
@@ -256,9 +217,10 @@ public class ResponsableImpl extends UsuarioRegistradoImpl implements
     }
 
     /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
+     * Imprime todos los elementos del objeto en una cadena.
+     *
+     * @return String Cadena con toda la informacion
+     * del objeto.
      */
     @Override
     public String toString() {
