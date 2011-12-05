@@ -16,7 +16,7 @@ if(sesion == null){
 }else{    
     UsuarioRegistrado usr = (UsuarioRegistrado)sesion.getAttribute("user");
     %>
-<div id="info">
+
         <br><div class="titulo">Ver proyectos</div><br>
         <% 
         try{                                        
@@ -25,7 +25,7 @@ if(sesion == null){
             for(int i = 0; i<proyectos.length; i++){
                 
                 out.println("<div class='entrada'>");
-                    out.println("<div class='boton' pg='cons-proy.jsp?id_p="+proyectos[i][1]+"'><img src='imagenes/iconos/edit.png' /></div>");
+                    out.println("<div class='boton' pg='cons-proy.jsp?id_p="+proyectos[i][1]+"&pst=0'><img src='imagenes/iconos/edit.png' /></div>");
                     out.println("<div class='info' align='left'>" + proyectos[i][0] +"</div>");
                 out.println("</div>");
             }
@@ -38,7 +38,4 @@ if(sesion == null){
             out.println("Error DB Creation Exception");
             out.println("<br>Mensaje: "+d.getMessage());
         }
-        %>
-</div>
-
-<% } %>
+   } %>

@@ -1,4 +1,5 @@
 
+
 <%@page import="java.lang.Integer"%>
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado"%>
@@ -20,7 +21,8 @@ if(sesion == null){
     <script>
         $(document).ready(function(){
             $.getScript("funciones.js");
-            $("#contenido").load('bienvenida.jsp');            
+            $("#contenido").append("<div id='info'></div>");
+            $("#info").load('bienvenida.jsp');            
         });
     </script>
     </head>

@@ -133,6 +133,8 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
             String accepted = "Proyecto aceptado.";
             String content = "Este correo es para informarte que tu solicitud para postular el proyecto: " + proyectName + " en el sistema de servicio social de nuestra facultad ha sido existosa.\nLos alumnos podrán, a partir de ahora, postularse para participar en tu proyecto. Debes mantenerte al tanto de dichas solicitudes y revisar a los participantes, a fin de tener los mejores resultados. \n\n\nEste mensaje fue generado de forma automática y por tanto no hay necesidad de responderlo.";
             dove.sendmail(userMail, accepted, content);
+            ConectaDb conexion = new ConectaDbImpl();
+            conexion.autorizarProyectoDb(proyectID);
         } catch (DBConsultException cons) {
             throw new DBCreationException(cons.getMessage());
         }
@@ -173,7 +175,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
      */
     private void modificaProyecto(final int proyectID, final boolean estado) throws DBCreationException, DBModificationException {
         ConectaDb conexion = new ConectaDbImpl();
-        conexion.rechazarProyectoDb(proyectID);
+        conexion.autorizarProyectoDb(proyectID);
     }
 
     public String[][] dameRespPendientes() throws DBConsultException, DBCreationException {
@@ -225,7 +227,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         ConectaDb conexion = new ConectaDbImpl();
         LinkedList<String[]> tmpResult = conexion.alumnosPorCarreraDb();
         arrayResult = new String[tmpResult.size()][];
-        for(int i = 0; i < arrayResult.length; i++){
+        for (int i = 0; i < arrayResult.length; i++) {
             arrayResult[i] = tmpResult.get(i);
         }
         return arrayResult;
@@ -237,7 +239,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         ConectaDb conexion = new ConectaDbImpl();
         LinkedList<String[]> tmpResult = conexion.proyectosPorCarrerasDb();
         arrayResult = new String[tmpResult.size()][];
-        for(int i = 0; i < arrayResult.length; i++){
+        for (int i = 0; i < arrayResult.length; i++) {
             arrayResult[i] = tmpResult.get(i);
         }
         return arrayResult;
@@ -248,7 +250,7 @@ public class AdminImpl extends UsuarioRegistradoImpl implements Admin {
         ConectaDb conexion = new ConectaDbImpl();
         LinkedList<String[]> tmpResult = conexion.proyectosPorAreaDb();
         arrayResult = new String[tmpResult.size()][];
-        for(int i = 0; i < arrayResult.length; i++){
+        for (int i = 0; i < arrayResult.length; i++) {
             arrayResult[i] = tmpResult.get(i);
         }
         return arrayResult;

@@ -21,6 +21,6 @@ if(tipo == 1){
 }else if (tipo == 2){
         out.print("<div class='titulo-menu'>Alumno</div>");
         out.print("<div class='entrada-menu' pg='ver-proy.jsp'>Ver proyectos</div>");
-        out.print("<div class='entrada-menu' pg='mis-proy.jsp' >Consultar mis proyectos</div>");
+        out.print("<div class='entrada-menu' pg='mis-proy-alu.jsp' >Consultar mis proyectos</div>");
 }    
 %>

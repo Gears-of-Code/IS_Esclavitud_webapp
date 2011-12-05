@@ -14,7 +14,6 @@ $(document).ready(function(){
 
 </head>
 
-<div id="info" align="center">
 	<span class='titulo'>Registro</span><br>
 <form id="forma" name="forma" method="post" action="reg-resp-db.jsp">
     <label for="usuario"></label>
@@ -56,4 +55,3 @@ $(document).ready(function(){
       </tr>
     </table>
   </form>
-</div>

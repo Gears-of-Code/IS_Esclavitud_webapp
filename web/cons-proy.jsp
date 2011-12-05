@@ -18,6 +18,7 @@ if(sesion == null){
     try{
         UsuarioRegistrado usr = (UsuarioRegistrado)sesion.getAttribute("user");
         int id_p = Integer.parseInt(request.getParameter("id_p"));
+        
         Proyecto proyecto = usr.verDetallesProyecto(id_p);
 
         Mapper mapc = new Mapper(proyecto.getCarreras(), 1);
@@ -33,59 +34,78 @@ if(sesion == null){
         String[] carreras = mapc.getTranslated();
 
         %>
-        <div id="info">
-            <br /><span class="titulo">Consultar Proyecto</span><br /><br />
+        <br />
+        <span class="titulo">Consultar Proyecto</span><br /><br />
 
 
-            <div class="bloqueinfo" align="right">Numero de aprobacion: <% out.println(proyecto.getId()); %> </div>
-            <div class="bloqueinfo" align="right">Máximo participantes: <% out.println(proyecto.getMaxParticipantes()); %> </div>
-            <div class="bloqueinfo" align="left">Responsable: 
-                <% out.println("<div class='button button-consultar' pg='perf-res.jsp?id_u="+res.getId()+"'>"+res.getNombre()+"</div>"); %> 
-            </div>
-            <div class="bloqueinfo" align="left">Area de Conocimiento:<br>
-                <% 
-                    for(int i = 0; i<areasConocimiento.length; i++){
-                        out.println("+ "+areasConocimiento[0]+"<br>"); 
-                    }
+        <div class="bloqueinfo" align="right">
+            Numero de aprobacion: <% out.println(proyecto.getId()); %> 
+        </div>
 
-                %>
-            </div>
-            
-            <div class="bloqueinfo" align="left">Direccion: <% out.println(proyecto.getDireccion()); %></div>
-            <div class="bloqueinfo" align="left">Telefono: <% out.println(proyecto.getTelefono()); %></div>
-            <div class="bloqueinfo" align="left">Correo: <% out.println(proyecto.getEmail()); %></div>
+        <div class="bloqueinfo" align="right">
+            Máximo participantes: <% out.println(proyecto.getMaxParticipantes()); %> 
+        </div>
 
-                                        
-            <div class="bloqueinfo" align="left">Carreras participantes:<br>
-                <% 
-                    for(int i = 0; i<carreras.length; i++){
-                        out.println("+ "+carreras[0]+"<br>"); 
-                    }
+        <div class="bloqueinfo" align="left">Responsable: 
+            <% out.println("<div class='button button-consultar' pg='perf-res.jsp?id_u="+res.getId()+"'>"+res.getNombre()+"</div>"); %> 
+        </div>
 
-                %>
-            </div>
-
-            <div class="bloqueinfo" align="left">Descripción: </div>
-                <% out.println(proyecto.getDescripcion()); %> 
-
-            
-                <%
-                if(usr.getTipo() == 2){
-                    //int p_id = proyecto.getId();
-                    out.println("<div>POSTULARSE</div>");
-                    //out.println("<div class='button-reg' pg='postularse.jsp?id_p="+out.println(p_id)+"'>Postularse</div>");
+        <div class="bloqueinfo" align="left">
+            Area de Conocimiento:<br>
+            <% 
+                for(int i = 0; i<areasConocimiento.length; i++){
+                    out.println("+ "+areasConocimiento[0]+"<br>"); 
                 }
-                %>
-            </div>
-        </div><%
 
-           
+            %>
+        </div>
+
+        <div class="bloqueinfo" align="left">
+            Direccion: <% out.println(proyecto.getDireccion()); %>
+        </div>
+
+        <div class="bloqueinfo" align="left">
+            Telefono: <% out.println(proyecto.getTelefono()); %>
+        </div>
+
+        <div class="bloqueinfo" align="left">
+            Correo: <% out.println(proyecto.getEmail()); %>
+        </div>
+
+
+        <div class="bloqueinfo" align="left">
+            Carreras participantes:<br>
+            <% 
+                for(int i = 0; i<carreras.length; i++){
+                    out.println("+ "+carreras[0]+"<br>"); 
+                }
+
+            %>
+        </div>
+
+        <div class="bloqueinfo" align="left">
+            Descripción:
+            <% out.println(proyecto.getDescripcion()); %> 
+        </div>
+
+
+        <%
+        if(usr.getTipo() == 2){   
+
+            int pst = Integer.parseInt(request.getParameter("pst"));
+            if(pst == 1) {
+                out.println("<div class='button-reg' pg='despostularse.jsp?id_p="+id_p+"'>Despostularse</div>");
+            }else{
+                out.println("<div class='button-reg' pg='postularse.jsp?id_p="+id_p+"'>Postularse</div>");
+            }
+
+        }
     }catch(DBConsultException e){
         out.println("DBConsultException: "+e.getMessage());
     }catch(DBCreationException d){
         out.println("DBCreationException: "+d.getMessage());
     }catch(UnsupportedOperationException f){
-            out.println("UnsupportedOperationException: "+f.getMessage());
+        out.println("UnsupportedOperationException: "+f.getMessage());
         }
 }
 %>

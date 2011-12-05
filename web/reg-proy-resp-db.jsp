@@ -38,10 +38,15 @@ if(sesion == null){
         out.println("<br>maxparticipantes: "+maxparticipantes);
                 
         res.proponerProyecto(nombre, descripcion, direccion, email, telefono, maxparticipantes, a, b);
-		
-		response.sendRedirect("index.jsp");
+	%> 
+        <script>
+            alert("El proyecto se ha registrado. El administrador tiene que autorizarlo antes de aparecer en el listado."); 
+        </script>
+        <%
+	response.sendRedirect("index.jsp");
     }catch(DBCreationException e){
         out.println("Base de datos fuera de servicio. Intentelo más tarde.");
+        out.println("<br>Error: "+e.getMessage());
     }
 }
 %>

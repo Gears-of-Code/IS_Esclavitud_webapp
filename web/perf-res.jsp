@@ -16,9 +16,8 @@ if(sesion == null){
     Responsable res = new ResponsableImpl();
     res = (Responsable)(res.verDetallesUsuario(id));
     
-%>
-    
-<div id="info">
+    %>
+
     <span class="titulo">Perfil de <% out.println(res.getNombre()); %> </span><br /><br />
     
     <div class="bloqueinfo" align="left">Teléfono: <% out.println(res.getTelefono()); %></div>
@@ -28,6 +27,7 @@ if(sesion == null){
     <div class="bloqueinfo" align="left">
         Descripcion: <% out.println(res.getDescripcion()); %>
     </div>
-</div>
-
-<% } %>
+        
+    <% 
+}
+%>

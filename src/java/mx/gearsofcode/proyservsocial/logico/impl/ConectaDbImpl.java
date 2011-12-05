@@ -147,9 +147,12 @@ public class ConectaDbImpl implements ConectaDb {
                     break;
 
                 case TipoUsuario.ALUMNO_VALUE:
-                    query = "SELECT nombre, id_p "
-                            + "FROM  proyectos "
-                            + "WHERE estado = 1";
+                    query = "SELECT q1.* FROM(SELECT nombre, id_p FROM proyectos) q1 LEFT JOIN (SELECT proyectos.nombre, proyectos.id_p, postulados.id_u FROM proyectos, postulados WHERE proyectos.id_p = postulados.id_p AND postulados.id_u="+idUsuario+") q2 ON q1.id_p=q2.id_p WHERE q2.id_p IS NULL";
+                    
+                    
+                   // query = "SELECT nombre, id_p "
+                   //         + "FROM  proyectos NATURAL JOIN postulados"
+                    //        + "WHERE estado = 1;";
                     resultset = statement.executeQuery(query);
                     break;
 
@@ -190,7 +193,7 @@ public class ConectaDbImpl implements ConectaDb {
 
                 case TipoUsuario.RESPONSABLE_VALUE:
                     query = "SELECT nombre, id_p FROM  proyectos "
-                            + "WHERE estado = \"0\" AND id_u =\"" + idUsuario + "\";";
+                            + "WHERE id_u =\"" + idUsuario + "\";";
                     resultset = statement.executeQuery(query);
                     break;
 
@@ -219,8 +222,7 @@ public class ConectaDbImpl implements ConectaDb {
     public ResultSet verDetallesProyectoDb(final int idProyecto)
             throws DBCreationException {
 
-        String query = "SELECT * FROM proyectos NATURAL JOIN proyac "
-                + "NATURAL JOIN proycarr WHERE id_p = " + idProyecto;
+        String query = "SELECT * FROM proyectos WHERE id_p = " + idProyecto+";";
 
         Connection connect = null;
         Statement statement = null;
@@ -339,7 +341,6 @@ public class ConectaDbImpl implements ConectaDb {
 
             connect = cargarBase();
             statement = connect.createStatement();
-
             if (statement.executeUpdate(query) == 0) {
                 throw new DBModificationException();
             }
@@ -428,30 +429,34 @@ public class ConectaDbImpl implements ConectaDb {
     public void rechazaResponsableDb(final int idResponsable)
             throws DBCreationException, DBModificationException {
 
-        String query = "DELETE FROM ? WHERE id_u  = ?";
+        String query = "DELETE FROM responsables WHERE id_u  = ?;";
+        String query2 = "DELETE FROM usuarios WHERE id_u  = ?;";
+        
         Connection connect = null;
         PreparedStatement statement = null;
+        PreparedStatement usr = null;
         ResultSet resultset = null;
 
         try {
 
             connect = cargarBase();
             statement = connect.prepareStatement(query);
-            statement.setString(1,"`responsables`");
-            statement.setString(2, idResponsable + "");
-
+            statement.setInt(1, idResponsable);
+            
+            
             if ((statement.executeUpdate()) == 0) {
                 throw new DBModificationException("Guy not found. " + idResponsable);
             }
             
-            statement.setString(1,"`usuarios`");
-            statement.setString(2, idResponsable + "");
             
-            if ((statement.executeUpdate()) == 0) {
+            usr = connect.prepareStatement(query2);
+            usr.setInt(1, idResponsable);
+            
+            if ((usr.executeUpdate()) == 0) {
                 throw new DBModificationException("Guy not found. " + idResponsable);
             }
         } catch (SQLException sqlex) {
-            throw new DBModificationException(sqlex.getMessage() + "   " + sqlex.getSQLState());
+            throw new DBModificationException(sqlex.getMessage() + "   " + sqlex.getSQLState() + "      "+ statement );
         }
     }
 
@@ -1272,11 +1277,10 @@ public class ConectaDbImpl implements ConectaDb {
         String email = usuario.getEmail();
         int activado = NO_AUTORIZADO;
         String update = "INSERT INTO usuarios (username,contrasena,tipo,nombre,"
-                + "telefono,email,activado) VALUES ("
+                + "telefono,email) VALUES ("
                 + "'" + nombreUsuario + "','" + contrasena + "',"
                 + tipo + ",'" + nombre + "',"
-                + telefono + ",'" + email + "',"
-                + activado + ")";
+                + telefono + ",'" + email + "')";
 
         return update;
     }

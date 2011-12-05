@@ -6,19 +6,22 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-HttpSession misesion = request.getSession(false);
 
-Admin usuario = (Admin) misesion.getAttribute("user");
-String[][] proyectos;
+HttpSession sesion = request.getSession(false);
+if(sesion == null){
+    response.sendRedirect("iniciosesion.jsp");
+}else{    
 
-try{
-    proyectos = usuario.verMisProyectos();
-%>
+    Admin usuario = (Admin) sesion.getAttribute("user");
+    String[][] proyectos;
 
-<div id="info">
-	<br /><span class="titulo">Autorizaciones Pendientes: Proyectos</span><br /><br />
-        
+    try{
+        proyectos = usuario.verMisProyectos();
+
+        %>
+        <br /><span class="titulo">Autorizaciones Pendientes: Proyectos</span><br /><br />
         <%
+
         for(int i=0; i<proyectos.length; i++){
             out.println("<div class='entrada'>");
                 out.println("<div class='button button-aceptar' pg='acep-proy.jsp?id_p="+proyectos[i][1]+"&b=0'>Aceptar</div>");
@@ -27,16 +30,12 @@ try{
                 out.println("<div class='info' align='left'>"+proyectos[i][0]+"</div>  ");
             out.println("</div>");
         }
-        %>
-</div>
-
- <%
-}catch(DBConsultException e){
-	out.println("Base de datos fuera de servicio. Intentelo más tarde.");
-    out.println("<br>DBConsultException "+e.getMessage());
-}catch(DBCreationException d){
-	out.println("Base de datos fuera de servicio. Intentelo más tarde.");
-    out.println("<br>DBCreationException: "+d.getMessage());
+    }catch(DBConsultException e){
+            out.println("Base de datos fuera de servicio. Intentelo más tarde.");
+        out.println("<br>DBConsultException "+e.getMessage());
+    }catch(DBCreationException d){
+            out.println("Base de datos fuera de servicio. Intentelo más tarde.");
+        out.println("<br>DBCreationException: "+d.getMessage());
+    }
 }
-
 %>

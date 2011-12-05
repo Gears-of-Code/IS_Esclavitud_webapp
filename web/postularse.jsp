@@ -1,24 +1,33 @@
+<%@page import="mx.gearsofcode.proyservsocial.logico.proyectos.impl.ProyectoImpl"%>
+<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.*" %>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBModificationException"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.proyectos.Proyecto"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.util.DBConsultException"%>
 <%@page import="mx.gearsofcode.proyservsocial.logico.util.DBCreationException"%>
+<%@page import="java.lang.Integer"%>
+<%@page import="java.lang.String"%>
 <%@page session="false"  %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="mx.gearsofcode.proyservsocial.logico.usuarios.*" %>
 
 
 <%
-// HttpSession misesion = request.getSession(false);
-//Alumno al = (Alumno) misesion.getAttribute("usuario");
-//try{
-//    al.postularseAProyecto(request.getParameter("id_p"));
-//   %> <script> notifica("mensaje exito"); </script><%
-    //response.sendRedirect("index.jsp");
-//}catch(DBModificationException e){
-//    %> <script> notifica("mensaje error"); </script><%
-//}catch(DBCreationException d){
-//    %> <script> notifica("mensaje error"); </script><%
-//} 
+HttpSession sesion = request.getSession(false);
+if(sesion == null){
+    response.sendRedirect("iniciosesion.jsp");
+}else{
+    Alumno al = (Alumno) sesion.getAttribute("user");
+    
+    try{
+        int id_p = Integer.parseInt(request.getParameter("id_p"));
+        al.postularseAProyecto(id_p);
+        %> <script> alert("Te has postulado a este proyecto"); </script><%
+        response.sendRedirect("index.jsp");
+        
+    }catch(DBModificationException e){
+        %> <script> alert("DBModificationException"); </script><%
+        out.println("Error: "+e.getMessage());
+        
+    }catch(DBCreationException d){
+        %> <script> alert("DBCreationException"); </script><%
+        out.println("Error: "+d.getMessage());
+    }
+}
 %>
-
-<p> Que pex </p>

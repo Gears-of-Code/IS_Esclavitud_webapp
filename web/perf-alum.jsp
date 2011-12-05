@@ -16,13 +16,10 @@ if(sesion == null){
     
     Alumno alum = new AlumnoImpl();
     alum = (Alumno)(alum.verDetallesUsuario(id));
-%>
-    
-<div id="info">
+    %>
     <span class="titulo">Perfil de <% out.println(alum.getNombre()); %> </span><br /><br />
     
     <div class="bloqueinfo" align="left">Carrera: <% out.println(alum.getCarrera()); %></div>
     <div class="bloqueinfo" align="left">Porcentaje: <% out.println(alum.getPorcentaje()+"%"); %></div>              
-</div>
 
 <% } %>

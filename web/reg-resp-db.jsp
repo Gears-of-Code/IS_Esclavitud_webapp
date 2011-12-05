@@ -45,6 +45,6 @@
             out.println("Falta ingresar datos.<a href='javascript:history.back(1)'>Regresar</a>");
         }
     } catch (DBCreationException e) {
-        out.println("Base de datos fuera de servicio. Intentelo más tarde.");
+        out.println("Base de datos fuera de servicio. Intentelo más tarde."+e.getMessage());
     }
 %>
