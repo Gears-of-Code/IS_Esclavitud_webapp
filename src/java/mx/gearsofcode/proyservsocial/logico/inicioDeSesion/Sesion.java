@@ -7,6 +7,7 @@
 package mx.gearsofcode.proyservsocial.logico.inicioDeSesion;
 
 import mx.gearsofcode.proyservsocial.logico.usuarios.UsuarioRegistrado;
+
 import mx.gearsofcode.proyservsocial.logico.util.DBConsultException;
 import mx.gearsofcode.proyservsocial.logico.util.DBCreationException;
 
